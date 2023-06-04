@@ -3,18 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package sge;
-
+import java.awt.Image;
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
 /**
  *
  * @author gabri
  */
 public class main extends javax.swing.JFrame {
 
+
     /**
      * Creates new form main
      */
     public main() {
         initComponents();
+        
     }
 
     /**
@@ -26,27 +30,55 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagens/desktopFrameBg.png"));
+        Image image = icon.getImage();
+        areaTrabalhoMain = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
+        logoMain = new javax.swing.JLabel();
         mainMenu = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
-        rf_001 = new javax.swing.JMenuItem();
-        rf_002 = new javax.swing.JMenuItem();
-        rf_003 = new javax.swing.JMenuItem();
-        rf_004 = new javax.swing.JMenuItem();
-        rf_005 = new javax.swing.JMenuItem();
+        rf_001Menu = new javax.swing.JMenuItem();
+        rf_002Menu = new javax.swing.JMenuItem();
+        rf_003Menu = new javax.swing.JMenuItem();
+        rf_004Menu = new javax.swing.JMenuItem();
+        rf_005Menu = new javax.swing.JMenuItem();
         menuFinanceiro = new javax.swing.JMenu();
         menuRelatorios = new javax.swing.JMenu();
-        rf_006 = new javax.swing.JMenuItem();
-        rf_007 = new javax.swing.JMenuItem();
-        rf_008 = new javax.swing.JMenuItem();
+        rf_006Menu = new javax.swing.JMenuItem();
+        rf_007Menu = new javax.swing.JMenuItem();
+        rf_008Menu = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SGE - Sistema de Gestão Escolar");
+        setExtendedState(6);
         setMinimumSize(new java.awt.Dimension(400, 300));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
-        jLabel1.setToolTipText("");
+        areaTrabalhoMain.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        logoMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logoMain.png"))); // NOI18N
+
+        areaTrabalhoMain.setLayer(logoMain, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout areaTrabalhoMainLayout = new javax.swing.GroupLayout(areaTrabalhoMain);
+        areaTrabalhoMain.setLayout(areaTrabalhoMainLayout);
+        areaTrabalhoMainLayout.setHorizontalGroup(
+            areaTrabalhoMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, areaTrabalhoMainLayout.createSequentialGroup()
+                .addContainerGap(360, Short.MAX_VALUE)
+                .addComponent(logoMain)
+                .addContainerGap())
+        );
+        areaTrabalhoMainLayout.setVerticalGroup(
+            areaTrabalhoMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, areaTrabalhoMainLayout.createSequentialGroup()
+                .addContainerGap(143, Short.MAX_VALUE)
+                .addComponent(logoMain)
+                .addContainerGap())
+        );
 
         mainMenu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         mainMenu.setMargin(new java.awt.Insets(4, 4, 4, 4));
@@ -56,45 +88,45 @@ public class main extends javax.swing.JFrame {
         menuCadastros.setActionCommand("Cadastros");
         menuCadastros.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        rf_001.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rf_001.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluno.png"))); // NOI18N
-        rf_001.setText("Aluno");
-        rf_001.addActionListener(new java.awt.event.ActionListener() {
+        rf_001Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_001Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluno.png"))); // NOI18N
+        rf_001Menu.setText("Aluno");
+        rf_001Menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rf_001ActionPerformed(evt);
+                rf_001MenuActionPerformed(evt);
             }
         });
-        menuCadastros.add(rf_001);
+        menuCadastros.add(rf_001Menu);
 
-        rf_002.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rf_002.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
-        rf_002.setText("Professor");
-        rf_002.addActionListener(new java.awt.event.ActionListener() {
+        rf_002Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_002Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
+        rf_002Menu.setText("Professor");
+        rf_002Menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rf_002ActionPerformed(evt);
+                rf_002MenuActionPerformed(evt);
             }
         });
-        menuCadastros.add(rf_002);
+        menuCadastros.add(rf_002Menu);
 
-        rf_003.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rf_003.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turma.png"))); // NOI18N
-        rf_003.setText("Turma");
-        menuCadastros.add(rf_003);
+        rf_003Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_003Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turma.png"))); // NOI18N
+        rf_003Menu.setText("Turma");
+        menuCadastros.add(rf_003Menu);
 
-        rf_004.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rf_004.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/curso.png"))); // NOI18N
-        rf_004.setText("Curso");
-        rf_004.addActionListener(new java.awt.event.ActionListener() {
+        rf_004Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_004Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/curso.png"))); // NOI18N
+        rf_004Menu.setText("Curso");
+        rf_004Menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rf_004ActionPerformed(evt);
+                rf_004MenuActionPerformed(evt);
             }
         });
-        menuCadastros.add(rf_004);
+        menuCadastros.add(rf_004Menu);
 
-        rf_005.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rf_005.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
-        rf_005.setText("Funcionário");
-        menuCadastros.add(rf_005);
+        rf_005Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_005Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
+        rf_005Menu.setText("Funcionário");
+        menuCadastros.add(rf_005Menu);
 
         mainMenu.add(menuCadastros);
 
@@ -105,20 +137,20 @@ public class main extends javax.swing.JFrame {
         menuRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuRelatorios.png"))); // NOI18N
         menuRelatorios.setText("Relatórios");
 
-        rf_006.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rf_006.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
-        rf_006.setText("Financeiro");
-        menuRelatorios.add(rf_006);
+        rf_006Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_006Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
+        rf_006Menu.setText("Financeiro");
+        menuRelatorios.add(rf_006Menu);
 
-        rf_007.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rf_007.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
-        rf_007.setText("Notas");
-        menuRelatorios.add(rf_007);
+        rf_007Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_007Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
+        rf_007Menu.setText("Notas");
+        menuRelatorios.add(rf_007Menu);
 
-        rf_008.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rf_008.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/frequencias.png"))); // NOI18N
-        rf_008.setText("Frequências");
-        menuRelatorios.add(rf_008);
+        rf_008Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_008Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/frequencias.png"))); // NOI18N
+        rf_008Menu.setText("Frequências");
+        menuRelatorios.add(rf_008Menu);
 
         mainMenu.add(menuRelatorios);
 
@@ -134,36 +166,32 @@ public class main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(314, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap())
+            .addComponent(areaTrabalhoMain)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(183, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap())
+            .addComponent(areaTrabalhoMain)
         );
 
         getAccessibleContext().setAccessibleDescription("SGE - Sistema de Gestão Escolar");
 
-        pack();
+        setSize(new java.awt.Dimension(510, 317));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rf_001ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_001ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rf_001ActionPerformed
+    private void rf_001MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_001MenuActionPerformed
+        rf_001 rfNovoAluno = new rf_001();
+        areaTrabalhoMain.add(rfNovoAluno);
+        rfNovoAluno.setVisible(true);
+    }//GEN-LAST:event_rf_001MenuActionPerformed
 
-    private void rf_004ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_004ActionPerformed
+    private void rf_004MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_004MenuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rf_004ActionPerformed
+    }//GEN-LAST:event_rf_004MenuActionPerformed
 
-    private void rf_002ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_002ActionPerformed
+    private void rf_002MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_002MenuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rf_002ActionPerformed
+    }//GEN-LAST:event_rf_002MenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,19 +229,20 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JDesktopPane areaTrabalhoMain;
+    private javax.swing.JLabel logoMain;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenu menuFinanceiro;
     private javax.swing.JMenu menuRelatorios;
     private javax.swing.JMenu menuSair;
-    private javax.swing.JMenuItem rf_001;
-    private javax.swing.JMenuItem rf_002;
-    private javax.swing.JMenuItem rf_003;
-    private javax.swing.JMenuItem rf_004;
-    private javax.swing.JMenuItem rf_005;
-    private javax.swing.JMenuItem rf_006;
-    private javax.swing.JMenuItem rf_007;
-    private javax.swing.JMenuItem rf_008;
+    private javax.swing.JMenuItem rf_001Menu;
+    private javax.swing.JMenuItem rf_002Menu;
+    private javax.swing.JMenuItem rf_003Menu;
+    private javax.swing.JMenuItem rf_004Menu;
+    private javax.swing.JMenuItem rf_005Menu;
+    private javax.swing.JMenuItem rf_006Menu;
+    private javax.swing.JMenuItem rf_007Menu;
+    private javax.swing.JMenuItem rf_008Menu;
     // End of variables declaration//GEN-END:variables
 }
