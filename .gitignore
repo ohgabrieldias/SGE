@@ -26,3 +26,10 @@ replay_pid*
 # vscode configuration folder
 .vscode
 .vscode/
+
+# dotenv
+.env
+.env.*
+
+#sonar-scanner files
+.scannerwork/

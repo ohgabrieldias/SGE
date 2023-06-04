@@ -1,5 +1,7 @@
 package sge;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,19 +9,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MySQLConnector {
-    private static final String DB_HOST = "35.184.59.54";
-    private static final String DB_PORT = "3306";
-    private static final String DB_NAME = "sge-db";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "Bs;'GBIN]f]Ryc6]";
-    
     private Connection connection;
 
     public MySQLConnector() {
+        Dotenv dotenv = Dotenv.configure().load();
+
+        String dbHost = dotenv.get("DB_HOST");
+        String dbPort = dotenv.get("DB_PORT");
+        String dbName = dotenv.get("DB_NAME");
+        String dbUser = dotenv.get("DB_USER");
+        String dbPassword = dotenv.get("DB_PASSWORD");
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
-            connection = DriverManager.getConnection(url, DB_USER, DB_PASSWORD);
+            String url = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
+            connection = DriverManager.getConnection(url, dbUser, dbPassword);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -72,4 +76,6 @@ public class MySQLConnector {
             e.printStackTrace();
         }
     }
+
+   
 }
