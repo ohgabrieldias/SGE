@@ -4,6 +4,10 @@
  */
 package sge;
 
+import  baseCoding.Pessoa;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author gabri
@@ -225,6 +229,8 @@ public class rf_001 extends javax.swing.JInternalFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void novoAlunoRespFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoAlunoRespFieldActionPerformed
