@@ -33,15 +33,6 @@ public String getEndereco(){
 
 public String toString(){
     return "{" + "nome =" +getNome() + " " + ",CPF =" + " " + getCpf() + " " + ", endereco =" + getEndereco() + "}"; 
+  }
 }
-}
 
-
-
-
-
-
-
-
-
-}
