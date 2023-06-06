@@ -1,6 +1,6 @@
 package baseCoding;
 
-import sge.MySQLConnector.MySQLConnector;
+import sge.MySQLConnector;
 
 
 import java.sql.ResultSet;
