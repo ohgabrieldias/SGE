@@ -45,29 +45,25 @@ public class Aluno extends Pessoa {
     
     public Aluno buscarAluno(long matricula) {
         Aluno tmpAluno = null;
-        
-        String query = "SELECT * FROM alunos WHERE matricula = ?";
-        
+    
+        String query = "SELECT * FROM users2 WHERE matricula = ?";
+    
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             stmt.setLong(1, matricula);
-            
-            ResultSet rs = connector.executeQuery(stmt); // Use the executeQuery method from MySQLConnector
-            
-            if (rs.next()) {
-                String nome = rs.getString("nome");
-                String cpf = rs.getString("cpf");
-                String endereco = rs.getString("endereco");
-                
-                tmpAluno = new Aluno(nome, cpf, endereco, matricula);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String nome = rs.getString("nome");
+                    String cpf = rs.getString("cpf");
+                    String endereco = rs.getString("endereco");
+                    tmpAluno = new Aluno(nome, cpf, endereco, matricula);
+                }
             }
-            
-            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+    
         return tmpAluno;
-    }
+    }    
     
     public void excluirAluno(long matricula) {
         String query = "DELETE FROM alunos WHERE matricula = ?";
