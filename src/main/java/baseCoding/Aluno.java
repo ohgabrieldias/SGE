@@ -16,7 +16,6 @@ public class Aluno extends Pessoa {
         this.matricula = matricula;
     }
 
-
     // Getters and setters for the 'matricula' attribute
 
     public long getMatricula() {
@@ -43,10 +42,48 @@ public class Aluno extends Pessoa {
     public String getEnd() {
         return super.getEndereco();
     }
-
+    
+    public Aluno buscarAluno(long matricula) {
+        Aluno tmpAluno = null;
+        
+        String query = "SELECT * FROM alunos WHERE matricula = ?";
+        
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            stmt.setLong(1, matricula);
+            
+            ResultSet rs = connector.executeQuery(stmt); // Use the executeQuery method from MySQLConnector
+            
+            if (rs.next()) {
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                String endereco = rs.getString("endereco");
+                
+                tmpAluno = new Aluno(nome, cpf, endereco, matricula);
+            }
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return tmpAluno;
+    }
+    
+    public void excluirAluno(long matricula) {
+        String query = "DELETE FROM alunos WHERE matricula = ?";
+    
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            stmt.setLong(1, matricula);
+            stmt.executeUpdate();
+            System.out.println("Aluno com matrícula " + matricula + " excluído com sucesso.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void cadastrarAluno(String nome, String endereco, String cpf, long matricula) {
         // Inserir dados na tabela "users"
-        String query = "INSERT INTO users2 (nome, endereco, cpf, matricula) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO alunos (nome, endereco, cpf, matricula) VALUES (?, ?, ?, ?)";
         
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             stmt.setString(1, nome);
