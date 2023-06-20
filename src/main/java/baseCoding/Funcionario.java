@@ -9,8 +9,8 @@ package baseCoding;
  * @author Matheus
  */
 public class Funcionario extends Pessoa {
-    public Funcionario(String nome, String cpf, String endereco){
-        super(nome,cpf,endereco);
+    public Funcionario(String nome, String sobrenome, String dataNasc, String cpf, String endereco){
+        super(nome, sobrenome, dataNasc, cpf, endereco);
     }
 
 }

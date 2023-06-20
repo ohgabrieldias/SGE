@@ -12,7 +12,9 @@ import baseCoding.Aluno;
 public class AlunoIntegrationTest {
     public static void main(String[] args) {
         // Create a test student
-        Aluno aluno = new Aluno("João", "123456789", "Rua A", 123456789);
+        Aluno aluno = new Aluno("Maria", "Silva", "2023-12-15", "98765432109", "Av n sei onde", "paps", "12345678910", 2021002);
+        // Insert the student into the database for testing
+        
 
         // Test the registration and search functionality
         testCadastrarAluno(aluno);
@@ -24,7 +26,7 @@ public class AlunoIntegrationTest {
 
     public static void testCadastrarAluno(Aluno aluno) {
         // Register the student in the database
-        aluno.cadastrarAluno(aluno.getNome(), aluno.getEnd(), aluno.getCpf(), aluno.getMatricula());
+        aluno.cadastrarAluno(aluno);
         System.out.println("Aluno cadastrado com sucesso.");
     }
 

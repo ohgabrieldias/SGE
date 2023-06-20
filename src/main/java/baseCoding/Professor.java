@@ -11,8 +11,8 @@ package baseCoding;
 public class Professor extends Pessoa {
     private int codigoProfessor;
     
-public Professor(String nome, String cpf, String endereco, int codigoProfessor){
-    super(nome,cpf,endereco);
+public Professor(String nome, String sobrenome, String dataNasc, String cpf, String endereco){
+    super(nome, sobrenome, dataNasc, cpf, endereco);
     this.codigoProfessor = codigoProfessor;
  }
 

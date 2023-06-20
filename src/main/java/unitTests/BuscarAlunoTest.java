@@ -4,11 +4,9 @@ import baseCoding.Aluno;
 
 public class BuscarAlunoTest {
     public static void main(String[] args) {
-        Aluno aluno = new Aluno("João", "123456789", "Rua A", 123456789);
-
+        Aluno aluno = new Aluno("Maria", "Silva", "19/06/2023", "98765432109", "Av n sei onde", "paps", "12345678910", 2021002);
         // Insert the student into the database for testing
-        aluno.cadastrarAluno(aluno.getNome(), aluno.getEnd(), aluno.getCpf(), aluno.getMatricula());
-
+        aluno.cadastrarAluno(aluno);
         // Search for the student in the database
         Aluno alunoEncontrado = aluno.buscarAluno(aluno.getMatricula());
 
