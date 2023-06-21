@@ -1,17 +1,22 @@
 package baseCoding;
 
+import java.io.IOException;
 import sge.MySQLConnector;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 public class Aluno extends Pessoa {
     private long matricula;
     private String responsavel;
     private String cpfresp;
-    
+    private static final Logger logger = Logger.getLogger(Aluno.class.getName());
+
+
     MySQLConnector connector = new MySQLConnector();
 
     public Aluno(String nome, String sobrenome, String dataNasc, String cpf, String end, String resp, String cpfresp, long matricula) {
@@ -27,24 +32,8 @@ public class Aluno extends Pessoa {
         return matricula;
     }
 
-    public String getNome() {
-        return super.getNome();
-    }
-
-    public String getSobrenome() {
-        return super.getSobrenome();
-    }
-
-    public String getCpf() {
-        return super.getCpf();
-    }
-
     public String getEnd() {
         return super.getEndereco();
-    }
-    
-    public String getDataNasc() {
-        return super.getDataNasc();
     }
     
     public String getResponsavel() {
@@ -69,9 +58,9 @@ public class Aluno extends Pessoa {
                     String dataNasc = rs.getString("datanasc");
                     String cpf = rs.getString("cpf");
                     String endereco = rs.getString("endereco");
-                    String cpfresp = rs.getString("cpfresp");
-                    String responsavel = rs.getString("resp");
-                    tmpAluno = new Aluno(nome, sobrenome, dataNasc, cpf, endereco, responsavel, cpfresp, matricula);
+                    String tmpCpfResp = rs.getString("cpfresp");
+                    String tmpResp = rs.getString("resp");
+                    tmpAluno = new Aluno(nome, sobrenome, dataNasc, cpf, endereco, tmpResp, tmpCpfResp, matricula);
                 }
             }
         } catch (SQLException e) {
@@ -82,16 +71,26 @@ public class Aluno extends Pessoa {
     }        
     
     public void excluirAluno(long matricula) {
+        try {
+            FileHandler fileHandler = new FileHandler("excliur.log");
+            fileHandler.setLevel(Level.ALL); // Define o nível de log desejado
+            fileHandler.setFormatter(new SimpleFormatter());
+            
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        logger.log(Level.INFO, "Aluno com matrícula {0} excluído com sucesso.", matricula);
         String query = "DELETE FROM alunos WHERE matricula = ?";
-    
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             stmt.setLong(1, matricula);
             stmt.executeUpdate();
-            System.out.println("Aluno com matrícula " + matricula + " excluído com sucesso.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     
     public boolean cadastrarAluno(Aluno aluno) {
         // Insert data into the "alunos" table
@@ -107,7 +106,8 @@ public class Aluno extends Pessoa {
             stmt.setString(7, aluno.getResponsavel());
             stmt.setLong(8, aluno.getMatricula());
             stmt.executeUpdate();
-            System.out.println("Student data inserted successfully into the 'alunos' table.");
+            logger.info("Student data inserted successfully into the 'alunos' table.");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -118,9 +118,18 @@ public class Aluno extends Pessoa {
     
     
     public static void main(String[] args) {
-        
+        try {
+            FileHandler fileHandler = new FileHandler("application.log");
+            fileHandler.setLevel(Level.ALL); // Define o nível de log desejado
+            fileHandler.setFormatter(new SimpleFormatter());
+            
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Aluno aluno = new Aluno("Maria", "Silva", "2023-12-15", "98765432109", "Av n sei onde", "paps", "12345678910", 2021002);
         aluno.cadastrarAluno(aluno);
+        aluno.excluirAluno(2021002);
     }
     
 }

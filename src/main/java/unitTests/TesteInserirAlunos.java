@@ -7,6 +7,8 @@ import baseCoding.Aluno;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+
 /**
  *
  * @author gabriel
@@ -43,8 +45,11 @@ public class TesteInserirAlunos {
             try {
                 String dataFormatada = formatarData(dataString);
                 
+                // Generate a random 10-digit student ID
+                Random random = new Random();
+                long matricula = 1_000_000_000L + random.nextInt(9_000_000);                
                 // Inserir aluno no banco de dados usando a data formatada corretamente
-                Aluno aluno = new Aluno(nome, sobrenome, dataFormatada, cpf, endereco, responsavel, cpfResponsavel, 2021002);
+                Aluno aluno = new Aluno(nome, sobrenome, dataFormatada, cpf, endereco, responsavel, cpfResponsavel, matricula);
                 aluno.cadastrarAluno(aluno);
                 
                 System.out.println("Aluno cadastrado com sucesso: " + nome + " " + sobrenome);
