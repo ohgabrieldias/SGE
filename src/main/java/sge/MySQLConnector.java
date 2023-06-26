@@ -29,6 +29,10 @@ public class MySQLConnector {
         }
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+    
     public boolean authenticateUser(String username, String password) {
         String query = "SELECT COUNT(*) FROM users WHERE username = ? AND password = ?";
 
