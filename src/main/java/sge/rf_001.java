@@ -5,10 +5,13 @@
 package sge;
 
 import  baseCoding.Aluno;
+import util.Formater;
 import javax.swing.JOptionPane;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -315,20 +318,13 @@ public class rf_001 extends javax.swing.JInternalFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         
-        // Dentro do método btnCadastrarActionPerformed()
-    try {
-        // Obtém a data de nascimento no formato dd/MM/yyyy
-        String dataNascimento = novoAlunoDN.getText();
-
-        // Converte a data para o formato do MySQL (yyyy-MM-dd)
-        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = inputFormat.parse(dataNascimento);
-        mysqlDateString = outputFormat.format(date);
-    } catch (ParseException e) {
-        // Trate qualquer exceção que possa ocorrer durante a conversão
-        e.printStackTrace();
-    }
+    // Obtém a data de nascimento no formato dd/MM/yyyy
+    String dataNascimento = null;
+        try {
+            dataNascimento = Formater.formatarData(novoAlunoDN.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(rf_001.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     // Verifique se mysqlDateString não está vazia antes de usá-la
     if (mysqlDateString != null && !mysqlDateString.isEmpty()) {
@@ -338,7 +334,7 @@ public class rf_001 extends javax.swing.JInternalFrame {
         if (validarNome(novoAlunoNome.getText()) && validarSobrenome(novoAlunoSobrenome.getText()) &&
             validarDataNascimento(mysqlDateString) && validarCPF(novoAlunoCPF.getText())) {
 
-            Aluno aluno = new Aluno(novoAlunoNome.getText(), novoAlunoSobrenome.getText(), mysqlDateString, novoAlunoCPF.getText(), "Av n sei onde", novoAlunoResp.getText(), novoAlunoCPFResp.getText(), 2021002);
+            Aluno aluno = new Aluno(novoAlunoNome.getText(), novoAlunoSobrenome.getText(), dataNascimento, novoAlunoCPF.getText(), "Av n sei onde", novoAlunoResp.getText(), novoAlunoCPFResp.getText(), 2021002);
             aluno.cadastrarAluno(aluno);
 
             JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");

@@ -4,6 +4,7 @@
  */
 package unitTests;
 import baseCoding.Aluno;
+import util.Formater;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,7 +17,6 @@ import java.util.Random;
 
 
 public class TesteInserirAlunos {
-
     public static void main(String[] args) {
         // Array com os dados dos alunos
         String[][] dadosAlunos = {
@@ -43,7 +43,7 @@ public class TesteInserirAlunos {
             String cpfResponsavel = alunoData[6];
             
             try {
-                String dataFormatada = formatarData(dataString);
+                String dataFormatada = Formater.formatarData("kjkk");
                 
                 // Generate a random 10-digit student ID
                 Random random = new Random();
@@ -57,12 +57,6 @@ public class TesteInserirAlunos {
                 System.out.println("Erro ao cadastrar aluno: " + nome + " " + sobrenome);
             }
         }
-    }
-    
-    public static String formatarData(String dataString) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = sdf.parse(dataString);
-        return new SimpleDateFormat("yyyy-MM-dd").format(data);
     }
 }
 
