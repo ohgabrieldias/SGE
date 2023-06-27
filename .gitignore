@@ -33,3 +33,4 @@ replay_pid*
 
 #sonar-scanner files
 .scannerwork/
+/nbproject/
