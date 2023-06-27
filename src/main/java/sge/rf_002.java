@@ -37,7 +37,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
         cpfLabel = new javax.swing.JLabel();
         cpfCampo = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
-        dnCampo = new com.toedter.calendar.JDateChooser();
+        dataNascimento = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
 
@@ -92,7 +92,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
             }
         });
 
-        dnCampo.setDateFormatString("dd'/'MM'/'yyyy");
+        dataNascimento.setDateFormatString("dd'/'MM'/'yyyy");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,7 +115,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
                                     .addComponent(nomeLabel)
                                     .addComponent(dnLabel))
                                 .addGap(0, 11, Short.MAX_VALUE))
-                            .addComponent(dnCampo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(dataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cpfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,7 +152,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cpfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dnCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -182,7 +182,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JTextField cpfCampo;
     private javax.swing.JLabel cpfLabel;
-    private com.toedter.calendar.JDateChooser dnCampo;
+    private com.toedter.calendar.JDateChooser dataNascimento;
     private javax.swing.JLabel dnLabel;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logo;

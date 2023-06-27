@@ -42,7 +42,7 @@
                               </Group>
                               <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="dnCampo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="dataNascimento" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -92,7 +92,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="cpfCampo" min="-2" max="-2" attributes="0"/>
-                  <Component id="dnCampo" min="-2" max="-2" attributes="0"/>
+                  <Component id="dataNascimento" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="btnCadastrar" min="-2" pref="35" max="-2" attributes="0"/>
@@ -207,7 +207,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="dnCampo">
+    <Component class="com.toedter.calendar.JDateChooser" name="dataNascimento">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="dd&apos;/&apos;MM&apos;/&apos;yyyy"/>
       </Properties>
