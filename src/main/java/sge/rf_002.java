@@ -34,10 +34,10 @@ public class rf_002 extends javax.swing.JInternalFrame {
         sobrenomeLabel = new javax.swing.JLabel();
         sobrenomeCampo = new javax.swing.JTextField();
         dnLabel = new javax.swing.JLabel();
-        dataNascimento = new com.toedter.calendar.JDateChooser();
         cpfLabel = new javax.swing.JLabel();
         cpfCampo = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
+        dnCampo = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
 
@@ -73,9 +73,6 @@ public class rf_002 extends javax.swing.JInternalFrame {
         dnLabel.setForeground(new java.awt.Color(51, 51, 51));
         dnLabel.setText("Data de Nascimento");
 
-        dataNascimento.setDateFormatString("d'/'MM'/'y");
-        dataNascimento.setMinSelectableDate(new java.util.Date(-62135755086000L));
-
         cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cpfLabel.setForeground(new java.awt.Color(51, 51, 51));
         cpfLabel.setText("CPF");
@@ -95,6 +92,8 @@ public class rf_002 extends javax.swing.JInternalFrame {
             }
         });
 
+        dnCampo.setDateFormatString("dd'/'MM'/'yyyy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,12 +110,12 @@ public class rf_002 extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nomeCampo)
-                            .addComponent(dataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nomeLabel)
                                     .addComponent(dnLabel))
-                                .addGap(0, 11, Short.MAX_VALUE)))
+                                .addGap(0, 11, Short.MAX_VALUE))
+                            .addComponent(dnCampo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cpfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,8 +151,8 @@ public class rf_002 extends javax.swing.JInternalFrame {
                     .addComponent(cpfLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cpfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cpfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dnCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -183,7 +182,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JTextField cpfCampo;
     private javax.swing.JLabel cpfLabel;
-    private com.toedter.calendar.JDateChooser dataNascimento;
+    private com.toedter.calendar.JDateChooser dnCampo;
     private javax.swing.JLabel dnLabel;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logo;
