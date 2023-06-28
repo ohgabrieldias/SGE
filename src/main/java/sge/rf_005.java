@@ -4,6 +4,12 @@
  */
 package sge;
 
+import baseCoding.Disciplina;
+import baseCoding.Funcionario;
+import javax.swing.JOptionPane;
+import util.Formater;
+import util.Validator;
+
 /**
  *
  * @author gabri
@@ -74,6 +80,11 @@ public class rf_005 extends javax.swing.JInternalFrame {
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,6 +153,28 @@ public class rf_005 extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String nome = nomeCampo.getText();
+        String dataInicio = "";
+        String dataFim= "";
+        dataInicio = Formater.formatarData2(dataInicioCampo);
+        dataFim = Formater.formatarData2(dataFimCampo);
+      
+        if (Validator.validarNome(nome) && Validator.validarData(dataInicio) && Validator.validarData(dataInicio) ) {
+            
+            Disciplina disc = new Disciplina(nome, dataInicio, dataFim);
+            if(disc.cadastrarDisciplinas(disc)){
+            
+                JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
+                // Feche o formulário
+                dispose();
+            }
+            else JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!");
+
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
