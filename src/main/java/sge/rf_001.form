@@ -68,7 +68,7 @@
                           <Component id="novoAlunoCPFResp" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="respAviso" alignment="0" max="32767" attributes="0"/>
+                  <Component id="respAviso" alignment="0" pref="325" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
@@ -299,6 +299,9 @@
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dataNascimento">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
