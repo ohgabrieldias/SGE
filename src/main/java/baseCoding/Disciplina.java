@@ -38,7 +38,7 @@ public class Disciplina {
             stmt.setString(1, disc.getNome());
             stmt.setString(2, disc.getDataInicio());
             stmt.setString(3, disc.getDataFim());
-            stmt.setString(3, disc.getNomeProfessor());
+            stmt.setString(4, disc.getNomeProfessor());
 
             stmt.executeUpdate();
             logger.info("Student data inserted successfully into the 'disciplinas' table.");
