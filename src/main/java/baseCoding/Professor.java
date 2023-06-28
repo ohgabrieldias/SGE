@@ -72,10 +72,21 @@ public int getCodigoProfessor(){
     }
     return tmpProfessor;
     // return null;
-    
   }
 
+    public String toString(){
+        return "Professor: " + this.getNome() + " " + this.getSobrenome() + " " + this.getDataNasc() + " " + this.getCpf() + " " + this.getEndereco();
+    }
+
   public static void main(String args[]){
+    try{
+        FileHandler fh = new FileHandler("professor.log");
+        fh.setLevel(Level.ALL); // Log all messages
+        fh.setFormatter(new SimpleFormatter());
+        logger.addHandler(fh);
+    }catch (IOException e){
+        e.printStackTrace();
+    }
     Professor professor = new Professor("Joao", "Silva", "1990-01-01", "12345678901", "Rua 1");
     professor.cadastrarProfessor(professor);
 
