@@ -6,8 +6,6 @@ package sge;
 
 import DAO.ProfessorDAO;
 import baseCoding.Disciplina;
-import baseCoding.Funcionario;
-import baseCoding.Professor;
 import java.util.List;
 import javax.swing.JOptionPane;
 import util.Formater;
@@ -94,7 +92,7 @@ public class rf_005 extends javax.swing.JInternalFrame {
                 professorCampoActionPerformed(evt);
             }
         });
-
+        
         jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +178,7 @@ public class rf_005 extends javax.swing.JInternalFrame {
         
         if (Validator.validarNome(nome) && Validator.validarData(dataInicio) && Validator.validarData(dataFim) ) {
             
-            Disciplina disc = new Disciplina(nome, dataInicio, dataFim);
+            Disciplina disc = new Disciplina(nome, dataInicio, dataFim,(String)professorCampo.getSelectedItem());
             if(disc.cadastrarDisciplinas(disc)){
             
                 JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
@@ -206,7 +204,6 @@ public class rf_005 extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_professorCampoAncestorAdded
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cadastroAluno;
