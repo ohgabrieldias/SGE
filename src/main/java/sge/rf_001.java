@@ -4,6 +4,11 @@
  */
 package sge;
 
+import  baseCoding.Aluno;
+import util.Formater;
+import javax.swing.JOptionPane;
+import util.Validator;
+
 /**
  *
  * @author gabri
@@ -13,7 +18,7 @@ public class rf_001 extends javax.swing.JInternalFrame {
     public rf_001() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +35,6 @@ public class rf_001 extends javax.swing.JInternalFrame {
         novoAlunoLabel = new javax.swing.JLabel();
         novoAlunoSobrenome = new javax.swing.JTextField();
         novoAlunoCPF = new javax.swing.JTextField();
-        novoAlunoDN = new javax.swing.JFormattedTextField();
         novoAlunoDNLabel = new javax.swing.JLabel();
         novoAlunoCPFLabel = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
@@ -41,6 +45,7 @@ public class rf_001 extends javax.swing.JInternalFrame {
         novoAlunoCPFResp = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         respAviso = new javax.swing.JLabel();
+        dataNascimento = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
         setTitle("Cadastro de Alun@");
@@ -76,15 +81,6 @@ public class rf_001 extends javax.swing.JInternalFrame {
         });
 
         novoAlunoCPF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        novoAlunoDN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
-        novoAlunoDN.setToolTipText("xx/xx/xxxx");
-        novoAlunoDN.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        novoAlunoDN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                novoAlunoDNActionPerformed(evt);
-            }
-        });
 
         novoAlunoDNLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         novoAlunoDNLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -125,6 +121,8 @@ public class rf_001 extends javax.swing.JInternalFrame {
         respAviso.setText("Somente se necessário um responsável");
         respAviso.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        dataNascimento.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,11 +136,16 @@ public class rf_001 extends javax.swing.JInternalFrame {
                         .addComponent(cadastroAluno))
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(novoAlunoDN)
-                            .addComponent(novoAlunoLabel)
-                            .addComponent(novoAlunoNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(novoAlunoDNLabel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(novoAlunoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(novoAlunoLabel)
+                                    .addComponent(novoAlunoDNLabel))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(dataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(novoAlunoCPFLabel)
@@ -159,7 +162,7 @@ public class rf_001 extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(novoAlunoCPFRespLabel)
                             .addComponent(novoAlunoCPFResp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(respAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(respAviso, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
@@ -186,9 +189,9 @@ public class rf_001 extends javax.swing.JInternalFrame {
                     .addComponent(novoAlunoDNLabel)
                     .addComponent(novoAlunoCPFLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(novoAlunoDN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(novoAlunoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(novoAlunoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -210,11 +213,7 @@ public class rf_001 extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void novoAlunoDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoAlunoDNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_novoAlunoDNActionPerformed
-
+    
     private void novoAlunoSobrenomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoAlunoSobrenomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_novoAlunoSobrenomeActionPerformed
@@ -224,7 +223,28 @@ public class rf_001 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_novoAlunoNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
+        String nome = novoAlunoNome.getText();
+        String sobrenome = novoAlunoSobrenome.getText();
+        String dataNasc = "";
+        String cpf = novoAlunoCPF.getText();
+        String cpfResp = novoAlunoCPFResp.getText();
+        String resp = novoAlunoResp.getText();
+        String end = "";
+        dataNasc = Formater.formatarData2(dataNascimento);
+      
+        System.out.print("data = " + dataNasc);
+        if (Validator.validarNome(nome) && Validator.validarSobrenome(sobrenome) && Validator.validarCPF(cpf)) {
+
+        Aluno aluno = new Aluno(nome, sobrenome, dataNasc, cpf, "Av n sei onde", resp,cpfResp, 2110102629);
+        aluno.cadastrarAluno(aluno);
+
+        JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
+
+        // Feche o formulário
+        dispose();
+        }
+        
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void novoAlunoRespFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoAlunoRespFieldActionPerformed
@@ -235,13 +255,13 @@ public class rf_001 extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JLabel cadastroAluno;
+    private com.toedter.calendar.JDateChooser dataNascimento;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField novoAlunoCPF;
     private javax.swing.JLabel novoAlunoCPFLabel;
     private javax.swing.JTextField novoAlunoCPFResp;
     private javax.swing.JLabel novoAlunoCPFRespLabel;
-    private javax.swing.JFormattedTextField novoAlunoDN;
     private javax.swing.JLabel novoAlunoDNLabel;
     private javax.swing.JLabel novoAlunoInternalLogo;
     private javax.swing.JLabel novoAlunoLabel;
