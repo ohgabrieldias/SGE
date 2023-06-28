@@ -4,6 +4,13 @@
  */
 package sge;
 
+import baseCoding.Funcionario;
+import java.text.Format;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import util.*;
 /**
  *
  * @author gabri
@@ -78,6 +85,11 @@ public class rf_003 extends javax.swing.JInternalFrame {
         cpfLabel1.setText("Data de nascimento");
 
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         loginPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
 
@@ -124,7 +136,7 @@ public class rf_003 extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dnCampo.setDateFormatString("d'/'MM'/'yyyy");
+        dnCampo.setDateFormatString("yyyy-MM-dd");
         dnCampo.setMaxSelectableDate(new java.util.Date(253370779289000L));
 
         sobrenomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -223,6 +235,22 @@ public class rf_003 extends javax.swing.JInternalFrame {
     private void sobrenomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobrenomeCampoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sobrenomeCampoActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        String nome = nomeCampo.getText();
+        String sobrenome = nomeCampo.getText();
+        String dataNasc = "";
+        String cpf = cpfCampo.getText();
+        String end = "";
+        dataNasc = Formater.formatarData2(dnCampo);
+      
+        System.out.print("data = " + dataNasc);
+        if (Validator.validarNome(nome) && Validator.validarSobrenome(sobrenome) && Validator.validarCPF(cpf)) {
+            
+            Funcionario func = new Funcionario(nome, sobrenome, dataNasc, cpf, end);
+            func.cadastrarFuncionario(func);
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

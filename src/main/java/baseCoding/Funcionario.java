@@ -6,6 +6,7 @@ package baseCoding;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Logger;
 import sge.MySQLConnector;
 
@@ -14,12 +15,14 @@ import sge.MySQLConnector;
  * @author Gabriel
  */
 public class Funcionario extends Pessoa {
+    private Date data;
     private String setor;
     private String cargo;
     private float salario;
     
     public Funcionario(String nome, String sobrenome, String dataNasc, String cpf, String endereco){
         super(nome, sobrenome, dataNasc, cpf, endereco);
+        this.data = data;
     }
     
     private static final Logger logger = Logger.getLogger(Funcionario.class.getName());
@@ -62,6 +65,9 @@ public String getCargo() {
     return cargo;
 }
 
+public Date getDate(){
+    return this.data;
+}
 public void setCargo(String cargo) {
     this.cargo = cargo;
 }

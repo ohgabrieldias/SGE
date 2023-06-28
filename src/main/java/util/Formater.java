@@ -4,6 +4,7 @@
  */
 package util;
 
+import com.toedter.calendar.JDateChooser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,4 +20,19 @@ public class Formater {
         Date data = sdf.parse(dataString);
         return new SimpleDateFormat("yyyy-MM-dd").format(data);
     }
+    
+
+// ...
+
+    public static String formatarData2(JDateChooser dateChooser) {
+    Date dataSelecionada = dateChooser.getDate();
+
+    if (dataSelecionada != null) {
+        SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+        return formatador.format(dataSelecionada);
+    } else {
+        return null;
+    }
+}
+
 }
