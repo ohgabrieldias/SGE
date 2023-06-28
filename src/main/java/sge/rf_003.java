@@ -5,11 +5,7 @@
 package sge;
 
 import baseCoding.Funcionario;
-import java.text.Format;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import util.*;
 /**
  *
@@ -249,6 +245,11 @@ public class rf_003 extends javax.swing.JInternalFrame {
             
             Funcionario func = new Funcionario(nome, sobrenome, dataNasc, cpf, end);
             func.cadastrarFuncionario(func);
+            
+            JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
+
+            // Feche o formulário
+            dispose();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
