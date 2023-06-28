@@ -4,8 +4,11 @@
  */
 package sge;
 
+import DAO.ProfessorDAO;
 import baseCoding.Disciplina;
 import baseCoding.Funcionario;
+import baseCoding.Professor;
+import java.util.List;
 import javax.swing.JOptionPane;
 import util.Formater;
 import util.Validator;
@@ -77,6 +80,20 @@ public class rf_005 extends javax.swing.JInternalFrame {
         professorLabel.setText("Professor responsável");
 
         professorCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        professorCampo.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                professorCampoAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        professorCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                professorCampoActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton1.setText("Cadastrar");
@@ -160,8 +177,8 @@ public class rf_005 extends javax.swing.JInternalFrame {
         String dataFim= "";
         dataInicio = Formater.formatarData2(dataInicioCampo);
         dataFim = Formater.formatarData2(dataFimCampo);
-      
-        if (Validator.validarNome(nome) && Validator.validarData(dataInicio) && Validator.validarData(dataInicio) ) {
+        
+        if (Validator.validarNome(nome) && Validator.validarData(dataInicio) && Validator.validarData(dataFim) ) {
             
             Disciplina disc = new Disciplina(nome, dataInicio, dataFim);
             if(disc.cadastrarDisciplinas(disc)){
@@ -175,6 +192,20 @@ public class rf_005 extends javax.swing.JInternalFrame {
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void professorCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorCampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_professorCampoActionPerformed
+
+    private void professorCampoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_professorCampoAncestorAdded
+        ProfessorDAO professordao = new ProfessorDAO();
+        List<String> dados = professordao.buscarNomesProfessores();
+        professorCampo.addItem("-- Selecione --");
+        for (String elemento : dados) {
+            professorCampo.addItem(elemento);
+        }
+        
+    }//GEN-LAST:event_professorCampoAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
