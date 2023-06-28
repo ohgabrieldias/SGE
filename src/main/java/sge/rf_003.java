@@ -136,7 +136,7 @@ public class rf_003 extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dnCampo.setDateFormatString("yyyy-MM-dd");
+        dnCampo.setDateFormatString("dd/MM/yyyy");
         dnCampo.setMaxSelectableDate(new java.util.Date(253370779289000L));
 
         sobrenomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
