@@ -7,11 +7,7 @@ package sge;
 import  baseCoding.Aluno;
 import util.Formater;
 import javax.swing.JOptionPane;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import util.Validator;
 
 /**
  *
@@ -22,87 +18,6 @@ public class rf_001 extends javax.swing.JInternalFrame {
     public rf_001() {
         initComponents();
     }
-
-    private boolean validarNome(String nome) {
-        // Verifique se o nome não está vazio
-        if (nome.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nome inválido");
-            return false;
-        }
-    
-        // Adicione outras validações específicas para o nome, se necessário
-    
-        return true;
-    }
-    
-    private boolean validarSobrenome(String sobrenome) {
-        // Verifique se o sobrenome não está vazio
-        if (sobrenome.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Sobrenome inválido");
-            return false;
-        }
-    
-        // Adicione outras validações específicas para o sobrenome, se necessário
-    
-        return true;
-    }
-    
-    private boolean validarDataNascimento(String dataNascimento) {
-        // Verifique se a data de nascimento não está vazia
-        if (dataNascimento.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Data de nascimento inválida");
-            return false;
-        }
-    
-        // Adicione outras validações específicas para a data de nascimento, se necessário
-    
-        return true;
-    }
-    
-    private boolean validarCPF(String cpf) {
-        // Remova caracteres especiais do CPF (pontos e traço)
-        cpf = cpf.replaceAll("[^0-9]", "");
-    
-        // Verifique se o CPF possui 11 dígitos
-        if (cpf.length() != 11) {
-            JOptionPane.showMessageDialog(this, "CPF inválido");
-            return false;
-        }
-    
-        // Verifique se todos os dígitos do CPF são iguais (CPF inválido)
-        if (cpf.matches("(\\d)\\1{10}")) {
-            JOptionPane.showMessageDialog(this, "CPF inválido");
-            return false;
-        }
-    
-        // Calcule o primeiro dígito verificador
-        int soma = 0;
-        for (int i = 0; i < 9; i++) {
-            soma += (cpf.charAt(i) - '0') * (10 - i);
-        }
-        int digito1 = 11 - (soma % 11);
-        if (digito1 > 9) {
-            digito1 = 0;
-        }
-    
-        // Calcule o segundo dígito verificador
-        soma = 0;
-        for (int i = 0; i < 10; i++) {
-            soma += (cpf.charAt(i) - '0') * (11 - i);
-        }
-        int digito2 = 11 - (soma % 11);
-        if (digito2 > 9) {
-            digito2 = 0;
-        }
-    
-        // Verifique se os dígitos verificadores calculados são iguais aos dígitos informados
-        if (digito1 != (cpf.charAt(9) - '0') || digito2 != (cpf.charAt(10) - '0')) {
-            JOptionPane.showMessageDialog(this, "CPF inválido");
-            return false;
-        }
-    
-        return true;
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,9 +26,6 @@ public class rf_001 extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-
-    String mysqlDateString;
-
     private void initComponents() {
 
         novoAlunoInternalLogo = new javax.swing.JLabel();
@@ -123,7 +35,6 @@ public class rf_001 extends javax.swing.JInternalFrame {
         novoAlunoLabel = new javax.swing.JLabel();
         novoAlunoSobrenome = new javax.swing.JTextField();
         novoAlunoCPF = new javax.swing.JTextField();
-        novoAlunoDN = new javax.swing.JFormattedTextField();
         novoAlunoDNLabel = new javax.swing.JLabel();
         novoAlunoCPFLabel = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
@@ -134,6 +45,7 @@ public class rf_001 extends javax.swing.JInternalFrame {
         novoAlunoCPFResp = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         respAviso = new javax.swing.JLabel();
+        dataNascimento = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
         setTitle("Cadastro de Alun@");
@@ -169,15 +81,6 @@ public class rf_001 extends javax.swing.JInternalFrame {
         });
 
         novoAlunoCPF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        novoAlunoDN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
-        novoAlunoDN.setToolTipText("xx/xx/xxxx");
-        novoAlunoDN.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        novoAlunoDN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                novoAlunoDNActionPerformed(evt);
-            }
-        });
 
         novoAlunoDNLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         novoAlunoDNLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -218,6 +121,8 @@ public class rf_001 extends javax.swing.JInternalFrame {
         respAviso.setText("Somente se necessário um responsável");
         respAviso.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        dataNascimento.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,11 +136,16 @@ public class rf_001 extends javax.swing.JInternalFrame {
                         .addComponent(cadastroAluno))
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(novoAlunoDN)
-                            .addComponent(novoAlunoLabel)
-                            .addComponent(novoAlunoNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(novoAlunoDNLabel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(novoAlunoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(novoAlunoLabel)
+                                    .addComponent(novoAlunoDNLabel))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(dataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(novoAlunoCPFLabel)
@@ -252,7 +162,7 @@ public class rf_001 extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(novoAlunoCPFRespLabel)
                             .addComponent(novoAlunoCPFResp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(respAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(respAviso, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
@@ -279,9 +189,9 @@ public class rf_001 extends javax.swing.JInternalFrame {
                     .addComponent(novoAlunoDNLabel)
                     .addComponent(novoAlunoCPFLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(novoAlunoDN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(novoAlunoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(novoAlunoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -304,10 +214,6 @@ public class rf_001 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void novoAlunoDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoAlunoDNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_novoAlunoDNActionPerformed
-
     private void novoAlunoSobrenomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoAlunoSobrenomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_novoAlunoSobrenomeActionPerformed
@@ -317,37 +223,26 @@ public class rf_001 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_novoAlunoNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        
-    // Obtém a data de nascimento no formato dd/MM/yyyy
-    String dataNascimento = null;
-        try {
-            dataNascimento = Formater.formatarData(novoAlunoDN.getText());
-        } catch (ParseException ex) {
-            Logger.getLogger(rf_001.class.getName()).log(Level.SEVERE, null, ex);
+        String nome = novoAlunoNome.getText();
+        String sobrenome = novoAlunoSobrenome.getText();
+        String dataNasc = "";
+        String cpf = novoAlunoCPF.getText();
+        String cpfResp = novoAlunoCPFResp.getText();
+        String resp = novoAlunoResp.getText();
+        String end = "";
+        dataNasc = Formater.formatarData2(dataNascimento);
+      
+        System.out.print("data = " + dataNasc);
+        if (Validator.validarNome(nome) && Validator.validarSobrenome(sobrenome) && Validator.validarCPF(cpf)) {
+
+        Aluno aluno = new Aluno(nome, sobrenome, dataNasc, cpf, "Av n sei onde", resp,cpfResp, 2110102629);
+        aluno.cadastrarAluno(aluno);
+
+        JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
+
+        // Feche o formulário
+        dispose();
         }
-
-    // Verifique se mysqlDateString não está vazia antes de usá-la
-    if (mysqlDateString != null && !mysqlDateString.isEmpty()) {
-        // Faça o que você precisa com mysqlDateString
-        System.out.println("Data de nascimento em formato MySQL: " + mysqlDateString);
-
-        if (validarNome(novoAlunoNome.getText()) && validarSobrenome(novoAlunoSobrenome.getText()) &&
-            validarDataNascimento(mysqlDateString) && validarCPF(novoAlunoCPF.getText())) {
-
-            Aluno aluno = new Aluno(novoAlunoNome.getText(), novoAlunoSobrenome.getText(), dataNascimento, novoAlunoCPF.getText(), "Av n sei onde", novoAlunoResp.getText(), novoAlunoCPFResp.getText(), 2021002);
-            aluno.cadastrarAluno(aluno);
-
-            JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
-
-            // Feche o formulário
-            dispose();
-            }
-        
-    } else {
-        // Caso mysqlDateString esteja vazia, mostre uma mensagem de erro ou realize outra ação apropriada
-        System.out.println("Erro ao converter a data de nascimento.");
-    }
-
         
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -360,13 +255,13 @@ public class rf_001 extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JLabel cadastroAluno;
+    private com.toedter.calendar.JDateChooser dataNascimento;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField novoAlunoCPF;
     private javax.swing.JLabel novoAlunoCPFLabel;
     private javax.swing.JTextField novoAlunoCPFResp;
     private javax.swing.JLabel novoAlunoCPFRespLabel;
-    private javax.swing.JFormattedTextField novoAlunoDN;
     private javax.swing.JLabel novoAlunoDNLabel;
     private javax.swing.JLabel novoAlunoInternalLogo;
     private javax.swing.JLabel novoAlunoLabel;
