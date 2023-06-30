@@ -134,6 +134,11 @@ public class main extends javax.swing.JFrame {
         rf_005Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rf_005Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         rf_005Menu.setText("Funcionário");
+        rf_005Menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rf_005MenuActionPerformed(evt);
+            }
+        });
         menuCadastros.add(rf_005Menu);
 
         mainMenu.add(menuCadastros);
@@ -221,6 +226,12 @@ public class main extends javax.swing.JFrame {
         areaTrabalhoMain.add(rfNovoProfessor);
         rfNovoProfessor.setVisible(true);
     }// GEN-LAST:event_rf_002MenuActionPerformed
+
+    private void rf_005MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_005MenuActionPerformed
+        rf_003 rfNovoFunc = new rf_003();
+        areaTrabalhoMain.add(rfNovoFunc);
+        rfNovoFunc.setVisible(true);
+    }//GEN-LAST:event_rf_005MenuActionPerformed
 
     /**
      * @param args the command line arguments
