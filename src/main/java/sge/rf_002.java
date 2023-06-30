@@ -4,13 +4,17 @@
  */
 package sge;
 
+
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
+import util.Validator;
+
 
 import javax.swing.JOptionPane;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
-import javax.xml.validation.Validator;
+
 
 import com.mysql.cj.x.protobuf.MysqlxNotice.Warning.Level;
 
@@ -198,8 +202,10 @@ public class rf_002 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Campo CPF vazio!");
         }else{
             String cpf = cpfCampo.getText();
-           // System.out.println(cpf);
+            if(Validator.validarCPF(cpf)){
+                JOptionPane.showMessageDialog(null, "CPF válido!");
         }
+     }
     }
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -236,5 +242,6 @@ public class rf_002 extends javax.swing.JInternalFrame {
     private javax.swing.JTextField sobrenomeCampo;
     private javax.swing.JLabel sobrenomeLabel;
     private javax.swing.JLabel titulo;
+
     // End of variables declaration//GEN-END:variables
 }
