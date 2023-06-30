@@ -71,7 +71,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/imagens/curso.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Curso"/>
+                <Property name="text" type="java.lang.String" value="Disciplina"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rf_004MenuActionPerformed"/>
@@ -87,6 +87,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rf_005MenuActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
