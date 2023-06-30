@@ -202,10 +202,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Campo CPF vazio!");
         }else{
             String cpf = cpfCampo.getText();
-            if(Validator.validarCPF(cpf)){
-                JOptionPane.showMessageDialog(null, "CPF válido!");
         }
-     }
     }
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -217,6 +214,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
             String sobrenome = sobrenomeCampo.getText();
             String cpf = cpfCampo.getText();
             String dataNasc = Formater.formatarData2(dataNascimento);
+        if(Validator.validarNome(nome) && Validator.validarNome(sobrenome) && Validator.validarCPF(cpf) && Validator.validarData(dataNasc)){
             Professor professor = new Professor(nome, sobrenome, dataNasc, cpf, "Rua 01");  
         if(professor.cadastrarProfessor(professor)){
             JOptionPane.showMessageDialog(null, "Professor cadastrado com sucesso!");
@@ -225,6 +223,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar professor!");
         }
       }
+    }
     }//GEN-LAST:event_btnCadastrarActionPerformed
     
 
