@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
+import javax.xml.validation.Validator;
 
 import com.mysql.cj.x.protobuf.MysqlxNotice.Warning.Level;
 
@@ -205,22 +206,15 @@ public class rf_002 extends javax.swing.JInternalFrame {
         if(nomeCampo.getText().equals("") || sobrenomeCampo.getText().equals("") || cpfCampo.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
         }else{
+            
             String nome = nomeCampo.getText();
             String sobrenome = sobrenomeCampo.getText();
             String cpf = cpfCampo.getText();
-           // String dataNasc = 2 + "/" + 2 + "/" + 2000;
-           // Professor professor = new Professor(nome, sobrenome, dataNasc, cpf, "Rua 01");
-            //System.out.println(nome);
-            //System.out.println(sobrenome);
-            //System.out.println(cpf);
-           // System.out.println(professor);
+            String dataNasc = Formater.formatarData2(dataNascimento);
+            Professor professor = new Professor(nome, sobrenome, dataNasc, cpf, "Rua 01");  
+            professor.cadastrarProfessor(professor);
+            
         }
-        String dataNascimento = null;
-            try{
-                dataNascimento = new SimpleDateFormat("dd/MM/yyyy").format(this.dataNascimento.getDate());
-            }catch(Exception e){
-              //  Logger.getLogger(rf_002.class.getName())//.log(Level.SEVERE, null, e);
-            }
     }//GEN-LAST:event_btnCadastrarActionPerformed
     
 
