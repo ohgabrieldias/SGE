@@ -4,6 +4,19 @@
  */
 package sge;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
+import javax.xml.validation.Validator;
+
+import com.mysql.cj.x.protobuf.MysqlxNotice.Warning.Level;
+
+import baseCoding.Professor;
+import util.Formater;
+
 /**
  *
  * @author gabri
@@ -162,20 +175,48 @@ public class rf_002 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeCampoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeCampoActionPerformed
+        if(nomeCampo.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Campo nome vazio!");
+        }else{
+            String nome = nomeCampo.getText();
+            //System.out.println(nome);
+        }
+    }
 
     private void sobrenomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobrenomeCampoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sobrenomeCampoActionPerformed
+        if(sobrenomeCampo.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Campo sobrenome vazio!");
+        }else{
+            String sobrenome = sobrenomeCampo.getText();
+            
+           // System.out.println(sobrenome);
+        }
+    }
 
     private void cpfCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfCampoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cpfCampoActionPerformed
+        if(cpfCampo.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Campo CPF vazio!");
+        }else{
+            String cpf = cpfCampo.getText();
+           // System.out.println(cpf);
+        }
+    }
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-
+        if(nomeCampo.getText().equals("") || sobrenomeCampo.getText().equals("") || cpfCampo.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+        }else{
+            
+            String nome = nomeCampo.getText();
+            String sobrenome = sobrenomeCampo.getText();
+            String cpf = cpfCampo.getText();
+            String dataNasc = Formater.formatarData2(dataNascimento);
+            Professor professor = new Professor(nome, sobrenome, dataNasc, cpf, "Rua 01");  
+            professor.cadastrarProfessor(professor);
+            
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
