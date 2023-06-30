@@ -217,9 +217,11 @@ public class main extends javax.swing.JFrame {
         rfNovoAluno.setVisible(true);
     }// GEN-LAST:event_rf_001MenuActionPerformed
 
-    private void rf_004MenuActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rf_004MenuActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_rf_004MenuActionPerformed
+    private void rf_004MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_004MenuActionPerformed
+        rf_005 rfNovaDisciplina = new rf_005();
+        areaTrabalhoMain.add(rfNovaDisciplina);
+        rfNovaDisciplina.setVisible(true);
+    }//GEN-LAST:event_rf_004MenuActionPerformed
 
     private void rf_002MenuActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rf_002MenuActionPerformed
         rf_002 rfNovoProfessor = new rf_002();
