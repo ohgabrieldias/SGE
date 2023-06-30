@@ -34,8 +34,12 @@ public class Validator {
         return true;
     }
     
-    public static boolean validarDataNascimento(String dataNascimento) {
-        if (dataNascimento.isEmpty()) {
+    public static boolean validarData(String data) {
+        if (data == null){
+            JOptionPane.showMessageDialog(null, "Data de nascimento inválida");
+            return false;
+        }
+        else if (data.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Data de nascimento inválida");
             return false;
         }

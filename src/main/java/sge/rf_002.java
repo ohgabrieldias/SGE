@@ -212,9 +212,13 @@ public class rf_002 extends javax.swing.JInternalFrame {
             String cpf = cpfCampo.getText();
             String dataNasc = Formater.formatarData2(dataNascimento);
             Professor professor = new Professor(nome, sobrenome, dataNasc, cpf, "Rua 01");  
-            professor.cadastrarProfessor(professor);
-            
+        if(professor.cadastrarProfessor(professor)){
+            JOptionPane.showMessageDialog(null, "Professor cadastrado com sucesso!");
+            this.dispose();
+        }else{  
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar professor!");
         }
+      }
     }//GEN-LAST:event_btnCadastrarActionPerformed
     
 
