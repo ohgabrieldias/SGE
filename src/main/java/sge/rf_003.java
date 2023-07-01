@@ -5,11 +5,7 @@
 package sge;
 
 import baseCoding.Funcionario;
-import java.text.Format;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import util.*;
 /**
  *
@@ -136,7 +132,7 @@ public class rf_003 extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dnCampo.setDateFormatString("yyyy-MM-dd");
+        dnCampo.setDateFormatString("dd/MM/yyyy");
         dnCampo.setMaxSelectableDate(new java.util.Date(253370779289000L));
 
         sobrenomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -244,11 +240,15 @@ public class rf_003 extends javax.swing.JInternalFrame {
         String end = "";
         dataNasc = Formater.formatarData2(dnCampo);
       
-        System.out.print("data = " + dataNasc);
         if (Validator.validarNome(nome) && Validator.validarSobrenome(sobrenome) && Validator.validarCPF(cpf)) {
             
             Funcionario func = new Funcionario(nome, sobrenome, dataNasc, cpf, end);
             func.cadastrarFuncionario(func);
+            
+            JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
+
+            // Feche o formulário
+            dispose();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
