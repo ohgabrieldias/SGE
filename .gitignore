@@ -36,6 +36,12 @@ replay_pid*
 
 #lst
 *.lst
+**.*.lst
+/target/maven-status/maven-compiler-plugin/compile/default-compile/*.lst
+/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/*.lst
 
 #.form
 *.form
+**.*.form
+/src/main/java/sge/*.form
+/src/main/java/**/*.form
