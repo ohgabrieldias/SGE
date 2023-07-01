@@ -101,8 +101,10 @@ public class rf_009 extends javax.swing.JInternalFrame {
         nomeLabel2.setText("Endereço");
 
         btnEditar1.setText("Editar");
+        btnEditar1.setEnabled(false);
 
         btnSalvar1.setText("Salvar Edições");
+        btnSalvar1.setEnabled(false);
 
         jLayeredPane1.setLayer(nomeLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(nomeCampo, javax.swing.JLayeredPane.DEFAULT_LAYER);
