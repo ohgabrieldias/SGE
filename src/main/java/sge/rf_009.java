@@ -45,7 +45,7 @@ public class rf_009 extends javax.swing.JInternalFrame {
         btnEditar1 = new javax.swing.JButton();
         btnSalvar1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaAlunos = new javax.swing.JTable();
 
         setClosable(true);
         setTitle("Movimentação de Alun@s");
@@ -155,7 +155,7 @@ public class rf_009 extends javax.swing.JInternalFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -166,7 +166,7 @@ public class rf_009 extends javax.swing.JInternalFrame {
                 "Aluno", "CPF"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaAlunos);
 
         jLayeredPane2.setLayer(logo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(pesquisaNomeLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -244,7 +244,6 @@ public class rf_009 extends javax.swing.JInternalFrame {
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel logo;
     private javax.swing.JTextField nomeCampo;
     private javax.swing.JLabel nomeLabel;
@@ -252,6 +251,7 @@ public class rf_009 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel nomeLabel2;
     private javax.swing.JLabel pesquisaNomeLabel;
     private javax.swing.JTextField sobrenomeCampo;
+    private javax.swing.JTable tabelaAlunos;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }
