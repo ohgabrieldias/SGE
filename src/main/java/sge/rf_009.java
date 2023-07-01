@@ -4,6 +4,11 @@
  */
 package sge;
 
+import DAO.AlunoDAO;
+import baseCoding.Aluno;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author gabri
@@ -15,6 +20,25 @@ public class rf_009 extends javax.swing.JInternalFrame {
      */
     public rf_009() {
         initComponents();
+        preencherTabelaAlunos();
+    }
+    
+    public void preencherTabelaAlunos() {
+        AlunoDAO alunoDao = new AlunoDAO();
+    
+        List<Aluno> alunos = alunoDao.buscarListaAluno();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Aluno");
+        model.addColumn("CPF");
+
+        for (Aluno aluno : alunos) {
+            Object[] rowData = new Object[8];
+            rowData[0] = aluno.getNome();
+            rowData[1] = aluno.getCpf();
+            model.addRow(rowData);
+        }
+
+        tabelaAlunos.setModel(model);
     }
 
     /**

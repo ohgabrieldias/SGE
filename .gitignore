@@ -36,6 +36,8 @@ replay_pid*
 
 #lst
 *.lst
+**.*.lst
 
 #.form
 *.form
+**.*.form
