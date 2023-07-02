@@ -25,7 +25,14 @@ public class Aluno extends Pessoa {
         this.responsavel = resp;
         this.cpfresp = cpfresp;
     }
+    
+    public Aluno(String nome, String sobrenome, String dataNasc, String cpf, String end){
+        super(nome, sobrenome, dataNasc, cpf, end);
+    }
 
+    public Aluno(String nome, String cpf) {
+        super(nome,cpf);
+    }
     // Getters and setters for the 'matricula' attribute
 
     public long getMatricula() {

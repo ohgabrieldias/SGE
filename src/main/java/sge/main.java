@@ -47,6 +47,8 @@ public class main extends javax.swing.JFrame {
         rf_003Menu = new javax.swing.JMenuItem();
         rf_004Menu = new javax.swing.JMenuItem();
         rf_005Menu = new javax.swing.JMenuItem();
+        menuMovimentar = new javax.swing.JMenu();
+        rf_009 = new javax.swing.JMenuItem();
         menuFinanceiro = new javax.swing.JMenu();
         rf_006Menu = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -71,14 +73,14 @@ public class main extends javax.swing.JFrame {
         areaTrabalhoMainLayout.setHorizontalGroup(
             areaTrabalhoMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, areaTrabalhoMainLayout.createSequentialGroup()
-                .addContainerGap(360, Short.MAX_VALUE)
+                .addContainerGap(472, Short.MAX_VALUE)
                 .addComponent(logoMain)
                 .addContainerGap())
         );
         areaTrabalhoMainLayout.setVerticalGroup(
             areaTrabalhoMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, areaTrabalhoMainLayout.createSequentialGroup()
-                .addContainerGap(143, Short.MAX_VALUE)
+                .addContainerGap(205, Short.MAX_VALUE)
                 .addComponent(logoMain)
                 .addContainerGap())
         );
@@ -143,28 +145,30 @@ public class main extends javax.swing.JFrame {
 
         mainMenu.add(menuCadastros);
 
-        menuFinanceiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuFinanceiro.png"))); // NOI18N
-        menuFinanceiro.setText("Financeiro");
+        menuMovimentar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentar.png"))); // NOI18N
+        menuMovimentar.setText("Movimentar");
+        menuMovimentar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        rf_006Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rf_006Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
-        rf_006Menu.setText("Relatório");
-        rf_006Menu.addActionListener(new java.awt.event.ActionListener() {
+        rf_009.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_009.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluno.png"))); // NOI18N
+        rf_009.setText("Alunos");
+        rf_009.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rf_006MenuActionPerformed(evt);
+                rf_009ActionPerformed(evt);
             }
         });
-        menuFinanceiro.add(rf_006Menu);
+        menuMovimentar.add(rf_009);
 
-        jMenuItem1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentar.png"))); // NOI18N
-        jMenuItem1.setText("Movimentar");
-        menuFinanceiro.add(jMenuItem1);
+        mainMenu.add(menuMovimentar);
 
+        menuFinanceiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuFinanceiro.png"))); // NOI18N
+        menuFinanceiro.setText("Financeiro");
+        menuFinanceiro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         mainMenu.add(menuFinanceiro);
 
         menuRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuRelatorios.png"))); // NOI18N
         menuRelatorios.setText("Relatórios");
+        menuRelatorios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         rf_007Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rf_007Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
@@ -180,6 +184,7 @@ public class main extends javax.swing.JFrame {
 
         menuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuSair.png"))); // NOI18N
         menuSair.setText("Sair");
+        menuSair.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         menuSair.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         menuSair.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         mainMenu.add(menuSair);
@@ -199,7 +204,7 @@ public class main extends javax.swing.JFrame {
 
         getAccessibleContext().setAccessibleDescription("SGE - Sistema de Gestão Escolar");
 
-        setSize(new java.awt.Dimension(510, 317));
+        setSize(new java.awt.Dimension(622, 379));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -234,6 +239,12 @@ public class main extends javax.swing.JFrame {
         areaTrabalhoMain.add(rfNovoFunc);
         rfNovoFunc.setVisible(true);
     }//GEN-LAST:event_rf_005MenuActionPerformed
+
+    private void rf_009ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_009ActionPerformed
+        rf_009 rfMovimentAaluno = new rf_009();
+        areaTrabalhoMain.add(rfMovimentAaluno);
+        rfMovimentAaluno.setVisible(true);
+    }//GEN-LAST:event_rf_009ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,6 +292,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenu menuFinanceiro;
+    private javax.swing.JMenu menuMovimentar;
     private javax.swing.JMenu menuRelatorios;
     private javax.swing.JMenu menuSair;
     private javax.swing.JMenuItem rf_001Menu;
@@ -291,5 +303,6 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenuItem rf_006Menu;
     private javax.swing.JMenuItem rf_007Menu;
     private javax.swing.JMenuItem rf_008Menu;
+    private javax.swing.JMenuItem rf_009;
     // End of variables declaration//GEN-END:variables
 }
