@@ -23,6 +23,11 @@ public Pessoa(String nome, String sobrenome, String dataNasc, String cpf, String
     this.endereco = endereco;
 }
 
+public Pessoa(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
+}
+
 public String getNome(){
   return this.nome;
 }
