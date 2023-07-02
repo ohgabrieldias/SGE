@@ -8,6 +8,8 @@ import DAO.AlunoDAO;
 import baseCoding.Aluno;
 import java.util.Date;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import util.Formater;
 
@@ -128,8 +130,18 @@ public class rf_009 extends javax.swing.JInternalFrame {
         nomeLabel2.setText("Endereço");
 
         btnEditar1.setText("Editar");
+        btnEditar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditar1MouseClicked(evt);
+            }
+        });
 
         btnSalvar1.setText("Salvar Edições");
+        btnSalvar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalvar1MouseClicked(evt);
+            }
+        });
 
         jLayeredPane1.setLayer(nomeLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(nomeCampo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -319,6 +331,27 @@ public class rf_009 extends javax.swing.JInternalFrame {
             dnCampo.setDate(data);
          }
     }//GEN-LAST:event_tabelaAlunosMouseClicked
+
+    private void btnEditar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditar1MouseClicke
+        //ALTERAR CADASTRO DO ALUNO APOS CLICLAR NO BOTA EDITAR	
+        AlunoDAO alunoDAO = new AlunoDAO();
+        Formater formater = new Formater();
+
+        int id = (int) tabelaAlunos.getValueAt(tabelaAlunos.getSelectedRow(), 0);
+        Aluno aluno = alunoDAO.buscarPorId(id);
+        aluno.setNome(nomeCampo.getText());
+        aluno.setSobrenome(sobrenomeCampo.getText());
+        aluno.setCpf(cpfCampo.getText());
+        aluno.setEndereco(enderecoCampo.getText());
+        //aluno.setDataNasc(formater.converteDateToString(dnCampo.getDate()));
+        alunoDAO.alterarAluno(aluno);
+        alunoDAO.atualizarBD();
+        JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
+    }//GEN-LAST:event_btnEditar1MouseClicked
+
+    private void btnSalvar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvar1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvar1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -86,6 +86,33 @@ public class AlunoDAO {
         }   
     }
 
+    public List<Aluno> atualizarBD() {
+        List<Aluno> listaAlunos = new ArrayList<>();
+
+        String query = "SELECT * FROM alunos";
+
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                String nome = rs.getString("nome");
+                String sobrenome = rs.getString("sobrenome");
+                String dataNasc = rs.getString("datanasc");
+                String cpf = rs.getString("cpf");
+                String endereco = rs.getString("endereco");
+                String tmpCpfResp = rs.getString("cpfresp");
+                String tmpResp = rs.getString("responsavel");
+                long matricula = rs.getLong("matricula");
+
+                Aluno tmpAluno = new Aluno(nome, sobrenome, dataNasc, cpf, endereco, tmpResp, tmpCpfResp, matricula);
+                listaAlunos.add(tmpAluno);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaAlunos;
+    }
+
     public Aluno buscarPorId(int id) {
     String query = "SELECT * FROM alunos WHERE id = ?";
 
