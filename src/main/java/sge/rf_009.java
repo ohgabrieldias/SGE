@@ -28,13 +28,15 @@ public class rf_009 extends javax.swing.JInternalFrame {
     
         List<Aluno> alunos = alunoDao.buscarListaAluno();
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id");
         model.addColumn("Aluno");
         model.addColumn("CPF");
 
         for (Aluno aluno : alunos) {
             Object[] rowData = new Object[8];
-            rowData[0] = aluno.getNome();
-            rowData[1] = aluno.getCpf();
+            rowData[0] = aluno.getId();
+            rowData[1] = aluno.getNome();
+            rowData[2] = aluno.getCpf();
             model.addRow(rowData);
         }
 
