@@ -50,9 +50,8 @@ public class main extends javax.swing.JFrame {
         menuMovimentar = new javax.swing.JMenu();
         rf_009 = new javax.swing.JMenuItem();
         menuFinanceiro = new javax.swing.JMenu();
-        rf_006Menu = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         menuRelatorios = new javax.swing.JMenu();
+        rf_006Menu = new javax.swing.JMenuItem();
         rf_007Menu = new javax.swing.JMenuItem();
         rf_008Menu = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
@@ -170,6 +169,11 @@ public class main extends javax.swing.JFrame {
         menuRelatorios.setText("Relatórios");
         menuRelatorios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
+        rf_006Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_006Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
+        rf_006Menu.setText("Financeiro");
+        menuRelatorios.add(rf_006Menu);
+
         rf_007Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rf_007Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
         rf_007Menu.setText("Notas");
@@ -209,11 +213,13 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rf_003MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_003MenuActionPerformed
-        // TODO add your handling code here:
+        rf_004 rfNovaTurma = new rf_004();
+        areaTrabalhoMain.add(rfNovaTurma);
+        rfNovaTurma.setVisible(true);
     }//GEN-LAST:event_rf_003MenuActionPerformed
 
     private void rf_006MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_006MenuActionPerformed
-        // TODO add your handling code here:
+        // TODO
     }//GEN-LAST:event_rf_006MenuActionPerformed
 
     private void rf_001MenuActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rf_001MenuActionPerformed
@@ -287,7 +293,6 @@ public class main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane areaTrabalhoMain;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel logoMain;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JMenu menuCadastros;

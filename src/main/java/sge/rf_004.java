@@ -4,6 +4,9 @@
  */
 package sge;
 
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+
 /**
  *
  * @author gabri
@@ -15,6 +18,17 @@ public class rf_004 extends javax.swing.JInternalFrame {
      */
     public rf_004() {
         initComponents();
+        
+
+        for (int i = 1; i <= 20; i++) {
+            JCheckBox checkBox = new JCheckBox("Disciplina " + i);
+            listaDisciplinas.add(checkBox);
+        }
+        
+        for (int i = 1; i <= 20; i++) {
+            JCheckBox checkBox = new JCheckBox("Aluno " + i);
+            listaAlunos.add(checkBox);
+        }
     }
 
     /**
@@ -31,9 +45,13 @@ public class rf_004 extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         nomeLabel = new javax.swing.JLabel();
         nomeCampo = new javax.swing.JTextField();
-        nomeLabel1 = new javax.swing.JLabel();
-        scorllDisciolinas = new javax.swing.JScrollPane();
-        disciplinasLista = new javax.swing.JTable();
+        scrollDisciplinas = new javax.swing.JScrollPane();
+        listaDisciplinas = new javax.swing.JPanel();
+        disciplinasLabel = new javax.swing.JLabel();
+        disciplinasLabel1 = new javax.swing.JLabel();
+        scrollAlunos = new javax.swing.JScrollPane();
+        listaAlunos = new javax.swing.JPanel();
+        btnCadastrar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Cadastro de Turma");
@@ -44,22 +62,32 @@ public class rf_004 extends javax.swing.JInternalFrame {
         titulo.setText("Cadastro de Turma");
 
         nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        nomeLabel.setText("Nome");
+        nomeLabel.setText("Nome da turma");
 
-        nomeLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        nomeLabel1.setText("Disciplinas");
+        nomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        nomeCampo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        disciplinasLista.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        disciplinasLista.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        scrollDisciplinas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollDisciplinas.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-            },
-            new String [] {
+        listaDisciplinas.setBackground(new java.awt.Color(255, 255, 255));
+        listaDisciplinas.setLayout(new javax.swing.BoxLayout(listaDisciplinas, javax.swing.BoxLayout.Y_AXIS));
+        scrollDisciplinas.setViewportView(listaDisciplinas);
 
-            }
-        ));
-        disciplinasLista.setDragEnabled(true);
-        scorllDisciolinas.setViewportView(disciplinasLista);
+        disciplinasLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        disciplinasLabel.setText("Selecione as Disciplinas desta turma");
+
+        disciplinasLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        disciplinasLabel1.setText("Selecione os Alunos desta turma");
+
+        scrollAlunos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollAlunos.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        listaAlunos.setBackground(new java.awt.Color(255, 255, 255));
+        listaAlunos.setLayout(new javax.swing.BoxLayout(listaAlunos, javax.swing.BoxLayout.Y_AXIS));
+        scrollAlunos.setViewportView(listaAlunos);
+
+        btnCadastrar.setText("Cadastrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,18 +95,30 @@ public class rf_004 extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(scorllDisciolinas)
-                    .addComponent(nomeLabel1)
-                    .addComponent(nomeLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(logo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                         .addComponent(titulo)
-                        .addGap(127, 127, 127))
-                    .addComponent(jSeparator1)
-                    .addComponent(nomeCampo))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addGap(152, 152, 152))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nomeLabel)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(disciplinasLabel1)
+                            .addComponent(disciplinasLabel))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(scrollAlunos, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scrollDisciplinas, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomeCampo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,10 +137,16 @@ public class rf_004 extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nomeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(nomeLabel1)
+                .addComponent(disciplinasLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scorllDisciolinas, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(388, Short.MAX_VALUE))
+                .addComponent(scrollDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(disciplinasLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -108,13 +154,17 @@ public class rf_004 extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable disciplinasLista;
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JLabel disciplinasLabel;
+    private javax.swing.JLabel disciplinasLabel1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel listaAlunos;
+    private javax.swing.JPanel listaDisciplinas;
     private javax.swing.JLabel logo;
     private javax.swing.JTextField nomeCampo;
     private javax.swing.JLabel nomeLabel;
-    private javax.swing.JLabel nomeLabel1;
-    private javax.swing.JScrollPane scorllDisciolinas;
+    private javax.swing.JScrollPane scrollAlunos;
+    private javax.swing.JScrollPane scrollDisciplinas;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }
