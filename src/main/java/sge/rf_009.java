@@ -300,16 +300,15 @@ public class rf_009 extends javax.swing.JInternalFrame {
 
     private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
         // TODO add your handling code here:
-        int linha = tabelaAlunos.getSelectedRow();
-        if (linha != -1) {
-            nomeCampo.setText(tabelaAlunos.getValueAt(linha, 0).toString());
-            sobrenomeCampo.setText(tabelaAlunos.getValueAt(linha, 1).toString());
-            cpfCampo.setText(tabelaAlunos.getValueAt(linha, 1).toString());
-            //.setText(tabelaAlunos.getValueAt(linha, 1).toString());
-            enderecoCampo.setText(tabelaAlunos.getValueAt(linha, 2).toString());
-           // dnCampo.setDate((Date) tabelaAlunos.getValueAt(linha, 3));
-            
-        }
+        AlunoDAO alunoDAO = new AlunoDAO();
+        int id = (int) tabelaAlunos.getValueAt(tabelaAlunos.getSelectedRow(), 0);
+        Aluno aluno = alunoDAO.buscarAluno(id);
+        if (aluno != null) {
+            nomeCampo.setText(aluno.getNome());
+            cpfCampo.setText(aluno.getCpf());
+            enderecoCampo.setText(aluno.getEndereco());
+           // dnCampo.setText(aluno.getDataNasc());
+         }
     }//GEN-LAST:event_tabelaAlunosMouseClicked
 
 

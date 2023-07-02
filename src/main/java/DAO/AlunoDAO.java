@@ -83,6 +83,26 @@ public class AlunoDAO {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        }   
+    }
+
+    public void buscarPorId(Aluno id){
+        String query = "SELECT * FROM alunos WHERE id = ?";
+
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            stmt.setString(1, id.getId());
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String nome = rs.getString("nome");
+                    String sobrenome = rs.getString("sobrenome");
+                    String dataNasc = rs.getString("datanasc");
+                    String cpf = rs.getString("cpf");
+                    String endereco = rs.getString("endereco");
+                    Aluno tmpAluno = new Aluno(nome, sobrenome, dataNasc, cpf, endereco);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
