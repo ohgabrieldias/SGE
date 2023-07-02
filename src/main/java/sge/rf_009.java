@@ -122,10 +122,8 @@ public class rf_009 extends javax.swing.JInternalFrame {
         nomeLabel2.setText("Endereço");
 
         btnEditar1.setText("Editar");
-        btnEditar1.setEnabled(false);
 
         btnSalvar1.setText("Salvar Edições");
-        btnSalvar1.setEnabled(false);
 
         jLayeredPane1.setLayer(nomeLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(nomeCampo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -212,8 +210,27 @@ public class rf_009 extends javax.swing.JInternalFrame {
             new String [] {
                 "Aluno", "CPF"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaAlunos.setColumnSelectionAllowed(true);
+        tabelaAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaAlunosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaAlunos);
+        tabelaAlunos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tabelaAlunos.getColumnModel().getColumnCount() > 0) {
+            tabelaAlunos.getColumnModel().getColumn(0).setResizable(false);
+            tabelaAlunos.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jLayeredPane2.setLayer(logo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(pesquisaNomeLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -277,6 +294,10 @@ public class rf_009 extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
+        
+    }//GEN-LAST:event_tabelaAlunosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
