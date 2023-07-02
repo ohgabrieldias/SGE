@@ -48,15 +48,16 @@ public class AlunoDAO {
     public List<Aluno> buscarListaAluno() {
     List<Aluno> listaAlunos = new ArrayList<>();
 
-    String query = "SELECT nome, cpf FROM alunos";
+    String query = "SELECT id,nome, cpf FROM alunos";
 
     try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
          ResultSet rs = stmt.executeQuery()) {
         while (rs.next()) {
+            String id = rs.getString("id");
             String nome = rs.getString("nome");
             String cpf = rs.getString("cpf");
 
-            Aluno tmpAluno = new Aluno(nome,cpf);
+            Aluno tmpAluno = new Aluno(id,nome,cpf);
             listaAlunos.add(tmpAluno);
         }
     } catch (SQLException e) {
