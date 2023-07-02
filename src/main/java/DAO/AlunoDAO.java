@@ -86,27 +86,27 @@ public class AlunoDAO {
         }   
     }
 
-    public void buscarPorId(Aluno id){
-        String query = "SELECT * FROM alunos WHERE id = ?";
+    public Aluno buscarPorId(int id) {
+    String query = "SELECT * FROM alunos WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
-            stmt.setString(1, id.getId());
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    String nome = rs.getString("nome");
-                    String sobrenome = rs.getString("sobrenome");
-                    String dataNasc = rs.getString("datanasc");
-                    String cpf = rs.getString("cpf");
-                    String endereco = rs.getString("endereco");
-                    Aluno tmpAluno = new Aluno(nome, sobrenome, dataNasc, cpf, endereco);
-                }
+    try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        stmt.setInt(1, id);
+
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                String nome = rs.getString("nome");
+                String sobrenome = rs.getString("sobrenome");
+                String dataNasc = rs.getString("datanasc");
+                String cpf = rs.getString("cpf");
+                String endereco = rs.getString("endereco");
+                return new Aluno(nome, sobrenome, dataNasc, cpf, endereco);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
 
-    
-
+    return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
+}
 
 }

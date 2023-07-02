@@ -302,9 +302,10 @@ public class rf_009 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         AlunoDAO alunoDAO = new AlunoDAO();
         int id = (int) tabelaAlunos.getValueAt(tabelaAlunos.getSelectedRow(), 0);
-        Aluno aluno = alunoDAO.buscarAluno(id);
+        Aluno aluno = alunoDAO.buscarPorId(id);
         if (aluno != null) {
             nomeCampo.setText(aluno.getNome());
+            sobrenomeCampo.setText(aluno.getSobrenome());
             cpfCampo.setText(aluno.getCpf());
             enderecoCampo.setText(aluno.getEndereco());
            // dnCampo.setText(aluno.getDataNasc());
