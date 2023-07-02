@@ -202,17 +202,17 @@ public class rf_009 extends javax.swing.JInternalFrame {
 
         tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Aluno", "CPF"
+                "ID", "Aluno", "CPF"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -230,6 +230,7 @@ public class rf_009 extends javax.swing.JInternalFrame {
         if (tabelaAlunos.getColumnModel().getColumnCount() > 0) {
             tabelaAlunos.getColumnModel().getColumn(0).setResizable(false);
             tabelaAlunos.getColumnModel().getColumn(1).setResizable(false);
+            tabelaAlunos.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jLayeredPane2.setLayer(logo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -296,7 +297,17 @@ public class rf_009 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
-        
+        // TODO add your handling code here:
+        int linha = tabelaAlunos.getSelectedRow();
+        if (linha != -1) {
+            nomeCampo.setText(tabelaAlunos.getValueAt(linha, 0).toString());
+            sobrenomeCampo.setText(tabelaAlunos.getValueAt(linha, 1).toString());
+            cpfCampo.setText(tabelaAlunos.getValueAt(linha, 1).toString());
+            //.setText(tabelaAlunos.getValueAt(linha, 1).toString());
+            enderecoCampo.setText(tabelaAlunos.getValueAt(linha, 2).toString());
+           // dnCampo.setDate((Date) tabelaAlunos.getValueAt(linha, 3));
+            
+        }
     }//GEN-LAST:event_tabelaAlunosMouseClicked
 
 
