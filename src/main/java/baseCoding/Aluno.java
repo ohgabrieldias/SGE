@@ -26,16 +26,13 @@ public class Aluno extends Pessoa {
         this.cpfresp = cpfresp;
     }
     
-<<<<<<< HEAD
     public Aluno(String nome, String sobrenome, String dataNasc, String cpf, String end){
         super(nome, sobrenome, dataNasc, cpf, end);
     }
 
-=======
     public Aluno(String nome, String cpf) {
         super(nome,cpf);
     }
->>>>>>> ea488dbd3996cdb717b0665d06ec3cfff54c9120
     // Getters and setters for the 'matricula' attribute
 
     public long getMatricula() {
