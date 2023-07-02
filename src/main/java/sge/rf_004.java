@@ -4,6 +4,9 @@
  */
 package sge;
 
+import DAO.AlunoDAO;
+import DAO.DisciplinaDAO;
+import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
@@ -16,17 +19,26 @@ public class rf_004 extends javax.swing.JInternalFrame {
     /**
      * Creates new form rf_004
      */
+    private DisciplinaDAO discDao = new DisciplinaDAO();
+    private AlunoDAO alunoDao = new AlunoDAO();
     public rf_004() {
         initComponents();
         
-
-        for (int i = 1; i <= 20; i++) {
-            JCheckBox checkBox = new JCheckBox("Disciplina " + i);
+        createDiscCheckboxes(discDao.buscarNomesDisciplinas());
+        createAlunoCheckboxes(alunoDao.buscarNomesAlunos());
+        
+    }
+    
+    public void createDiscCheckboxes(List<String> stringList) {
+        for (String str : stringList) {
+            JCheckBox checkBox = new JCheckBox(str);
             listaDisciplinas.add(checkBox);
         }
-        
-        for (int i = 1; i <= 20; i++) {
-            JCheckBox checkBox = new JCheckBox("Aluno " + i);
+    }
+    
+    public void createAlunoCheckboxes(List<String> stringList) {
+        for (String str : stringList) {
+            JCheckBox checkBox = new JCheckBox(str);
             listaAlunos.add(checkBox);
         }
     }

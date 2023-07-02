@@ -84,8 +84,27 @@ public class AlunoDAO {
             e.printStackTrace();
         }
     }
-
     
+    public List<String> buscarNomesAlunos() {
+        List<String> nomesAlunos = new ArrayList<>();
 
+        String query = "SELECT nome, cpf FROM alunos";
 
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            try (ResultSet resultSet = stmt.executeQuery()) {
+
+            while (resultSet.next()) {
+                String nome = resultSet.getString("nome");
+                String cpf = resultSet.getString("cpf");
+                String nomeCpf = nome + " - CPF: " + cpf;
+                nomesAlunos.add(nomeCpf);
+             }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nomesAlunos;
+    }
+    
 }
