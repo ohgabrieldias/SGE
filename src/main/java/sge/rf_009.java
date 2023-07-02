@@ -6,8 +6,10 @@ package sge;
 
 import DAO.AlunoDAO;
 import baseCoding.Aluno;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import util.Formater;
 
 /**
  *
@@ -119,6 +121,8 @@ public class rf_009 extends javax.swing.JInternalFrame {
 
         dnLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         dnLabel.setText("Data de Nascimento");
+
+        dnCampo.setDateFormatString("dd/MM/yyyy");
 
         nomeLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel2.setText("Endereço");
@@ -301,6 +305,8 @@ public class rf_009 extends javax.swing.JInternalFrame {
     private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
         // TODO add your handling code here:
         AlunoDAO alunoDAO = new AlunoDAO();
+        Formater formater = new Formater();
+        
         int id = (int) tabelaAlunos.getValueAt(tabelaAlunos.getSelectedRow(), 0);
         Aluno aluno = alunoDAO.buscarPorId(id);
         if (aluno != null) {
@@ -308,7 +314,9 @@ public class rf_009 extends javax.swing.JInternalFrame {
             sobrenomeCampo.setText(aluno.getSobrenome());
             cpfCampo.setText(aluno.getCpf());
             enderecoCampo.setText(aluno.getEndereco());
-           // dnCampo.setText(aluno.getDataNasc());
+            
+            Date data = formater.converteStringToDate(aluno.getDataNasc());
+            dnCampo.setDate(data);
          }
     }//GEN-LAST:event_tabelaAlunosMouseClicked
 
