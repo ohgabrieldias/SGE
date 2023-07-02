@@ -53,7 +53,7 @@ public class AlunoDAO {
     try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
          ResultSet rs = stmt.executeQuery()) {
         while (rs.next()) {
-            String id = rs.getString("id");
+            int id = rs.getInt("id");
             String nome = rs.getString("nome");
             String cpf = rs.getString("cpf");
 
