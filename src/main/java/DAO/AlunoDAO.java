@@ -69,7 +69,28 @@ public class AlunoDAO {
     }
 
     return listaAlunos;
-}
+    }
+
+    //Criar um metodo pra conseguir modificar dados do aluno 
+    public void alterarAluno(Aluno aluno) {
+        String query = "UPDATE alunos SET nome = ?, sobrenome = ?, datanasc = ?, cpf = ?, endereco = ?, cpfresp = ?, responsavel = ? WHERE matricula = ?";
+
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            stmt.setString(1, aluno.getNome());
+            stmt.setString(2, aluno.getSobrenome());
+            stmt.setString(3, aluno.getDataNasc());
+            stmt.setString(4, aluno.getCpf());
+            stmt.setString(5, aluno.getEndereco());
+            stmt.setString(6, aluno.getCpfResp());
+            stmt.setString(7, aluno.getResponsavel());
+            stmt.setLong(8, aluno.getMatricula());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
 
 
 }

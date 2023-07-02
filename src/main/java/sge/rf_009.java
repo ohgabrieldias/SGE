@@ -39,7 +39,28 @@ public class rf_009 extends javax.swing.JInternalFrame {
         }
 
         tabelaAlunos.setModel(model);
+        
     }
+
+//     public void preencherNovoDado(String nome, String Cpf, String endereco, String dataNasc, String sobrenome) {
+//         if(tabelaAlunos.getSelectedRow() > 0){
+//         btnEditar1.setEnabled(true);
+//         tabelaAlunos.setValueAt(nome, tabelaAlunos.getSelectedRow(), 0);
+//         tabelaAlunos.setValueAt(Cpf, tabelaAlunos.getSelectedRow(), 1);
+//         tabelaAlunos.setValueAt(endereco, tabelaAlunos.getSelectedRow(), 2);
+//         tabelaAlunos.setValueAt(dataNasc, tabelaAlunos.getSelectedRow(), 3);
+//         tabelaAlunos.setValueAt(sobrenome, tabelaAlunos.getSelectedRow(), 4);
+//         if (tabelaAlunos.getSelectedRow() != -1){
+//             btnEditar1.setEnabled(true);
+//             Aluno aluno = new Aluno(nome, sobrenome, dataNasc, Cpf, endereco);
+//             AlunoDAO alunoDao = new AlunoDAO();
+//             alunoDao.alterarAluno(aluno);
+            
+//         }else{
+//             System.out.println("Erro ao atualizar");
+//         }
+//     }
+// }
 
     /**
      * This method is called from within the constructor to initialize the form.
