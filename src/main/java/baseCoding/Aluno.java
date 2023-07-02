@@ -11,7 +11,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 
 public class Aluno extends Pessoa {
-    private String id;
+    private int id;
     private long matricula;
     private String responsavel;
     private String cpfresp;
@@ -31,7 +31,7 @@ public class Aluno extends Pessoa {
         super(nome, sobrenome, dataNasc, cpf, end);
     }
 
-    public Aluno(String id, String nome, String cpf) {
+    public Aluno(int id, String nome, String cpf) {
         super(nome,cpf);
         this.id = id;
        
@@ -50,7 +50,7 @@ public class Aluno extends Pessoa {
         return responsavel;
     }
     
-    public String getId() {
+    public int getId() {
         return id;
     }
     public String getCpfResp() {
