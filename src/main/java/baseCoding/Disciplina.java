@@ -15,6 +15,7 @@ import sge.MySQLConnector;
  * @author gabriel
  */
 public class Disciplina {
+    private int id;
     private String nome;
     private String dataInicio;
     private String dataFim;
@@ -28,6 +29,11 @@ public class Disciplina {
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.professor = professor;
+    }
+    
+    public Disciplina(int id, String nome){
+        this.nome = nome;
+        this.id = id;
     }
     
     public boolean cadastrarDisciplinas(Disciplina disc) {
@@ -53,6 +59,11 @@ public class Disciplina {
     public String getNome(){
         return this.nome;
     }
+    
+    public int getId(){
+        return this.id;
+    }
+    
     public String getNomeProfessor(){
         return this.professor;
     }
