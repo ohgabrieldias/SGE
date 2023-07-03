@@ -212,6 +212,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="nomeCampo">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="nomeLabel1">
               <Properties>
@@ -222,6 +225,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="sobrenomeCampo">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="cpfLabel">
               <Properties>
@@ -232,6 +238,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="cpfCampo">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="dnLabel">
               <Properties>
@@ -244,6 +253,7 @@
             <Component class="com.toedter.calendar.JDateChooser" name="dnCampo">
               <Properties>
                 <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="nomeLabel2">
@@ -255,18 +265,24 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="enderecoCampo">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnEditar1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEditar1MouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditar1ActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnSalvar1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salvar Edi&#xe7;&#xf5;es"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSalvar1MouseClicked"/>

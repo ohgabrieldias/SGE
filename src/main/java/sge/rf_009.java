@@ -22,6 +22,8 @@ public class rf_009 extends javax.swing.JInternalFrame {
     /**
      * Creates new form rf_009
      */
+    Aluno alunoTmp = null;
+    Formater formater = new Formater();
     public rf_009() {
         initComponents();
         preencherTabelaAlunos();
@@ -47,26 +49,6 @@ public class rf_009 extends javax.swing.JInternalFrame {
         tabelaAlunos.setModel(model);
         
     }
-
-//     public void preencherNovoDado(String nome, String Cpf, String endereco, String dataNasc, String sobrenome) {
-//         if(tabelaAlunos.getSelectedRow() > 0){
-//         btnEditar1.setEnabled(true);
-//         tabelaAlunos.setValueAt(nome, tabelaAlunos.getSelectedRow(), 0);
-//         tabelaAlunos.setValueAt(Cpf, tabelaAlunos.getSelectedRow(), 1);
-//         tabelaAlunos.setValueAt(endereco, tabelaAlunos.getSelectedRow(), 2);
-//         tabelaAlunos.setValueAt(dataNasc, tabelaAlunos.getSelectedRow(), 3);
-//         tabelaAlunos.setValueAt(sobrenome, tabelaAlunos.getSelectedRow(), 4);
-//         if (tabelaAlunos.getSelectedRow() != -1){
-//             btnEditar1.setEnabled(true);
-//             Aluno aluno = new Aluno(nome, sobrenome, dataNasc, Cpf, endereco);
-//             AlunoDAO alunoDao = new AlunoDAO();
-//             alunoDao.alterarAluno(aluno);
-            
-//         }else{
-//             System.out.println("Erro ao atualizar");
-//         }
-//     }
-// }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -115,28 +97,44 @@ public class rf_009 extends javax.swing.JInternalFrame {
         nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel.setText("Nome");
 
+        nomeCampo.setEnabled(false);
+
         nomeLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel1.setText("Sobrenome");
 
+        sobrenomeCampo.setEnabled(false);
+
         cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cpfLabel.setText("CPF");
+
+        cpfCampo.setEnabled(false);
 
         dnLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         dnLabel.setText("Data de Nascimento");
 
         dnCampo.setDateFormatString("dd/MM/yyyy");
+        dnCampo.setEnabled(false);
 
         nomeLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel2.setText("Endereço");
 
+        enderecoCampo.setEnabled(false);
+
         btnEditar1.setText("Editar");
+        btnEditar1.setEnabled(false);
         btnEditar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEditar1MouseClicked(evt);
             }
         });
+        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditar1ActionPerformed(evt);
+            }
+        });
 
         btnSalvar1.setText("Salvar Edições");
+        btnSalvar1.setEnabled(false);
         btnSalvar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSalvar1MouseClicked(evt);
@@ -316,42 +314,51 @@ public class rf_009 extends javax.swing.JInternalFrame {
 
     private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
         // TODO add your handling code here:
+        btnEditar1.setEnabled(true);
         AlunoDAO alunoDAO = new AlunoDAO();
-        Formater formater = new Formater();
         
-        int id = (int) tabelaAlunos.getValueAt(tabelaAlunos.getSelectedRow(), 0);
-        Aluno aluno = alunoDAO.buscarPorId(id);
-        if (aluno != null) {
-            nomeCampo.setText(aluno.getNome());
-            sobrenomeCampo.setText(aluno.getSobrenome());
-            cpfCampo.setText(aluno.getCpf());
-            enderecoCampo.setText(aluno.getEndereco());
+        int selectedRow = tabelaAlunos.getSelectedRow();
+        int selectedColumn = tabelaAlunos.getSelectedColumn();
+        int id = (Integer)tabelaAlunos.getValueAt(selectedRow, selectedColumn);
+        
+        alunoTmp = alunoDAO.buscarPorId(id);
+        if (alunoTmp != null) {
+            nomeCampo.setText(alunoTmp.getNome());
+            sobrenomeCampo.setText(alunoTmp.getSobrenome());
+            cpfCampo.setText(alunoTmp.getCpf());
+            enderecoCampo.setText(alunoTmp.getEndereco());
             
-            Date data = formater.converteStringToDate(aluno.getDataNasc());
+            Date data = formater.converteStringToDate(alunoTmp.getDataNasc());
             dnCampo.setDate(data);
          }
     }//GEN-LAST:event_tabelaAlunosMouseClicked
 
-    private void btnEditar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditar1MouseClicke
+    private void btnEditar1MouseClicked(java.awt.event.MouseEvent evt) {                                       
         //ALTERAR CADASTRO DO ALUNO APOS CLICLAR NO BOTA EDITAR	
-        AlunoDAO alunoDAO = new AlunoDAO();
-        Formater formater = new Formater();
-
-        int id = (int) tabelaAlunos.getValueAt(tabelaAlunos.getSelectedRow(), 0);
-        Aluno aluno = alunoDAO.buscarPorId(id);
-        aluno.setNome(nomeCampo.getText());
-        aluno.setSobrenome(sobrenomeCampo.getText());
-        aluno.setCpf(cpfCampo.getText());
-        aluno.setEndereco(enderecoCampo.getText());
-        //aluno.setDataNasc(formater.converteDateToString(dnCampo.getDate()));
-        alunoDAO.alterarAluno(aluno);
-        alunoDAO.atualizarBD();
-        JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
-    }//GEN-LAST:event_btnEditar1MouseClicked
+        nomeCampo.setEnabled(true);
+        sobrenomeCampo.setEnabled(true);
+        cpfCampo.setEnabled(true);
+        enderecoCampo.setEnabled(true);
+        dnCampo.setEnabled(true);
+        btnSalvar1.setEnabled(true);
+         
+    }                                       
 
     private void btnSalvar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvar1MouseClicked
-        // TODO add your handling code here:
+        AlunoDAO alunoDAO = new AlunoDAO();
+
+        alunoTmp.setNome(nomeCampo.getText());
+        alunoTmp.setSobrenome(sobrenomeCampo.getText());
+        alunoTmp.setCpf(cpfCampo.getText());
+        alunoTmp.setEndereco(enderecoCampo.getText());
+        alunoTmp.setDataNasc(formater.formatarData2(dnCampo));
+        alunoDAO.alterarAluno(alunoTmp);
+        JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
     }//GEN-LAST:event_btnSalvar1MouseClicked
+
+    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditar1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

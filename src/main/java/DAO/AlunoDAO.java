@@ -69,7 +69,7 @@ public class AlunoDAO {
 
     //Criar um metodo pra conseguir modificar dados do aluno 
     public void alterarAluno(Aluno aluno) {
-        String query = "UPDATE alunos SET nome = ?, sobrenome = ?, datanasc = ?, cpf = ?, endereco = ?, cpfresp = ?, responsavel = ? WHERE matricula = ?";
+        String query = "UPDATE alunos SET nome = ?, sobrenome = ?, datanasc = ?, cpf = ?, endereco = ? WHERE id = ?";
 
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             stmt.setString(1, aluno.getNome());
@@ -77,9 +77,9 @@ public class AlunoDAO {
             stmt.setString(3, aluno.getDataNasc());
             stmt.setString(4, aluno.getCpf());
             stmt.setString(5, aluno.getEndereco());
-            stmt.setString(6, aluno.getCpfResp());
-            stmt.setString(7, aluno.getResponsavel());
-            stmt.setLong(8, aluno.getMatricula());
+//            stmt.setString(6, aluno.getCpfResp());
+//            stmt.setString(7, aluno.getResponsavel());
+            stmt.setLong(6, aluno.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -126,7 +126,7 @@ public class AlunoDAO {
                 String dataNasc = rs.getString("datanasc");
                 String cpf = rs.getString("cpf");
                 String endereco = rs.getString("endereco");
-                return new Aluno(nome, sobrenome, dataNasc, cpf, endereco);
+                return new Aluno(id,nome, sobrenome, dataNasc, cpf, endereco);
             }
         }
     } catch (SQLException e) {
