@@ -27,8 +27,9 @@ public class Aluno extends Pessoa {
         this.cpfresp = cpfresp;
     }
     
-    public Aluno(String nome, String sobrenome, String dataNasc, String cpf, String end){
+    public Aluno(int id, String nome, String sobrenome, String dataNasc, String cpf, String end){
         super(nome, sobrenome, dataNasc, cpf, end);
+        this.id = id;
     }
 
     public Aluno(int id, String nome, String cpf) {

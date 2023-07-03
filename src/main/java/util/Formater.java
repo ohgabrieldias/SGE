@@ -25,14 +25,24 @@ public class Formater {
 // ...
 
     public static String formatarData2(JDateChooser dateChooser) {
-    Date dataSelecionada = dateChooser.getDate();
+        Date dataSelecionada = dateChooser.getDate();
 
-    if (dataSelecionada != null) {
-        SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
-        return formatador.format(dataSelecionada);
-    } else {
-        return null;
+        if (dataSelecionada != null) {
+            SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+            return formatador.format(dataSelecionada);
+        } else {
+            return null;
+        }
     }
-}
+    
+    public static Date converteStringToDate(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

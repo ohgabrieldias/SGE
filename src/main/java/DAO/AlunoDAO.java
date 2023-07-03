@@ -69,7 +69,7 @@ public class AlunoDAO {
 
     //Criar um metodo pra conseguir modificar dados do aluno 
     public void alterarAluno(Aluno aluno) {
-        String query = "UPDATE alunos SET nome = ?, sobrenome = ?, datanasc = ?, cpf = ?, endereco = ?, cpfresp = ?, responsavel = ? WHERE matricula = ?";
+        String query = "UPDATE alunos SET nome = ?, sobrenome = ?, datanasc = ?, cpf = ?, endereco = ? WHERE id = ?";
 
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             stmt.setString(1, aluno.getNome());
@@ -77,14 +77,64 @@ public class AlunoDAO {
             stmt.setString(3, aluno.getDataNasc());
             stmt.setString(4, aluno.getCpf());
             stmt.setString(5, aluno.getEndereco());
-            stmt.setString(6, aluno.getCpfResp());
-            stmt.setString(7, aluno.getResponsavel());
-            stmt.setLong(8, aluno.getMatricula());
+//            stmt.setString(6, aluno.getCpfResp());
+//            stmt.setString(7, aluno.getResponsavel());
+            stmt.setLong(6, aluno.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }   
     }
+
+    public List<Aluno> atualizarBD() {
+        List<Aluno> listaAlunos = new ArrayList<>();
+
+        String query = "SELECT * FROM alunos";
+
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                String nome = rs.getString("nome");
+                String sobrenome = rs.getString("sobrenome");
+                String dataNasc = rs.getString("datanasc");
+                String cpf = rs.getString("cpf");
+                String endereco = rs.getString("endereco");
+                String tmpCpfResp = rs.getString("cpfresp");
+                String tmpResp = rs.getString("responsavel");
+                long matricula = rs.getLong("matricula");
+
+                Aluno tmpAluno = new Aluno(nome, sobrenome, dataNasc, cpf, endereco, tmpResp, tmpCpfResp, matricula);
+                listaAlunos.add(tmpAluno);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaAlunos;
+    }
+
+    public Aluno buscarPorId(int id) {
+    String query = "SELECT * FROM alunos WHERE id = ?";
+
+    try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        stmt.setInt(1, id);
+
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                String nome = rs.getString("nome");
+                String sobrenome = rs.getString("sobrenome");
+                String dataNasc = rs.getString("datanasc");
+                String cpf = rs.getString("cpf");
+                String endereco = rs.getString("endereco");
+                return new Aluno(id,nome, sobrenome, dataNasc, cpf, endereco);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
+}
     
     public List<String> buscarNomesAlunos() {
         List<String> nomesAlunos = new ArrayList<>();
