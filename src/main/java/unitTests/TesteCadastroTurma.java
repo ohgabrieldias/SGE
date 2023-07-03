@@ -39,19 +39,19 @@ public class TesteCadastroTurma {
         Date dataFim = new Date();
 
         // Criando a turma
-        Turma turma = new Turma(curso, "EC11", "EC11-001", dataInicio, dataFim);
-        turma.setAlunos(alunos);
-        turma.setProfessores(professores);
-        turma.setDisciplinas(disciplinas);
-
-        // Testando o cadastro da turma
-        boolean cadastroSucesso = turma.cadastrarTurma(turma);
-
-        if (cadastroSucesso) {
-            System.out.println("Turma cadastrada com sucesso!");
-        } else {
-            System.out.println("Falha ao cadastrar a turma.");
-        }
+//        Turma turma = new Turma(curso, "EC11", "EC11-001", dataInicio, dataFim);
+//        turma.setAlunos(alunos);
+//        turma.setProfessores(professores);
+//        turma.setDisciplinas(disciplinas);
+//
+//        // Testando o cadastro da turma
+//        boolean cadastroSucesso = turma.cadastrarTurma(turma);
+//
+//        if (cadastroSucesso) {
+//            System.out.println("Turma cadastrada com sucesso!");
+//        } else {
+//            System.out.println("Falha ao cadastrar a turma.");
+//        }
     }
 }
 

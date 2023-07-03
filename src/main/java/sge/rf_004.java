@@ -6,8 +6,14 @@ package sge;
 
 import DAO.AlunoDAO;
 import DAO.DisciplinaDAO;
+import DAO.TurmaDAO;
+import baseCoding.Aluno;
+import baseCoding.Disciplina;
+import baseCoding.Turma;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -19,21 +25,75 @@ public class rf_004 extends javax.swing.JInternalFrame {
     /**
      * Creates new form rf_004
      */
+    private TurmaDAO turmaDao = new TurmaDAO();
     private DisciplinaDAO discDao = new DisciplinaDAO();
     private AlunoDAO alunoDao = new AlunoDAO();
+    private List<Disciplina> discList = discDao.getDisciplinas();
+    private List<Aluno> alunoList = alunoDao.buscarListaAluno();
+    
     public rf_004() {
         initComponents();
         
-        createDiscCheckboxes(discDao.buscarNomesDisciplinas());
+        createDiscCheckboxes(discList);
         createAlunoCheckboxes(alunoDao.buscarNomesAlunos());
         
     }
     
-    public void createDiscCheckboxes(List<String> stringList) {
-        for (String str : stringList) {
-            JCheckBox checkBox = new JCheckBox(str);
+    public void createDiscCheckboxes(List<Disciplina> discList) {
+        for (Disciplina disc : discList) {
+            JCheckBox checkBox = new JCheckBox(disc.getNome());
             listaDisciplinas.add(checkBox);
         }
+    }
+    
+   
+    public List<Disciplina> getDisciplinaIds(List<Disciplina> disciplinas, List<String> nomes) {
+        List<Disciplina> discipTmp = new ArrayList<>();
+
+        for (String nome : nomes) {
+            for (Disciplina disciplina : disciplinas) {
+                if (disciplina.getNome().equals(nome)) {
+                    discipTmp.add(disciplina);
+                    System.out.println(disciplina.getId());
+                    break;
+                }
+            }
+        }
+
+        return discipTmp;
+    }
+    
+    public List<Aluno> getAlunosIds(List<Aluno> alunos, List<String> nomes) {
+    List<Aluno> alunoTmp = new ArrayList<>();
+
+    for (String nome : nomes) {
+        for (Aluno aluno : alunos) {
+            String cpfPart = nome.substring(nome.indexOf("CPF: ") + 5); // Obtém a parte após "CPF: "
+//            System.out.print(cpfPart);
+            if (aluno.getCpf().equals(cpfPart)) {
+                alunoTmp.add(aluno);
+                System.out.println(aluno.getId());
+                break;
+            }
+        }
+    }
+
+    return alunoTmp;
+}
+
+    public List<String> getSelectedCheckboxValues(JPanel panel) {
+        List<String> selectedValues = new ArrayList<>();
+
+        for (int i = 0; i < panel.getComponentCount(); i++) {
+            if (panel.getComponent(i) instanceof JCheckBox) {
+                JCheckBox checkBox = (JCheckBox) panel.getComponent(i);
+                if (checkBox.isSelected()) {
+                    selectedValues.add(checkBox.getText());
+                }
+            }
+        }
+
+        return selectedValues;
     }
     
     public void createAlunoCheckboxes(List<String> stringList) {
@@ -100,6 +160,11 @@ public class rf_004 extends javax.swing.JInternalFrame {
         scrollAlunos.setViewportView(listaAlunos);
 
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,6 +228,24 @@ public class rf_004 extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        List<String> discSelected = getSelectedCheckboxValues(listaDisciplinas);
+        List<String> alunosSelected = getSelectedCheckboxValues(listaAlunos);
+        
+        List<Disciplina> selectedDiscip = getDisciplinaIds(discList, discSelected);
+        List<Aluno> selectedAlunos = getAlunosIds(alunoList, alunosSelected);
+        
+        Turma turma = new Turma(nomeCampo.getText(), "EC11", "2023-03-01", "2023-06-01", selectedAlunos, selectedDiscip);
+        
+        if(turmaDao.cadastrarTurma(turma)){
+
+           JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
+           // Feche o formulário
+           dispose();
+           }
+           else JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!");
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

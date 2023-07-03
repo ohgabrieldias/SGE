@@ -1,58 +1,56 @@
 package baseCoding;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 import baseCoding.*;
+import java.util.ArrayList;
+import java.util.List;
 import sge.MySQLConnector;
 
 public class Turma {
     private LinkedList<Professor> professores; // lista dos professores dessa turma
-    private LinkedList<Aluno> alunos; // lista dos alunos
-    private LinkedList<String> disciplinas; // lista das disciplinas
+    private List<Aluno> alunos; // lista dos alunos
+    private List<Disciplina> disciplinas; // lista das disciplinas
     private String curso;
     private String nome; // nome da turma ex: ec11
     private String codigo; // ec11-001
-    private Date dataInicio;
-    private Date dataFim;
+    private String dataInicio;
+    private String dataFim;
 
     MySQLConnector connector = new MySQLConnector();
     private static final Logger logger = Logger.getLogger(Turma.class.getName());
 
-    public Turma(Curso curso, String nome, String codigo, Date dataInicio, Date dataFim) {
-        this.curso = curso.getCurso();
+    public Turma(String nome, String codigo, String dataInicio, String dataFim,List<Aluno> listAluno, List<Disciplina> listDiscip) {
         this.nome = nome;
         this.codigo = codigo;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         
         this.professores = new LinkedList<>();
-        this.alunos = new LinkedList<>();
-        this.disciplinas = new LinkedList<>();
+        this.alunos = listAluno;
+        this.disciplinas = listDiscip;
     }
-
-    public boolean cadastrarTurma(Turma turma) {
-        // Insert data into the "turmas" table
-        String query = "INSERT INTO turmas (curso, nome, codigo, data_inicio, data_fim) VALUES (?, ?, ?, ?, ?)";
-
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
-            stmt.setString(1, turma.getCurso());
-            stmt.setString(2, turma.getNome());
-            stmt.setString(3, turma.getCodigo());
-            stmt.setDate(4, new java.sql.Date(turma.getDataInicio().getTime()));
-            stmt.setDate(5, new java.sql.Date(turma.getDataFim().getTime()));
-            stmt.executeUpdate();
-            logger.info("Turma data inserted successfully into the 'turmas' table.");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+    
+    public List<Integer> getListaIdAlunos() {
+        // Implementação do método getListaIdAlunos
+        List<Integer> listaIdAlunos = new ArrayList<>();
+        for (Aluno aluno : alunos){
+            listaIdAlunos.add(aluno.getId());
         }
 
-        return true;
+        return listaIdAlunos;
     }
 
+    public List<Integer> getListaIdsDisciplinas() {
+        // Implementação do método getListaIdsDisciplinas
+        List<Integer> listaIdsDisciplinas = new ArrayList<>();
+        for (Disciplina disciplina : disciplinas){
+            listaIdsDisciplinas.add(disciplina.getId());
+        }
+
+        return listaIdsDisciplinas;
+    }
+    
     public void addAluno(Aluno aluno) {
         alunos.add(aluno);
     }
@@ -71,20 +69,12 @@ public class Turma {
         this.professores = professores;
     }
 
-    public LinkedList<Aluno> getAlunos() {
+    public List<Aluno> getAlunos() {
         return alunos;
     }
 
     public void setAlunos(LinkedList<Aluno> alunos) {
         this.alunos = alunos;
-    }
-
-    public LinkedList<String> getDisciplinas() {
-        return disciplinas;
-    }
-
-    public void setDisciplinas(LinkedList<String> disciplinas) {
-        this.disciplinas = disciplinas;
     }
 
     public String getNome() {
@@ -107,22 +97,12 @@ public class Turma {
         this.codigo = codigo;
     }
 
-    public Date getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public Date getDataFim() {
+    public String getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Date dataFim) {
-        this.dataFim = dataFim;
-    }
-    
-    public static void main(String[] args) {
-    }
 }

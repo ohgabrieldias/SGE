@@ -11,6 +11,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 
 public class Aluno extends Pessoa {
+    private int id;
     private long matricula;
     private String responsavel;
     private String cpfresp;
@@ -30,13 +31,18 @@ public class Aluno extends Pessoa {
         super(nome, sobrenome, dataNasc, cpf, end);
     }
 
-    public Aluno(String nome, String cpf) {
+    public Aluno(int id, String nome, String cpf) {
         super(nome,cpf);
+        this.id = id;
     }
     // Getters and setters for the 'matricula' attribute
 
     public long getMatricula() {
         return matricula;
+    }
+    
+    public int getId() {
+        return id;
     }
 
     public String getEnd() {
