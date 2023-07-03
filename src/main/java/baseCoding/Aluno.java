@@ -34,12 +34,15 @@ public class Aluno extends Pessoa {
     public Aluno(int id, String nome, String cpf) {
         super(nome,cpf);
         this.id = id;
-       
     }
     // Getters and setters for the 'matricula' attribute
 
     public long getMatricula() {
         return matricula;
+    }
+    
+    public int getId() {
+        return id;
     }
 
     public String getEnd() {
