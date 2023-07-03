@@ -6,8 +6,12 @@ package sge;
 
 import DAO.AlunoDAO;
 import baseCoding.Aluno;
+import java.util.Date;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import util.Formater;
 
 /**
  *
@@ -18,6 +22,8 @@ public class rf_009 extends javax.swing.JInternalFrame {
     /**
      * Creates new form rf_009
      */
+    Aluno alunoTmp = null;
+    Formater formater = new Formater();
     public rf_009() {
         initComponents();
         preencherTabelaAlunos();
@@ -28,39 +34,21 @@ public class rf_009 extends javax.swing.JInternalFrame {
     
         List<Aluno> alunos = alunoDao.buscarListaAluno();
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id");
         model.addColumn("Aluno");
         model.addColumn("CPF");
 
         for (Aluno aluno : alunos) {
             Object[] rowData = new Object[8];
-            rowData[0] = aluno.getNome();
-            rowData[1] = aluno.getCpf();
+            rowData[0] = aluno.getId();
+            rowData[1] = aluno.getNome();
+            rowData[2] = aluno.getCpf();
             model.addRow(rowData);
         }
 
         tabelaAlunos.setModel(model);
         
     }
-
-//     public void preencherNovoDado(String nome, String Cpf, String endereco, String dataNasc, String sobrenome) {
-//         if(tabelaAlunos.getSelectedRow() > 0){
-//         btnEditar1.setEnabled(true);
-//         tabelaAlunos.setValueAt(nome, tabelaAlunos.getSelectedRow(), 0);
-//         tabelaAlunos.setValueAt(Cpf, tabelaAlunos.getSelectedRow(), 1);
-//         tabelaAlunos.setValueAt(endereco, tabelaAlunos.getSelectedRow(), 2);
-//         tabelaAlunos.setValueAt(dataNasc, tabelaAlunos.getSelectedRow(), 3);
-//         tabelaAlunos.setValueAt(sobrenome, tabelaAlunos.getSelectedRow(), 4);
-//         if (tabelaAlunos.getSelectedRow() != -1){
-//             btnEditar1.setEnabled(true);
-//             Aluno aluno = new Aluno(nome, sobrenome, dataNasc, Cpf, endereco);
-//             AlunoDAO alunoDao = new AlunoDAO();
-//             alunoDao.alterarAluno(aluno);
-            
-//         }else{
-//             System.out.println("Erro ao atualizar");
-//         }
-//     }
-// }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,23 +97,49 @@ public class rf_009 extends javax.swing.JInternalFrame {
         nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel.setText("Nome");
 
+        nomeCampo.setEnabled(false);
+
         nomeLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel1.setText("Sobrenome");
+
+        sobrenomeCampo.setEnabled(false);
 
         cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cpfLabel.setText("CPF");
 
+        cpfCampo.setEnabled(false);
+
         dnLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         dnLabel.setText("Data de Nascimento");
+
+        dnCampo.setDateFormatString("dd/MM/yyyy");
+        dnCampo.setEnabled(false);
 
         nomeLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel2.setText("Endereço");
 
+        enderecoCampo.setEnabled(false);
+
         btnEditar1.setText("Editar");
         btnEditar1.setEnabled(false);
+        btnEditar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditar1MouseClicked(evt);
+            }
+        });
+        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditar1ActionPerformed(evt);
+            }
+        });
 
         btnSalvar1.setText("Salvar Edições");
         btnSalvar1.setEnabled(false);
+        btnSalvar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalvar1MouseClicked(evt);
+            }
+        });
 
         jLayeredPane1.setLayer(nomeLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(nomeCampo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -204,16 +218,36 @@ public class rf_009 extends javax.swing.JInternalFrame {
 
         tabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Aluno", "CPF"
+                "ID", "Aluno", "CPF"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaAlunos.setColumnSelectionAllowed(true);
+        tabelaAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaAlunosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaAlunos);
+        tabelaAlunos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tabelaAlunos.getColumnModel().getColumnCount() > 0) {
+            tabelaAlunos.getColumnModel().getColumn(0).setResizable(false);
+            tabelaAlunos.getColumnModel().getColumn(1).setResizable(false);
+            tabelaAlunos.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jLayeredPane2.setLayer(logo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(pesquisaNomeLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -277,6 +311,54 @@ public class rf_009 extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
+        // TODO add your handling code here:
+        btnEditar1.setEnabled(true);
+        AlunoDAO alunoDAO = new AlunoDAO();
+        
+        int selectedRow = tabelaAlunos.getSelectedRow();
+        int selectedColumn = tabelaAlunos.getSelectedColumn();
+        int id = (Integer)tabelaAlunos.getValueAt(selectedRow, selectedColumn);
+        
+        alunoTmp = alunoDAO.buscarPorId(id);
+        if (alunoTmp != null) {
+            nomeCampo.setText(alunoTmp.getNome());
+            sobrenomeCampo.setText(alunoTmp.getSobrenome());
+            cpfCampo.setText(alunoTmp.getCpf());
+            enderecoCampo.setText(alunoTmp.getEndereco());
+            
+            Date data = formater.converteStringToDate(alunoTmp.getDataNasc());
+            dnCampo.setDate(data);
+         }
+    }//GEN-LAST:event_tabelaAlunosMouseClicked
+
+    private void btnEditar1MouseClicked(java.awt.event.MouseEvent evt) {                                       
+        //ALTERAR CADASTRO DO ALUNO APOS CLICLAR NO BOTA EDITAR	
+        nomeCampo.setEnabled(true);
+        sobrenomeCampo.setEnabled(true);
+        cpfCampo.setEnabled(true);
+        enderecoCampo.setEnabled(true);
+        dnCampo.setEnabled(true);
+        btnSalvar1.setEnabled(true);
+         
+    }                                       
+
+    private void btnSalvar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvar1MouseClicked
+        AlunoDAO alunoDAO = new AlunoDAO();
+
+        alunoTmp.setNome(nomeCampo.getText());
+        alunoTmp.setSobrenome(sobrenomeCampo.getText());
+        alunoTmp.setCpf(cpfCampo.getText());
+        alunoTmp.setEndereco(enderecoCampo.getText());
+        alunoTmp.setDataNasc(formater.formatarData2(dnCampo));
+        alunoDAO.alterarAluno(alunoTmp);
+        JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
+    }//GEN-LAST:event_btnSalvar1MouseClicked
+
+    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditar1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
