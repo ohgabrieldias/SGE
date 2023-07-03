@@ -48,15 +48,16 @@ public class AlunoDAO {
     public List<Aluno> buscarListaAluno() {
     List<Aluno> listaAlunos = new ArrayList<>();
 
-    String query = "SELECT nome, cpf FROM alunos";
+    String query = "SELECT id,nome, cpf FROM alunos";
 
     try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
          ResultSet rs = stmt.executeQuery()) {
         while (rs.next()) {
+            int id = rs.getInt("id");
             String nome = rs.getString("nome");
             String cpf = rs.getString("cpf");
 
-            Aluno tmpAluno = new Aluno(nome,cpf);
+            Aluno tmpAluno = new Aluno(id,nome,cpf);
             listaAlunos.add(tmpAluno);
         }
     } catch (SQLException e) {
@@ -84,8 +85,27 @@ public class AlunoDAO {
             e.printStackTrace();
         }
     }
-
     
+    public List<String> buscarNomesAlunos() {
+        List<String> nomesAlunos = new ArrayList<>();
 
+        String query = "SELECT nome, cpf FROM alunos";
 
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            try (ResultSet resultSet = stmt.executeQuery()) {
+
+            while (resultSet.next()) {
+                String nome = resultSet.getString("nome");
+                String cpf = resultSet.getString("cpf");
+                String nomeCpf = nome + " - CPF: " + cpf;
+                nomesAlunos.add(nomeCpf);
+             }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nomesAlunos;
+    }
+    
 }
