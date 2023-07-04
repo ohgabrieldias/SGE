@@ -50,9 +50,8 @@ public class main extends javax.swing.JFrame {
         menuMovimentar = new javax.swing.JMenu();
         rf_009 = new javax.swing.JMenuItem();
         menuFinanceiro = new javax.swing.JMenu();
-        rf_006Menu = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         menuRelatorios = new javax.swing.JMenu();
+        rf_006Menu = new javax.swing.JMenuItem();
         rf_007Menu = new javax.swing.JMenuItem();
         rf_008Menu = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
@@ -116,11 +115,6 @@ public class main extends javax.swing.JFrame {
         rf_003Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rf_003Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turma.png"))); // NOI18N
         rf_003Menu.setText("Turma");
-        rf_003Menu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rf_003MenuActionPerformed(evt);
-            }
-        });
         menuCadastros.add(rf_003Menu);
 
         rf_004Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -169,6 +163,11 @@ public class main extends javax.swing.JFrame {
         menuRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuRelatorios.png"))); // NOI18N
         menuRelatorios.setText("Relatórios");
         menuRelatorios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        rf_006Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_006Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
+        rf_006Menu.setText("Financeiro");
+        menuRelatorios.add(rf_006Menu);
 
         rf_007Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rf_007Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
@@ -287,7 +286,6 @@ public class main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane areaTrabalhoMain;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel logoMain;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JMenu menuCadastros;
