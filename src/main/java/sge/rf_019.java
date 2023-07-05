@@ -52,23 +52,33 @@ public class rf_019 extends javax.swing.JInternalFrame {
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentacoes.png"))); // NOI18N
 
         titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        titulo.setText("Movimentação de Professores");
+        titulo.setText("Movimentação de Professores(as)");
 
         pesquisaNomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        pesquisaNomeLabel.setText("Pesquisa por nome");
+        pesquisaNomeLabel.setText("Selecione um professor(a)");
 
         tabelaProfessores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Aluno", "CPF"
+                "ID", "CPF", "Nome"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaProfessores.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tabelaProfessores);
+        tabelaProfessores.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
