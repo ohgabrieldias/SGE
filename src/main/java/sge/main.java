@@ -49,6 +49,7 @@ public class main extends javax.swing.JFrame {
         rf_005Menu = new javax.swing.JMenuItem();
         menuMovimentar = new javax.swing.JMenu();
         rf_009 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuFinanceiro = new javax.swing.JMenu();
         menuRelatorios = new javax.swing.JMenu();
         rf_006Menu = new javax.swing.JMenuItem();
@@ -153,6 +154,16 @@ public class main extends javax.swing.JFrame {
         });
         menuMovimentar.add(rf_009);
 
+        jMenuItem1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
+        jMenuItem1.setText("Professores");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuMovimentar.add(jMenuItem1);
+
         mainMenu.add(menuMovimentar);
 
         menuFinanceiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuFinanceiro.png"))); // NOI18N
@@ -245,6 +256,12 @@ public class main extends javax.swing.JFrame {
         rfMovimentAaluno.setVisible(true);
     }//GEN-LAST:event_rf_009ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        rf_019 rfMovimentaProfessor = new rf_019();
+        areaTrabalhoMain.add(rfMovimentaProfessor);
+        rfMovimentaProfessor.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -286,6 +303,7 @@ public class main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane areaTrabalhoMain;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel logoMain;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JMenu menuCadastros;
