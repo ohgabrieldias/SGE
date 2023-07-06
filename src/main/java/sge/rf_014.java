@@ -50,10 +50,10 @@ public class rf_014 extends javax.swing.JInternalFrame {
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentacoes.png"))); // NOI18N
 
         titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        titulo.setText("Movimentação de Cursos");
+        titulo.setText("Movimentação de Disciplinas");
 
         pesquisaNomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        pesquisaNomeLabel.setText("Selecione um curso");
+        pesquisaNomeLabel.setText("Selecione uma disciplina");
 
         listaCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -63,7 +63,7 @@ public class rf_014 extends javax.swing.JInternalFrame {
                 {null, null, null}
             },
             new String [] {
-                "Id", "Curso", "Professor"
+                "Id", "Disciplina", "Professor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -81,7 +81,7 @@ public class rf_014 extends javax.swing.JInternalFrame {
         painelInformacoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        nomeLabel.setText("Nome do curso");
+        nomeLabel.setText("Nome da disciplina");
 
         nomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -91,12 +91,12 @@ public class rf_014 extends javax.swing.JInternalFrame {
         professorCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         inicioDataLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        inicioDataLabel.setText("Início do Curso");
+        inicioDataLabel.setText("Início da disciplina");
 
         inicioDataCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         fimDataLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        fimDataLabel.setText("Fim do Curso");
+        fimDataLabel.setText("Fim da disciplina");
 
         fimDataCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -120,12 +120,10 @@ public class rf_014 extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(painelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelInformacoesLayout.createSequentialGroup()
-                        .addGroup(painelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nomeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(painelInformacoesLayout.createSequentialGroup()
-                                .addComponent(nomeLabel)
-                                .addGap(72, 72, 72)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGroup(painelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomeLabel)
+                            .addComponent(nomeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(painelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(professorCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(professorLabel)))
@@ -179,7 +177,7 @@ public class rf_014 extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pesquisaNomeLabel)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(logo)
                         .addGap(74, 74, 74)

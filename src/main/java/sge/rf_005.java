@@ -61,14 +61,14 @@ public class rf_005 extends javax.swing.JInternalFrame {
 
         dataInicioLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         dataInicioLabel.setForeground(new java.awt.Color(51, 51, 51));
-        dataInicioLabel.setText("Início do Curso");
+        dataInicioLabel.setText("Início da disciplina");
 
         dataInicioCampo.setDateFormatString("dd/MM/yyyy");
         dataInicioCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         dataFimLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         dataFimLabel.setForeground(new java.awt.Color(51, 51, 51));
-        dataFimLabel.setText("Fim do Curso");
+        dataFimLabel.setText("Fim da disciplina");
 
         dataFimCampo.setDateFormatString("dd/MM/yyyy");
         dataFimCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -78,28 +78,9 @@ public class rf_005 extends javax.swing.JInternalFrame {
         professorLabel.setText("Professor responsável");
 
         professorCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        professorCampo.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                professorCampoAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        professorCampo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                professorCampoActionPerformed(evt);
-            }
-        });
-        
+
         jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

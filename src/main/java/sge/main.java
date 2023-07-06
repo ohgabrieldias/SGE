@@ -49,7 +49,7 @@ public class main extends javax.swing.JFrame {
         rf_005Menu = new javax.swing.JMenuItem();
         menuMovimentar = new javax.swing.JMenu();
         rf_009 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        rf_014 = new javax.swing.JMenuItem();
         menuFinanceiro = new javax.swing.JMenu();
         menuRelatorios = new javax.swing.JMenu();
         rf_006Menu = new javax.swing.JMenuItem();
@@ -159,15 +159,15 @@ public class main extends javax.swing.JFrame {
         });
         menuMovimentar.add(rf_009);
 
-        jMenuItem1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/curso.png"))); // NOI18N
-        jMenuItem1.setText("Cursos");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        rf_014.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_014.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/curso.png"))); // NOI18N
+        rf_014.setText("Disciplinas");
+        rf_014.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                rf_014ActionPerformed(evt);
             }
         });
-        menuMovimentar.add(jMenuItem1);
+        menuMovimentar.add(rf_014);
 
         mainMenu.add(menuMovimentar);
 
@@ -263,11 +263,11 @@ public class main extends javax.swing.JFrame {
         rfMovimentAaluno.setVisible(true);
     }//GEN-LAST:event_rf_009ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void rf_014ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_014ActionPerformed
         rf_014 rfMovimentaCurso = new rf_014();
         areaTrabalhoMain.add(rfMovimentaCurso);
         rfMovimentaCurso.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_rf_014ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,7 +310,6 @@ public class main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane areaTrabalhoMain;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel logoMain;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JMenu menuCadastros;
@@ -327,5 +326,6 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenuItem rf_007Menu;
     private javax.swing.JMenuItem rf_008Menu;
     private javax.swing.JMenuItem rf_009;
+    private javax.swing.JMenuItem rf_014;
     // End of variables declaration//GEN-END:variables
 }

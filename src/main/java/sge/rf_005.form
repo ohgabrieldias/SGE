@@ -143,7 +143,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="In&#xed;cio do Curso"/>
+        <Property name="text" type="java.lang.String" value="In&#xed;cio da disciplina"/>
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dataInicioCampo">
@@ -162,7 +162,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Fim do Curso"/>
+        <Property name="text" type="java.lang.String" value="Fim da disciplina"/>
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dataFimCampo">
