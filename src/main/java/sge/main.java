@@ -258,7 +258,7 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_rf_005MenuActionPerformed
 
     private void rf_009ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_009ActionPerformed
-        rf_009 rfMovimentAaluno = new rf_009();
+        rf_012 rfMovimentAaluno = new rf_012();
         areaTrabalhoMain.add(rfMovimentAaluno);
         rfMovimentAaluno.setVisible(true);
     }//GEN-LAST:event_rf_009ActionPerformed

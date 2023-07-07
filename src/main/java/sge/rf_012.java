@@ -17,14 +17,14 @@ import util.Formater;
  *
  * @author gabri
  */
-public class rf_009 extends javax.swing.JInternalFrame {
+public class rf_012 extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form rf_009
      */
     Aluno alunoTmp = null;
     Formater formater = new Formater();
-    public rf_009() {
+    public rf_012() {
         initComponents();
         preencherTabelaAlunos();
     }
