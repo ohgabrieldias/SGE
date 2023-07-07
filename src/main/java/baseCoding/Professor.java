@@ -12,19 +12,33 @@ import java.util.logging.SimpleFormatter;
 
 public class Professor extends Pessoa {
     private int codigoProfessor;
+    private int id;
     private static final Logger logger = Logger.getLogger(Professor.class.getName());
 
     MySQLConnector connector = new MySQLConnector();
     
-public Professor(String nome, String sobrenome, String dataNasc, String cpf, String endereco){
-    super(nome, sobrenome, dataNasc, cpf, endereco);
-    this.codigoProfessor = codigoProfessor;
- }
+    public Professor(String nome, String sobrenome, String dataNasc, String cpf, String endereco){
+        super(nome, sobrenome, dataNasc, cpf, endereco);
+        this.codigoProfessor = codigoProfessor;
+    }
+    
+    public Professor(int id, String nome, String sobrenome, String dataNasc, String cpf, String end){
+        super(nome, sobrenome, dataNasc, cpf, end);
+        this.id = id;
+    }
+    
+    public Professor(int id, String nome, String cpf){
+        super(nome,  cpf);
+        this.id = id;
+    }
 
-public int getCodigoProfessor(){
-   return this.codigoProfessor;  
-  }
+    public int getCodigoProfessor(){
+    return this.codigoProfessor;  
+    }
 
+    public int getId(){
+        return this.id;
+    }
   public Boolean cadastrarProfessor(Professor professor) {
     String query = "INSERT INTO professores (nome, sobrenome, datanasc, cpf, endereco) VALUES (?, ?, ?, ?, ?)";
     try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {

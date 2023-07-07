@@ -4,6 +4,14 @@
  */
 package sge;
 
+import DAO.ProfessorDAO;
+import baseCoding.Professor;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import util.Formater;
+
 /**
  *
  * @author gabri
@@ -13,10 +21,33 @@ public class rf_019 extends javax.swing.JInternalFrame {
     /**
      * Creates new form rf_010
      */
+    Professor professorTmp = null;
+    Formater formater = new Formater();
+    ProfessorDAO professorDao = new ProfessorDAO();
+    
     public rf_019() {
         initComponents();
+        preencherTabelaProfessores();
     }
+    
+    public void preencherTabelaProfessores() {
+        List<Professor> professores = professorDao.buscarListaProfessor();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("CPF");
+        model.addColumn("NOME");
 
+        for (Professor professor : professores) {
+            Object[] rowData = new Object[8];
+            rowData[0] = professor.getId();
+            rowData[1] = professor.getCpf();
+            rowData[2] = professor.getNome();
+            model.addRow(rowData);
+        }
+        
+        tabelaProfessores.setModel(model);
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +109,11 @@ public class rf_019 extends javax.swing.JInternalFrame {
             }
         });
         tabelaProfessores.setColumnSelectionAllowed(true);
+        tabelaProfessores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaProfessoresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaProfessores);
         tabelaProfessores.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -86,25 +122,48 @@ public class rf_019 extends javax.swing.JInternalFrame {
         nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel.setText("Nome");
 
+        nomeCampo.setEnabled(false);
+
         nomeLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel1.setText("Sobrenome");
+
+        sobrenomeCampo.setEnabled(false);
 
         cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cpfLabel.setText("CPF");
 
+        cpfCampo.setEnabled(false);
+
         dnLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         dnLabel.setText("Data de Nascimento");
+
+        dnCampo.setDateFormatString("dd/MM/yyyy");
+        dnCampo.setEnabled(false);
 
         nomeLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel2.setText("Endereço");
 
+        enderecoCampo.setEnabled(false);
+
         btnEditar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnEditar1.setText("Editar");
+        btnEditar1.setEnabled(false);
+        btnEditar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditar1MouseClicked(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Excluir cadastro");
+        jButton1.setEnabled(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jLayeredPane1.setLayer(nomeLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(nomeCampo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -221,6 +280,58 @@ public class rf_019 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tabelaProfessoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProfessoresMouseClicked
+        btnEditar1.setEnabled(true);
+        jButton1.setEnabled(true);
+        
+        int selectedRow = tabelaProfessores.getSelectedRow();
+        int selectedColumn = tabelaProfessores.getSelectedColumn();
+        int id = (Integer)tabelaProfessores.getValueAt(selectedRow, selectedColumn);
+        
+        professorTmp = professorDao.buscarPorId(id);
+        if (professorTmp != null) {
+            nomeCampo.setText(professorTmp.getNome());
+            sobrenomeCampo.setText(professorTmp.getSobrenome());
+            cpfCampo.setText(professorTmp.getCpf());
+            enderecoCampo.setText(professorTmp.getEndereco());
+            
+            Date data = formater.converteStringToDate(professorTmp.getDataNasc());
+            dnCampo.setDate(data);
+         }
+    }//GEN-LAST:event_tabelaProfessoresMouseClicked
+
+    private void btnEditar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditar1MouseClicked
+        //ALTERAR CADASTRO DO ALUNO APOS CLICLAR NO BOTA EDITAR	
+        nomeCampo.setEnabled(true);
+        sobrenomeCampo.setEnabled(true);
+        cpfCampo.setEnabled(true);
+        enderecoCampo.setEnabled(true);
+        dnCampo.setEnabled(true);
+//        btnSalvar1.setEnabled(true); 
+    }//GEN-LAST:event_btnEditar1MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        int selectedRow = tabelaProfessores.getSelectedRow();
+        int selectedColumn = tabelaProfessores.getSelectedColumn();
+        int id = (Integer)tabelaProfessores.getValueAt(selectedRow, selectedColumn);
+        
+        if(professorDao.excluirProfessor(id)){
+            JOptionPane.showMessageDialog(null, "Professor excluído com sucesso!");
+            dispose();
+        }
+        else JOptionPane.showMessageDialog(null, "Exclusão falhou!");
+    }//GEN-LAST:event_jButton1MouseClicked
+    
+    private void btnSalvar1MouseClicked(java.awt.event.MouseEvent evt) {                                        
+        professorTmp.setNome(nomeCampo.getText());
+        professorTmp.setSobrenome(sobrenomeCampo.getText());
+        professorTmp.setCpf(cpfCampo.getText());
+        professorTmp.setEndereco(enderecoCampo.getText());
+        professorTmp.setDataNasc(formater.formatarData2(dnCampo));
+        professorDao.alterarProfessor(professorTmp);
+        JOptionPane.showMessageDialog(null, "Professor alterado com sucesso!");
+        dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar1;
