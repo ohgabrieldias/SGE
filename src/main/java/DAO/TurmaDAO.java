@@ -6,7 +6,9 @@ package DAO;
 
 import baseCoding.Turma;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import sge.MySQLConnector;
 import com.google.gson.Gson;
@@ -37,6 +39,25 @@ import com.google.gson.Gson;
     }
 
     return false;
+    }
+
+    //criar um metodo para buscar todas as turmas no banco de dados
+    public Turma buscarTurma() {
+        List<Turma> listaTurmas = new ArrayList<>();
+        String query = "SELECT id FROM turmas";
+
+        try(PreparedStatement stmt = connector.getConnection().prepareStatement(query) ;
+            ResultSet rs = stmt.executeQuery()){
+
+            while(rs.next()){
+                int id = rs.getInt("id");
+                Turma tmpTurma = new Turma(id);
+                listaTurmas.add(tmpTurma);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (Turma) listaTurmas;
     }
 
     private String toJsonString(List<Integer> list) {
