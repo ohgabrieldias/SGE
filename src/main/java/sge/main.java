@@ -116,11 +116,6 @@ public class main extends javax.swing.JFrame {
         rf_003Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rf_003Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turma.png"))); // NOI18N
         rf_003Menu.setText("Turma");
-        rf_003Menu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rf_003MenuActionPerformed(evt);
-            }
-        });
         menuCadastros.add(rf_003Menu);
 
         rf_004Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -162,6 +157,8 @@ public class main extends javax.swing.JFrame {
         jMenuItem1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turma.png"))); // NOI18N
         jMenuItem1.setText("Turmas");
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
+        jMenuItem1.setText("Professores");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -267,6 +264,9 @@ public class main extends javax.swing.JFrame {
         rf_015 rfMovimentarTurmas = new rf_015();
         areaTrabalhoMain.add(rfMovimentarTurmas);
         rfMovimentarTurmas.setVisible(true);
+        rf_019 rfMovimentaProfessor = new rf_019();
+        areaTrabalhoMain.add(rfMovimentaProfessor);
+        rfMovimentaProfessor.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
