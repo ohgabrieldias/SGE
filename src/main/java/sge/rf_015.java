@@ -28,8 +28,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
 
     public void preencherlistaTurmas(){
         TurmaDAO turmaDAO = new TurmaDAO();
-    
-        List<Turma> turmas = (List<Turma>) turmaDAO.buscarTurma();
+        List<Turma> turmas = turmaDAO.buscarTurma();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id");
         model.addColumn("Turma");

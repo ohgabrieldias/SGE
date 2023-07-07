@@ -32,8 +32,9 @@ public class Turma {
         this.disciplinas = listDiscip;
     }
 
-    public Turma(int id){
+    public Turma(int id, String nome){
         this.id = id;
+        this.nome = nome;
     }
     
     public List<Integer> getListaIdAlunos() {

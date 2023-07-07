@@ -42,22 +42,23 @@ import com.google.gson.Gson;
     }
 
     //criar um metodo para buscar todas as turmas no banco de dados
-    public Turma buscarTurma() {
+    public List<Turma> buscarTurma() {
         List<Turma> listaTurmas = new ArrayList<>();
-        String query = "SELECT id FROM turmas";
+        String query = "SELECT id, nome FROM turmas";
 
         try(PreparedStatement stmt = connector.getConnection().prepareStatement(query) ;
             ResultSet rs = stmt.executeQuery()){
 
             while(rs.next()){
                 int id = rs.getInt("id");
-                Turma tmpTurma = new Turma(id);
+                String nome = rs.getString("nome");
+                Turma tmpTurma = new Turma(id,nome);
                 listaTurmas.add(tmpTurma);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (Turma) listaTurmas;
+        return listaTurmas;
     }
 
     private String toJsonString(List<Integer> list) {
