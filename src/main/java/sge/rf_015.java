@@ -7,6 +7,7 @@ package sge;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.w3c.dom.events.MouseEvent;
@@ -44,6 +45,25 @@ public class rf_015 extends javax.swing.JInternalFrame {
         }
 
         listaTurmas.setModel(model);
+    }
+
+    public void preencherListaAlunos(){
+        AlunoDAO alunoDAO = new AlunoDAO();
+        List<Aluno> alunos = alunoDAO.buscarListaAluno();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Id");
+        model.addColumn("Nome");
+        model.addColumn("CPF");
+
+        for (Aluno aluno : alunos) {
+            Object[] rowData = new Object[8];
+            rowData[0] = aluno.getId();
+            rowData[1] = aluno.getNome();
+            rowData[2] = aluno.getCpf();
+            model.addRow(rowData);
+        }
+
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
