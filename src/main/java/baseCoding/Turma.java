@@ -36,6 +36,10 @@ public class Turma {
         this.id = id;
         this.nome = nome;
     }
+
+    public Turma(String nome){
+        this.nome = nome;
+    }
     
     public List<Integer> getListaIdAlunos() {
         // Implementação do método getListaIdAlunos

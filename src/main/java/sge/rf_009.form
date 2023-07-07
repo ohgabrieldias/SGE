@@ -215,6 +215,9 @@
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomeCampoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="nomeLabel1">
               <Properties>
@@ -228,6 +231,9 @@
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sobrenomeCampoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="cpfLabel">
               <Properties>

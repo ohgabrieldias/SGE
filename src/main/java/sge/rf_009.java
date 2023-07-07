@@ -98,11 +98,21 @@ public class rf_009 extends javax.swing.JInternalFrame {
         nomeLabel.setText("Nome");
 
         nomeCampo.setEnabled(false);
+        nomeCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeCampoActionPerformed(evt);
+            }
+        });
 
         nomeLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel1.setText("Sobrenome");
 
         sobrenomeCampo.setEnabled(false);
+        sobrenomeCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sobrenomeCampoActionPerformed(evt);
+            }
+        });
 
         cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cpfLabel.setText("CPF");
@@ -359,6 +369,14 @@ public class rf_009 extends javax.swing.JInternalFrame {
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditar1ActionPerformed
+
+    private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeCampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeCampoActionPerformed
+
+    private void sobrenomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobrenomeCampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sobrenomeCampoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,7 +6,10 @@ package sge;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+import org.w3c.dom.events.MouseEvent;
 
 import DAO.AlunoDAO;
 import DAO.TurmaDAO;
@@ -42,19 +45,6 @@ public class rf_015 extends javax.swing.JInternalFrame {
 
         listaTurmas.setModel(model);
     }
-
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExcluirActionPerformed
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeCampoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeCampoActionPerformed
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -389,6 +379,27 @@ public class rf_015 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        JOptionPane.showConfirmDialog(null, "Deseja realmente excluir a turma?", "Excluir turma", JOptionPane.YES_NO_OPTION);
+        if(JOptionPane.YES_OPTION == 0){
+            TurmaDAO turmaDAO = new TurmaDAO();
+            turmaDAO.excluirTurma(listaTurmas.getSelectedRow());
+            JOptionPane.showMessageDialog(null, "Turma excluída com sucesso!");
+        }else{
+            JOptionPane.showMessageDialog(null, "Turma não excluída!");
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        TurmaDAO turmaDAO = new TurmaDAO();
+        Turma turma = new Turma(nomeCampo.getText());
+        turmaDAO.cadastrarTurma(turma);
+        JOptionPane.showMessageDialog(null, "Turma atulizada com sucesso!");
+        preencherlistaTurmas();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel alunosLista;

@@ -61,6 +61,34 @@ import com.google.gson.Gson;
         return listaTurmas;
     }
 
+    public Turma buscarPorId(int id){
+        String query = "SELECT * FROM turmas WHERE id = ?";
+        try(PreparedStatement stmt = connector.getConnection().prepareStatement(query)){
+            stmt.setInt(1, id);
+            try(ResultSet rs = stmt.executeQuery()){
+                if(rs.next()){
+                    String nome = rs.getString("nome");
+                    Turma tmpTurma = new Turma(id, nome);
+                    return tmpTurma;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Turma excluirTurma(int id){
+        String query = "DELETE FROM turmas WHERE id = ?";
+        try(PreparedStatement stmt = connector.getConnection().prepareStatement(query)){
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private String toJsonString(List<Integer> list) {
         Gson gson = new Gson();
         return gson.toJson(list);
