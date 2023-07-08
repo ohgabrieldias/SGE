@@ -49,7 +49,10 @@ public class main extends javax.swing.JFrame {
         rf_005Menu = new javax.swing.JMenuItem();
         menuMovimentar = new javax.swing.JMenu();
         rf_009 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        rf_019 = new javax.swing.JMenuItem();
+        rf_015 = new javax.swing.JMenuItem();
+        rf_014 = new javax.swing.JMenuItem();
+        rf_016 = new javax.swing.JMenuItem();
         menuFinanceiro = new javax.swing.JMenu();
         menuRelatorios = new javax.swing.JMenu();
         rf_006Menu = new javax.swing.JMenuItem();
@@ -116,6 +119,11 @@ public class main extends javax.swing.JFrame {
         rf_003Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rf_003Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turma.png"))); // NOI18N
         rf_003Menu.setText("Turma");
+        rf_003Menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rf_003MenuActionPerformed(evt);
+            }
+        });
         menuCadastros.add(rf_003Menu);
 
         rf_004Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -141,7 +149,7 @@ public class main extends javax.swing.JFrame {
         mainMenu.add(menuCadastros);
 
         menuMovimentar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentar.png"))); // NOI18N
-        menuMovimentar.setText("Movimentar");
+        menuMovimentar.setText("Alterar");
         menuMovimentar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         rf_009.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -154,17 +162,45 @@ public class main extends javax.swing.JFrame {
         });
         menuMovimentar.add(rf_009);
 
-        jMenuItem1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turma.png"))); // NOI18N
-        jMenuItem1.setText("Turmas");
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
-        jMenuItem1.setText("Professores");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        rf_019.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_019.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
+        rf_019.setText("Professores");
+        rf_019.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                rf_019ActionPerformed(evt);
             }
         });
-        menuMovimentar.add(jMenuItem1);
+        menuMovimentar.add(rf_019);
+
+        rf_015.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_015.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turma.png"))); // NOI18N
+        rf_015.setText("Turmas");
+        rf_015.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rf_015ActionPerformed(evt);
+            }
+        });
+        menuMovimentar.add(rf_015);
+
+        rf_014.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_014.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/curso.png"))); // NOI18N
+        rf_014.setText("Disciplinas");
+        rf_014.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rf_014ActionPerformed(evt);
+            }
+        });
+        menuMovimentar.add(rf_014);
+
+        rf_016.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_016.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
+        rf_016.setText("Funcionários");
+        rf_016.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rf_016ActionPerformed(evt);
+            }
+        });
+        menuMovimentar.add(rf_016);
 
         mainMenu.add(menuMovimentar);
 
@@ -255,19 +291,34 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_rf_005MenuActionPerformed
 
     private void rf_009ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_009ActionPerformed
-        rf_012 rfMovimentAaluno = new rf_012();
-        areaTrabalhoMain.add(rfMovimentAaluno);
-        rfMovimentAaluno.setVisible(true);
+        rf_012 rfAlterarAaluno = new rf_012();
+        areaTrabalhoMain.add(rfAlterarAaluno);
+        rfAlterarAaluno.setVisible(true);
     }//GEN-LAST:event_rf_009ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        rf_015 rfMovimentarTurmas = new rf_015();
-        areaTrabalhoMain.add(rfMovimentarTurmas);
-        rfMovimentarTurmas.setVisible(true);
-        rf_019 rfMovimentaProfessor = new rf_019();
-        areaTrabalhoMain.add(rfMovimentaProfessor);
-        rfMovimentaProfessor.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void rf_019ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_019ActionPerformed
+        rf_019 rfAlterarProfessor = new rf_019();
+        areaTrabalhoMain.add(rfAlterarProfessor);
+        rfAlterarProfessor.setVisible(true);
+    }//GEN-LAST:event_rf_019ActionPerformed
+
+    private void rf_015ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_015ActionPerformed
+        rf_015 rfAlterarTurmas = new rf_015();
+        areaTrabalhoMain.add(rfAlterarTurmas);
+        rfAlterarTurmas.setVisible(true);
+    }//GEN-LAST:event_rf_015ActionPerformed
+
+    private void rf_014ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_014ActionPerformed
+        //rf_014 rfAlterarDisciplinas = new rf_014();
+        //areaTrabalhoMain.add(rfAlterarDisciplinas);
+        //rfAlterarDisciplinas.setVisible(true);
+    }//GEN-LAST:event_rf_014ActionPerformed
+
+    private void rf_016ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_016ActionPerformed
+        //rf_016 rfAlterarFuncionario = new rf_016();
+        //areaTrabalhoMain.add(rfAlterarFuncionario);
+        //rfAlterarFuncionario.setVisible(true);
+    }//GEN-LAST:event_rf_016ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,7 +361,6 @@ public class main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane areaTrabalhoMain;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel logoMain;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JMenu menuCadastros;
@@ -327,5 +377,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenuItem rf_007Menu;
     private javax.swing.JMenuItem rf_008Menu;
     private javax.swing.JMenuItem rf_009;
+    private javax.swing.JMenuItem rf_014;
+    private javax.swing.JMenuItem rf_015;
+    private javax.swing.JMenuItem rf_016;
+    private javax.swing.JMenuItem rf_019;
     // End of variables declaration//GEN-END:variables
 }
