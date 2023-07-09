@@ -69,12 +69,13 @@ public class rf_015 extends javax.swing.JInternalFrame {
         listaTurmas = new javax.swing.JTable();
         nomeLabel = new javax.swing.JLabel();
         nomeCampo = new javax.swing.JTextField();
-        btnSalvar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         cabecalho = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
         titulo = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        btnSalvar = new javax.swing.JButton();
         alunosPainel = new javax.swing.JPanel();
         cabecalho1 = new javax.swing.JPanel();
         logo1 = new javax.swing.JLabel();
@@ -133,11 +134,11 @@ public class rf_015 extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSalvar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnSalvar.setText("Salvar");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -167,7 +168,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
                         .addComponent(logo)
                         .addGap(42, 42, 42)
                         .addComponent(titulo)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 13, Short.MAX_VALUE))
                     .addComponent(jSeparator2))
                 .addContainerGap())
         );
@@ -185,23 +186,27 @@ public class rf_015 extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        btnSalvar.setText("Salvar");
+
         javax.swing.GroupLayout dadosPainelLayout = new javax.swing.GroupLayout(dadosPainel);
         dadosPainel.setLayout(dadosPainelLayout);
         dadosPainelLayout.setHorizontalGroup(
             dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dadosPainelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(dadosPainelLayout.createSequentialGroup()
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSalvar))
-                    .addComponent(nomeLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pesquisaNomeLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(nomeCampo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(nomeLabel)
+                    .addComponent(pesquisaNomeLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(cabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nomeCampo))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         dadosPainelLayout.setVerticalGroup(
             dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,10 +220,11 @@ public class rf_015 extends javax.swing.JInternalFrame {
                 .addComponent(nomeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nomeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
 
@@ -403,13 +409,13 @@ public class rf_015 extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         TurmaDAO turmaDAO = new TurmaDAO();
         Turma turma = new Turma(nomeCampo.getText());
         turmaDAO.cadastrarTurma(turma);
         JOptionPane.showMessageDialog(null, "Turma atulizada com sucesso!");
         preencherlistaTurmas();
-    }//GEN-LAST:event_btnSalvarActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {
     }
@@ -417,6 +423,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel alunosLista;
     private javax.swing.JPanel alunosPainel;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSalvarAlunos;
