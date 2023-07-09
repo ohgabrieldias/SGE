@@ -138,6 +138,11 @@ public class rf_004 extends javax.swing.JInternalFrame {
 
         nomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nomeCampo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        nomeCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeCampoActionPerformed(evt);
+            }
+        });
 
         scrollDisciplinas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollDisciplinas.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -246,6 +251,10 @@ public class rf_004 extends javax.swing.JInternalFrame {
            }
            else JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!");
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeCampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeCampoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

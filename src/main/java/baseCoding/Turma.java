@@ -12,6 +12,7 @@ public class Turma {
     private List<Aluno> alunos; // lista dos alunos
     private List<Disciplina> disciplinas; // lista das disciplinas
     private String curso;
+    private int id;
     private String nome; // nome da turma ex: ec11
     private String codigo; // ec11-001
     private String dataInicio;
@@ -29,6 +30,15 @@ public class Turma {
         this.professores = new LinkedList<>();
         this.alunos = listAluno;
         this.disciplinas = listDiscip;
+    }
+
+    public Turma(int id, String nome){
+        this.id = id;
+        this.nome = nome;
+    }
+
+    public Turma(String nome){
+        this.nome = nome;
     }
     
     public List<Integer> getListaIdAlunos() {
@@ -103,6 +113,10 @@ public class Turma {
 
     public String getDataFim() {
         return dataFim;
+    }
+
+    public Object getId() {
+        return id;
     }
 
 }
