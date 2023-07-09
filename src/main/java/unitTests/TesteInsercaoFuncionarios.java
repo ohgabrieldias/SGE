@@ -4,54 +4,34 @@
  */
 package unitTests;
 
+import DAO.FuncionarioDAO;
 import baseCoding.Funcionario;
 
 /**
  *
  * @author gabriel
  */
-import java.text.SimpleDateFormat;
-
 public class TesteInsercaoFuncionarios {
-
     public static void main(String[] args) {
-        // Criação dos objetos Funcionario
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        FuncionarioDAO funcionarioDao = new FuncionarioDAO();
 
-        Funcionario funcionario1 = new Funcionario("João", "Silva", "1990-01-01", "11111111111", "Rua A");
-        funcionario1.setSetor("Vendas");
-        funcionario1.setCargo("Vendedor");
-        funcionario1.setSalario(2000.0f);
+        // Inserir 10 funcionários
+        for (int i = 1; i <= 10; i++) {
+            String nome = "Funcionario " + i;
+            String sobrenome = "Sobrenome " + i;
+            String dataNasc = "1990-01-01";
+            String cpf = "123456789" + i;
+            String endereco = "Endereço " + i;
+            String username = nome.toLowerCase().replace(" ", "") + "." + sobrenome.toLowerCase().replace(" ", "");
+            String password = "password" + i;
 
-        Funcionario funcionario2 = new Funcionario("Maria", "Santos","1991-02-02", "22222222222", "Rua B");
-        funcionario2.setSetor("Financeiro");
-        funcionario2.setCargo("Contadora");
-        funcionario2.setSalario(3000.0f);
+            Funcionario funcionario = new Funcionario(nome, sobrenome, dataNasc, cpf, endereco, username, password);
+            boolean sucesso = funcionarioDao.cadastrarFuncionario(funcionario);
 
-        Funcionario funcionario3 = new Funcionario("Pedro", "Souza", "1992-03-03", "33333333333", "Rua C");
-        funcionario3.setSetor("RH");
-        funcionario3.setCargo("Recursos Humanos");
-        funcionario3.setSalario(2500.0f);
-
-        Funcionario funcionario4 = new Funcionario("Ana", "Lima", "1993-04-04", "44444444444", "Rua D");
-        funcionario4.setSetor("Produção");
-        funcionario4.setCargo("Operadora de Máquina");
-        funcionario4.setSalario(2200.0f);
-
-        Funcionario funcionario5 = new Funcionario("Luiz", "Gomes", "1994-05-05", "55555555555", "Rua E");
-        funcionario5.setSetor("TI");
-        funcionario5.setCargo("Desenvolvedor");
-        funcionario5.setSalario(4000.0f);
-
-        // Inserção dos funcionários
-        Funcionario[] funcionarios = {funcionario1, funcionario2, funcionario3, funcionario4, funcionario5};
-
-        for (Funcionario funcionario : funcionarios) {
-            boolean inserido = funcionario.cadastrarFuncionario(funcionario);
-            if (inserido) {
-                System.out.println("Funcionário inserido com sucesso: " + funcionario.getNome() + " " + funcionario.getSobrenome());
+            if (sucesso) {
+                System.out.println("Funcionário " + i + " cadastrado com sucesso.");
             } else {
-                System.out.println("Falha ao inserir funcionário: " + funcionario.getNome() + " " + funcionario.getSobrenome());
+                System.out.println("Falha ao cadastrar funcionário " + i + ".");
             }
         }
     }

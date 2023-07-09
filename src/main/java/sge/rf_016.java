@@ -4,6 +4,15 @@
  */
 package sge;
 
+import DAO.FuncionarioDAO;
+import baseCoding.Funcionario;
+import baseCoding.Funcionario;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import util.Formater;
+
 /**
  *
  * @author gabri
@@ -13,9 +22,53 @@ public class rf_016 extends javax.swing.JInternalFrame {
     /**
      * Creates new form rf_016
      */
+    Funcionario funcionarioTmp = null;
+    Formater formater = new Formater();
+    FuncionarioDAO funcionarioDao = new FuncionarioDAO();
+    
     public rf_016() {
         initComponents();
+        preencherTabelaFuncionarios();
     }
+    
+    public void preencherTabelaFuncionarios() {
+        List<Funcionario> funcionarios = funcionarioDao.buscarListaFuncionario();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("CPF");
+        model.addColumn("NOME");
+
+        for (Funcionario funcionario : funcionarios) {
+            Object[] rowData = new Object[8];
+            rowData[0] = funcionario.getId();
+            rowData[1] = funcionario.getCpf();
+            rowData[2] = funcionario.getNome();
+            model.addRow(rowData);
+        }
+        
+        jTable1.setModel(model);
+        
+    }
+    
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {                                               
+        btnEditar.setEnabled(true);
+        btnExcluir.setEnabled(true);
+        
+        int selectedRow = jTable1.getSelectedRow();
+        int selectedColumn = jTable1.getSelectedColumn();
+        int id = (Integer)jTable1.getValueAt(selectedRow, selectedColumn);
+        
+        funcionarioTmp = funcionarioDao.buscarPorId(id);
+        if (funcionarioTmp != null) {
+            nomeCampo.setText(funcionarioTmp.getNome());
+            sobrenomeCampo.setText(funcionarioTmp.getSobrenome());
+            cpfCampo.setText(funcionarioTmp.getCpf());
+//            senhaCampo.setText(funcionarioTmp.getPassword());
+            
+            Date data = formater.converteStringToDate(funcionarioTmp.getDataNasc());
+            jDateChooser1.setDate(data);
+         }
+    }                                                                                  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,6 +131,11 @@ public class rf_016 extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         painelInformacoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -86,16 +144,21 @@ public class rf_016 extends javax.swing.JInternalFrame {
         nomeLabel.setText("Nome");
 
         nomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        nomeCampo.setEnabled(false);
 
         sobrenomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        sobrenomeCampo.setEnabled(false);
 
         sobrenomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         sobrenomeLabel.setText("Sobrenome");
 
         cpfCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cpfCampo.setEnabled(false);
 
         cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cpfLabel.setText("CPF");
+
+        jDateChooser1.setEnabled(false);
 
         cpfLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cpfLabel1.setText("Data de nascimento");
@@ -103,6 +166,8 @@ public class rf_016 extends javax.swing.JInternalFrame {
         infoSenha.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         infoSenha.setForeground(new java.awt.Color(204, 0, 0));
         infoSenha.setText("Somente insira uma senha nova se for necessário trocar");
+
+        senhaCampo.setEnabled(false);
 
         javax.swing.GroupLayout painelInformacoesLayout = new javax.swing.GroupLayout(painelInformacoes);
         painelInformacoes.setLayout(painelInformacoesLayout);
@@ -168,13 +233,26 @@ public class rf_016 extends javax.swing.JInternalFrame {
         btnExcluir.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir funcionário");
+        btnExcluir.setEnabled(false);
+        btnExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluirMouseClicked(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarMouseClicked(evt);
+            }
+        });
 
         btnSalvar.setText("Salvar");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
+        btnSalvar.setEnabled(false);
+        btnSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalvarMouseClicked(evt);
             }
         });
 
@@ -233,10 +311,43 @@ public class rf_016 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalvarActionPerformed
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+        nomeCampo.setEnabled(true);
+        sobrenomeCampo.setEnabled(true);
+        cpfCampo.setEnabled(true);
+        senhaCampo.setEnabled(true);
+        jDateChooser1.setEnabled(true);
+        btnSalvar.setEnabled(true); 
+    }//GEN-LAST:event_btnEditarMouseClicked
 
+    private void btnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluirMouseClicked
+        int selectedRow = jTable1.getSelectedRow();
+        int selectedColumn = jTable1.getSelectedColumn();
+        int id = (Integer)jTable1.getValueAt(selectedRow, selectedColumn);
+        
+        if(funcionarioDao.excluirFuncionario(id)){
+            JOptionPane.showMessageDialog(null, "Funcionario excluído com sucesso!");
+            dispose();
+        }
+        else JOptionPane.showMessageDialog(null, "Exclusão falhou!");
+    }//GEN-LAST:event_btnExcluirMouseClicked
+
+    private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
+        String tmpUsername = nomeCampo.getText() + "." + sobrenomeCampo.getText();
+        funcionarioTmp.setNome(nomeCampo.getText());
+        funcionarioTmp.setSobrenome(sobrenomeCampo.getText());
+        funcionarioTmp.setCpf(cpfCampo.getText());
+        funcionarioTmp.setDataNasc(formater.formatarData2(jDateChooser1));
+        funcionarioTmp.setPassowrd(senhaCampo.getText());
+        funcionarioTmp.setUsername(tmpUsername);
+        
+        if(funcionarioDao.alterarFuncionario(funcionarioTmp)){
+            JOptionPane.showMessageDialog(null, "Funcionario alterado com sucesso!");
+            dispose();
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Alteração falhou!!!");
+    }//GEN-LAST:event_btnSalvarMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;

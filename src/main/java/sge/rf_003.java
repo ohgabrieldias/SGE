@@ -4,6 +4,7 @@
  */
 package sge;
 
+import DAO.FuncionarioDAO;
 import baseCoding.Funcionario;
 import javax.swing.JOptionPane;
 import util.*;
@@ -16,6 +17,8 @@ public class rf_003 extends javax.swing.JInternalFrame {
     /**
      * Creates new form rf_003
      */
+    FuncionarioDAO funcionarioDao = new FuncionarioDAO();
+    
     public rf_003() {
         initComponents();
     }
@@ -81,9 +84,9 @@ public class rf_003 extends javax.swing.JInternalFrame {
         cpfLabel1.setText("Data de nascimento");
 
         btnCadastrar.setText("Cadastrar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
+        btnCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCadastrarMouseClicked(evt);
             }
         });
 
@@ -93,6 +96,7 @@ public class rf_003 extends javax.swing.JInternalFrame {
         senhaLabel.setText("Senha");
 
         senhaCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        senhaCampo.setEnabled(false);
         senhaCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 senhaCampoActionPerformed(evt);
@@ -100,6 +104,11 @@ public class rf_003 extends javax.swing.JInternalFrame {
         });
 
         gerarSenha.setText("Gerar Senha");
+        gerarSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gerarSenhaMouseClicked(evt);
+            }
+        });
         gerarSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gerarSenhaActionPerformed(evt);
@@ -132,7 +141,7 @@ public class rf_003 extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dnCampo.setDateFormatString("dd/MM/yyyy");
+        dnCampo.setDateFormatString("d'/'MM'/'yyyy");
         dnCampo.setMaxSelectableDate(new java.util.Date(253370779289000L));
 
         sobrenomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -233,24 +242,35 @@ public class rf_003 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_sobrenomeCampoActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void gerarSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerarSenhaMouseClicked
+        PasswordGenerator passGen = new PasswordGenerator();
+        senhaCampo.setText(passGen.generatePassword());
+    }//GEN-LAST:event_gerarSenhaMouseClicked
+
+    private void btnCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseClicked
         String nome = nomeCampo.getText();
         String sobrenome = nomeCampo.getText();
         String dataNasc = "";
         String cpf = cpfCampo.getText();
         String end = "";
         dataNasc = Formater.formatarData2(dnCampo);
+        String username = nome + "." + sobrenome;
+        String password = senhaCampo.getText();
       
         if (Validator.validarNome(nome) && Validator.validarSobrenome(sobrenome) && Validator.validarCPF(cpf)) {
             
-            Funcionario func = new Funcionario(nome, sobrenome, dataNasc, cpf, end);
-            func.cadastrarFuncionario(func);
-            
-            JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
-
-            // Feche o formulário
-            dispose();
+            Funcionario func = new Funcionario(nome, sobrenome, dataNasc, cpf, end,username,password);
+            if(funcionarioDao.cadastrarFuncionario(func)){
+                JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
+                dispose();
+            }
+            else
+                JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!");
         }
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+    }//GEN-LAST:event_btnCadastrarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
