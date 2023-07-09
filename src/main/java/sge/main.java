@@ -320,6 +320,15 @@ public class main extends javax.swing.JFrame {
         //areaTrabalhoMain.add(rfAlterarFuncionario);
         //rfAlterarFuncionario.setVisible(true);
     }//GEN-LAST:event_rf_016ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        rf_019 rfMovimentaProfessor = new rf_019();
+        areaTrabalhoMain.add(rfMovimentaProfessor);
+        rfMovimentaProfessor.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1MouseClicked
 
     /**
      * @param args the command line arguments
