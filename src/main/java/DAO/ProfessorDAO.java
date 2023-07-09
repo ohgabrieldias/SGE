@@ -105,7 +105,7 @@ public class ProfessorDAO {
         return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
     }
     
-    public void alterarProfessor(Professor professor) {
+    public boolean alterarProfessor(Professor professor) {
         String query = "UPDATE professores SET nome = ?, sobrenome = ?, datanasc = ?, cpf = ?, endereco = ? WHERE id = ?";
 
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
@@ -118,8 +118,11 @@ public class ProfessorDAO {
 //            stmt.setString(7, professor.getResponsavel());
             stmt.setLong(6, professor.getId());
             stmt.executeUpdate();
+            
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }   
     }
     

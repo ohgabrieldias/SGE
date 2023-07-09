@@ -168,6 +168,12 @@ public class rf_019 extends javax.swing.JInternalFrame {
 
         btnSalvar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.setEnabled(false);
+        btnSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalvarMouseClicked(evt);
+            }
+        });
 
         jLayeredPane1.setLayer(nomeLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(nomeCampo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -205,14 +211,14 @@ public class rf_019 extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dnLabel)
-                            .addComponent(dnCampo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(dnCampo, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)))
                     .addComponent(nomeLabel2)
                     .addComponent(enderecoCampo)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(67, 67, 67)
-                        .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -243,10 +249,8 @@ public class rf_019 extends javax.swing.JInternalFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)))
-                .addContainerGap())
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -317,7 +321,7 @@ public class rf_019 extends javax.swing.JInternalFrame {
         cpfCampo.setEnabled(true);
         enderecoCampo.setEnabled(true);
         dnCampo.setEnabled(true);
-//        btnSalvar1.setEnabled(true); 
+        btnSalvar.setEnabled(true); 
     }//GEN-LAST:event_btnEditar1MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -331,16 +335,26 @@ public class rf_019 extends javax.swing.JInternalFrame {
         }
         else JOptionPane.showMessageDialog(null, "Exclusão falhou!");
     }//GEN-LAST:event_jButton1MouseClicked
-    
-    private void btnSalvar1MouseClicked(java.awt.event.MouseEvent evt) {                                        
+
+    private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
         professorTmp.setNome(nomeCampo.getText());
         professorTmp.setSobrenome(sobrenomeCampo.getText());
         professorTmp.setCpf(cpfCampo.getText());
         professorTmp.setEndereco(enderecoCampo.getText());
         professorTmp.setDataNasc(formater.formatarData2(dnCampo));
-        professorDao.alterarProfessor(professorTmp);
-        JOptionPane.showMessageDialog(null, "Professor alterado com sucesso!");
-        dispose();
+        
+        if(professorDao.alterarProfessor(professorTmp)){
+            JOptionPane.showMessageDialog(null, "Professor alterado com sucesso!");
+            dispose();
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Alteração falhou!!!");
+
+        
+    }//GEN-LAST:event_btnSalvarMouseClicked
+    
+    private void btnSalvar1MouseClicked(java.awt.event.MouseEvent evt) {                                        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
