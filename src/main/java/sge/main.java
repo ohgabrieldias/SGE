@@ -316,9 +316,9 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_rf_014ActionPerformed
 
     private void rf_016ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_016ActionPerformed
-        //rf_016 rfAlterarFuncionario = new rf_016();
-        //areaTrabalhoMain.add(rfAlterarFuncionario);
-        //rfAlterarFuncionario.setVisible(true);
+        rf_016 rfAlterarFuncionario = new rf_016();
+        areaTrabalhoMain.add(rfAlterarFuncionario);
+        rfAlterarFuncionario.setVisible(true);
     }//GEN-LAST:event_rf_016ActionPerformed
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         rf_019 rfMovimentaProfessor = new rf_019();
