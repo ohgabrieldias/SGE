@@ -63,7 +63,8 @@ public class main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SGE - Sistema de Gestão Escolar");
         setExtendedState(6);
-        setMinimumSize(new java.awt.Dimension(400, 300));
+        setMinimumSize(new java.awt.Dimension(900, 700));
+        setPreferredSize(new java.awt.Dimension(900, 700));
 
         areaTrabalhoMain.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
