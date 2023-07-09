@@ -6,7 +6,9 @@ package DAO;
 
 import baseCoding.Turma;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import sge.MySQLConnector;
 import com.google.gson.Gson;
@@ -37,6 +39,54 @@ import com.google.gson.Gson;
     }
 
     return false;
+    }
+
+    //criar um metodo para buscar todas as turmas no banco de dados
+    public List<Turma> buscarTurma() {
+        List<Turma> listaTurmas = new ArrayList<>();
+        String query = "SELECT id, nome FROM turmas";
+
+        try(PreparedStatement stmt = connector.getConnection().prepareStatement(query) ;
+            ResultSet rs = stmt.executeQuery()){
+
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                Turma tmpTurma = new Turma(id,nome);
+                listaTurmas.add(tmpTurma);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaTurmas;
+    }
+
+    public Turma buscarPorId(int id){
+        String query = "SELECT * FROM turmas WHERE id = ?";
+        try(PreparedStatement stmt = connector.getConnection().prepareStatement(query)){
+            stmt.setInt(1, id);
+            try(ResultSet rs = stmt.executeQuery()){
+                if(rs.next()){
+                    String nome = rs.getString("nome");
+                    Turma tmpTurma = new Turma(id, nome);
+                    return tmpTurma;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Turma excluirTurma(int id){
+        String query = "DELETE FROM turmas WHERE id = ?";
+        try(PreparedStatement stmt = connector.getConnection().prepareStatement(query)){
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private String toJsonString(List<Integer> list) {
