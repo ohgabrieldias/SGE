@@ -6,6 +6,7 @@ package sge;
 
 
 import DAO.AlunoDAO;
+import DAO.DisciplinaDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import DAO.TurmaDAO;
@@ -13,6 +14,7 @@ import baseCoding.Aluno;
 import baseCoding.Disciplina;
 import baseCoding.Professor;
 import baseCoding.Turma;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -31,13 +33,17 @@ public class rf_015 extends javax.swing.JInternalFrame {
         preencherlistaTurmas();
     }
     
-    private LinkedList<Professor> professores = null; // lista dos professores dessa turma
-    private List<Disciplina> discList = null;
-    private List<Aluno> alunoList = null;
-    
     Formater formater = new Formater();
     TurmaDAO turmaDao = new TurmaDAO();
     AlunoDAO alunoDao = new AlunoDAO();
+    private DisciplinaDAO discDao = new DisciplinaDAO();
+    
+    private LinkedList<Professor> professores = null; // lista dos professores dessa turma
+    private List<Disciplina> discList = discDao.getDisciplinas();
+    private List<Aluno> alunoList = alunoDao.buscarListaAluno();
+    
+    
+    
     Turma turmaTmp = null;
     
     public void preencherlistaTurmas(){
@@ -308,6 +314,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
         listaAlunos.setLayout(new javax.swing.BoxLayout(listaAlunos, javax.swing.BoxLayout.Y_AXIS));
 
         btnSalvarAlunos.setText("Salvar");
+        btnSalvarAlunos.setEnabled(false);
         btnSalvarAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSalvarAlunosMouseClicked(evt);
@@ -390,6 +397,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
         listaDiscip.setLayout(new javax.swing.BoxLayout(listaDiscip, javax.swing.BoxLayout.Y_AXIS));
 
         jButton1.setText("Salvar");
+        jButton1.setEnabled(false);
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -453,6 +461,74 @@ public class rf_015 extends javax.swing.JInternalFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
   
     }//GEN-LAST:event_btnEditarActionPerformed
+    
+    public List<String> obterNomeCpfAlunos(List<Aluno> listaAlunos) {
+        List<String> nomeCpfAlunos = new ArrayList<>();
+
+        for (Aluno aluno : listaAlunos) {
+            String nomeCpf = aluno.getNome() + " CPF: " + aluno.getCpf();
+            nomeCpfAlunos.add(nomeCpf);
+        }
+
+        return nomeCpfAlunos;
+    }
+    
+    public static List<String> obterNomesDisciplinas(List<Disciplina> listaDisciplinas) {
+        List<String> nomesDisciplinas = new ArrayList<>();
+
+        for (Disciplina disciplina : listaDisciplinas) {
+            String nomeDisciplina = disciplina.getNome();
+            nomesDisciplinas.add(nomeDisciplina);
+        }
+
+        return nomesDisciplinas;
+    }
+    
+    public List<Aluno> encontrarAlunosComuns(List<Aluno> lista1, List<Aluno> lista2) {
+        List<Aluno> alunosComuns = new ArrayList<>();
+
+        for (Aluno aluno1 : lista1) {
+            for (Aluno aluno2 : lista2) {
+                if (aluno1.getId() == aluno2.getId()) {
+                    alunosComuns.add(aluno1);
+                    break; // Pode interromper a iteração interna, pois já encontrou um aluno comum
+                }
+            }
+        }
+
+        return alunosComuns;
+    }
+    
+    public List<Disciplina> encontrarDisciplinasComuns(List<Disciplina> lista1, List<Disciplina> lista2) {
+        List<Disciplina> disciplinasComuns = new ArrayList<>();
+
+        for (Disciplina disciplina1 : lista1) {
+            for (Disciplina disciplina2 : lista2) {
+                if (disciplina1.getId() == disciplina2.getId()) {
+                    disciplinasComuns.add(disciplina1);
+                    break; // Pode interromper a iteração interna, pois já encontrou uma disciplina comum
+                }
+            }
+        }
+
+        return disciplinasComuns;
+    }
+    
+    public void marcarJCheckBoxes(List<String> nomes, JPanel panel) {
+        Component[] components = panel.getComponents();
+
+        for (Component component : components) {
+            if (component instanceof JCheckBox) {
+                JCheckBox checkBox = (JCheckBox) component;
+                String textoCheckBox = checkBox.getText();
+
+                if (nomes.contains(textoCheckBox)) {
+                    checkBox.setSelected(true);
+                }
+            }
+        }
+    }
+
 
     private void listaTurmasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaTurmasMouseClicked
         // click na Tabela
@@ -468,12 +544,21 @@ public class rf_015 extends javax.swing.JInternalFrame {
         listaDiscip.revalidate();
         listaDiscip.repaint();
         
-        btnEditar.setEnabled(true);
         turmaTmp = turmaDao.buscarPorId(id);
+        btnEditar.setEnabled(true);
         btnExcluir.setEnabled(true);
         if (turmaTmp != null) {
-            createAlunosCheckboxes(turmaTmp.getAlunos());
-            createDiscCheckboxes(turmaTmp.getDisciplinas());
+            List<Aluno> tmpAlun = encontrarAlunosComuns(turmaTmp.getAlunos(),alunoList);
+            List<Disciplina> tmpDicp = encontrarDisciplinasComuns(turmaTmp.getDisciplinas(), discList);
+            
+            createAlunosCheckboxes(alunoList);
+            createDiscCheckboxes(discList);
+            
+            List<String> tmpList = obterNomeCpfAlunos(tmpAlun);            
+            marcarJCheckBoxes(tmpList,listaAlunos);
+            
+            tmpList = obterNomesDisciplinas(tmpDicp);
+            marcarJCheckBoxes(tmpList,listaDiscip);
          }
     }//GEN-LAST:event_listaTurmasMouseClicked
 
@@ -482,6 +567,10 @@ public class rf_015 extends javax.swing.JInternalFrame {
         listaDiscip.setEnabled(true);
         btnSalvar.setEnabled(true);
         nomeCampo.setEnabled(true);
+        jButton1.setEnabled(true);
+        btnSalvarAlunos.setEnabled(true);
+        
+        nomeCampo.setText(turmaTmp.getNome());
     }//GEN-LAST:event_btnEditarMouseClicked
     
     public List<Integer> getDisciplinaIds(List<Disciplina> disciplinas, List<String> nomes) {
@@ -534,7 +623,21 @@ public class rf_015 extends javax.swing.JInternalFrame {
     }
     private void btnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluirMouseClicked
         if((turmaTmp.getAlunos().isEmpty() || turmaTmp.getDisciplinas().isEmpty())){
-            if(turmaDao.excluirTurma(turmaTmp.getId())) JOptionPane.showMessageDialog(this, "Turma excluida!");
+            if(turmaDao.excluirTurma(turmaTmp.getId())) {
+                JOptionPane.showMessageDialog(this, "Turma excluida!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                
+                listaTurmas.removeAll();
+                listaTurmas.revalidate();
+                listaTurmas.repaint();
+                
+                preencherlistaTurmas();
+                
+                btnEditar.setEnabled(false);
+                btnExcluir.setEnabled(false);
+                btnSalvar.setEnabled(false);
+                jButton1.setEnabled(false);
+                
+            }
             else JOptionPane.showMessageDialog(this, "Exclusão falhou!!!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         else
@@ -557,29 +660,43 @@ public class rf_015 extends javax.swing.JInternalFrame {
         List<String> alunosSelected = getSelectedCheckboxValues(listaAlunos);
 
         if (alunosSelected.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Selecione pelo menos um aluno.", "Erro", JOptionPane.ERROR_MESSAGE);
+            int resposta = JOptionPane.showConfirmDialog(this, "A lista de alunos está vazia. Deseja remover todos os alunos da turma?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+                boolean sucesso = turmaDao.atualizarListaAlunosTurma(turmaTmp.getId(), new ArrayList<>());
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(this, "Todos os alunos foram removidos da turma.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ocorreu um erro ao remover os alunos da turma.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
             return;
         }
 
-        List<Integer> selectedAlunos = getAlunosIds(turmaTmp.getAlunos(), alunosSelected);
+    List<Integer> selectedAlunos = getAlunosIds(turmaTmp.getAlunos(), alunosSelected);
 
-        boolean sucesso = false;
-        if (!selectedAlunos.isEmpty()) {
-            sucesso = turmaDao.atualizarListaAlunosTurma(turmaTmp.getId(), selectedAlunos);
-        }
+    boolean sucesso = false;
+    if (!selectedAlunos.isEmpty()) {
+        sucesso = turmaDao.atualizarListaAlunosTurma(turmaTmp.getId(), selectedAlunos);
+    }
 
-        if (sucesso) {
-            JOptionPane.showMessageDialog(this, "Lista de alunos atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Ocorreu um erro ao atualizar a lista de alunos.", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
+        if (sucesso) JOptionPane.showMessageDialog(this, "Lista de alunos atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        else JOptionPane.showMessageDialog(this, "Ocorreu um erro ao atualizar a lista de alunos.", "Erro", JOptionPane.ERROR_MESSAGE);
+        
     }//GEN-LAST:event_btnSalvarAlunosMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         List<String> discSelected = getSelectedCheckboxValues(listaDiscip);
 
         if (discSelected.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Selecione pelo menos uma disciplina.", "Erro", JOptionPane.ERROR_MESSAGE);
+            int resposta = JOptionPane.showConfirmDialog(this, "A lista de disciplinas está vazia. Deseja remover todas as disciplinas da turma?", "Confirmação", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+                boolean sucesso = turmaDao.atualizarListaDisciplinasTurma(turmaTmp.getId(), new ArrayList<>());
+                if (sucesso) {
+                    JOptionPane.showMessageDialog(this, "Todas as disciplinas foram removidas da turma.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Ocorreu um erro ao remover as disciplinas da turma.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
             return;
         }
 

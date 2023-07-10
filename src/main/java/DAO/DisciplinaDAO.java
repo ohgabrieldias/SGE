@@ -61,6 +61,26 @@ public class DisciplinaDAO {
         return disciplinas;
     }
     
+    public boolean checkVinculo(String professor) {
+        String query = "SELECT * FROM disciplinas WHERE nome = ?";
+
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            stmt.setString(1, professor);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String nome = rs.getString("nome");
+                    // Faça algo com o nome da disciplina
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     public Disciplina buscarPorId(int id) {
         String query = "SELECT * FROM disciplinas WHERE id = ?";
 

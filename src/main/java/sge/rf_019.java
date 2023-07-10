@@ -4,6 +4,7 @@
  */
 package sge;
 
+import DAO.DisciplinaDAO;
 import DAO.ProfessorDAO;
 import baseCoding.Professor;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class rf_019 extends javax.swing.JInternalFrame {
     Professor professorTmp = null;
     Formater formater = new Formater();
     ProfessorDAO professorDao = new ProfessorDAO();
+    DisciplinaDAO discpDao = new DisciplinaDAO();
     
     public rf_019() {
         initComponents();
@@ -323,17 +325,21 @@ public class rf_019 extends javax.swing.JInternalFrame {
         dnCampo.setEnabled(true);
         btnSalvar.setEnabled(true); 
     }//GEN-LAST:event_btnEditar1MouseClicked
-
+    
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         int selectedRow = tabelaProfessores.getSelectedRow();
         int selectedColumn = tabelaProfessores.getSelectedColumn();
         int id = (Integer)tabelaProfessores.getValueAt(selectedRow, selectedColumn);
         
-        if(professorDao.excluirProfessor(id)){
-            JOptionPane.showMessageDialog(null, "Professor excluído com sucesso!");
+        if(discpDao.checkVinculo(professorTmp.getNome())){
+           if(professorDao.excluirProfessor(id)){
+            JOptionPane.showMessageDialog(null, "Professor excluído com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             dispose();
+           }
+            else JOptionPane.showMessageDialog(null, "Exclusão falhou!", "Erro", JOptionPane.ERROR_MESSAGE);         
         }
-        else JOptionPane.showMessageDialog(null, "Exclusão falhou!");
+        else JOptionPane.showMessageDialog(null, "Professor vinculado a uma disciplina", "Erro", JOptionPane.ERROR_MESSAGE); 
+
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
@@ -344,11 +350,11 @@ public class rf_019 extends javax.swing.JInternalFrame {
         professorTmp.setDataNasc(formater.formatarData2(dnCampo));
         
         if(professorDao.alterarProfessor(professorTmp)){
-            JOptionPane.showMessageDialog(null, "Professor alterado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Professor alterado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
         else
-            JOptionPane.showMessageDialog(null, "Alteração falhou!!!");
+            JOptionPane.showMessageDialog(null, "Alteração falhou!!!", "Erro", JOptionPane.ERROR_MESSAGE);
 
         
     }//GEN-LAST:event_btnSalvarMouseClicked
