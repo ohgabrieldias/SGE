@@ -235,21 +235,26 @@ public class rf_004 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        String tmp = nomeCampo.getText();
         List<String> discSelected = getSelectedCheckboxValues(listaDisciplinas);
         List<String> alunosSelected = getSelectedCheckboxValues(listaAlunos);
         
         List<Disciplina> selectedDiscip = getDisciplinaIds(discList, discSelected);
         List<Aluno> selectedAlunos = getAlunosIds(alunoList, alunosSelected);
         
-        Turma turma = new Turma(nomeCampo.getText(), "EC11", "2023-03-01", "2023-06-01", selectedAlunos, selectedDiscip);
-        
-        if(turmaDao.cadastrarTurma(turma)){
+        if(!(discSelected.isEmpty() || alunosSelected.isEmpty() || tmp.isEmpty())){
+            Turma turma = new Turma(tmp, "EC11", "2023-03-01", "2023-06-01", selectedAlunos, selectedDiscip);
 
-           JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
-           // Feche o formulário
-           dispose();
-           }
-           else JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!");
+            if(turmaDao.cadastrarTurma(turma)){
+
+               JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
+               // Feche o formulário
+               dispose();
+               }
+               else JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!");
+        }
+        
+        else JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeCampoActionPerformed

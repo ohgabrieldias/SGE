@@ -6,6 +6,10 @@ package sge;
 
 import DAO.FuncionarioDAO;
 import baseCoding.Funcionario;
+import static java.awt.SystemColor.text;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import javax.swing.JOptionPane;
 import util.*;
 /**
@@ -123,6 +127,11 @@ public class rf_003 extends javax.swing.JInternalFrame {
         jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Copiar senha");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
@@ -291,6 +300,19 @@ public class rf_003 extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!");
         }
     }//GEN-LAST:event_btnCadastrarMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
+        // Cria uma instância do StringSelection com o texto a ser copiado
+        StringSelection stringSelection = new StringSelection(senhaCampo.getText());
+
+        // Define o conteúdo do Clipboard como a StringSelection
+        clipboard.setContents(stringSelection, null);
+
+        // Exibe uma mensagem informando que o texto foi copiado
+        JOptionPane.showMessageDialog(this, "Texto copiado para a área de transferência!");
+    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
