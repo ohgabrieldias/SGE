@@ -248,6 +248,11 @@ public class main extends javax.swing.JFrame {
         menuSair.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         menuSair.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         menuSair.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        menuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuSairMouseClicked(evt);
+            }
+        });
         menuSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuSairActionPerformed(evt);
@@ -339,7 +344,7 @@ public class main extends javax.swing.JFrame {
     private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
         
     }//GEN-LAST:event_menuSairActionPerformed
-
+    
     private void rf_015ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_015ActionPerformed1
         
     }//GEN-LAST:event_rf_015ActionPerformed1
@@ -355,6 +360,10 @@ public class main extends javax.swing.JFrame {
         //areaTrabalhoMain.add(rfAlterarDisciplinas);
         //rfAlterarDisciplinas.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void menuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSairMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_menuSairMouseClicked
 
     /**
      * @param args the command line arguments
