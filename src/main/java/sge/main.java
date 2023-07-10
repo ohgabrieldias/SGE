@@ -7,6 +7,7 @@ package sge;
 import java.awt.Image;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  *
@@ -84,13 +85,16 @@ public class main extends javax.swing.JFrame {
         areaTrabalhoMainLayout.setVerticalGroup(
             areaTrabalhoMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, areaTrabalhoMainLayout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
+                .addContainerGap(197, Short.MAX_VALUE)
                 .addComponent(logoMain)
                 .addContainerGap())
         );
 
         mainMenu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         mainMenu.setMargin(new java.awt.Insets(4, 4, 4, 4));
+        mainMenu.setMinimumSize(new java.awt.Dimension(459, 40));
+        mainMenu.setName(""); // NOI18N
+        mainMenu.setPreferredSize(new java.awt.Dimension(459, 40));
 
         menuCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuCadastrar.png"))); // NOI18N
         menuCadastros.setText("Cadastrar");
@@ -166,9 +170,14 @@ public class main extends javax.swing.JFrame {
         rf_019.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rf_019.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
         rf_019.setText("Professores");
+        rf_019.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem1MouseClicked(evt);
+            }
+        });
         rf_019.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rf_019ActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
         menuMovimentar.add(rf_019);
@@ -178,7 +187,7 @@ public class main extends javax.swing.JFrame {
         rf_015.setText("Turmas");
         rf_015.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rf_015ActionPerformed(evt);
+                rf_015ActionPerformed1(evt);
             }
         });
         menuMovimentar.add(rf_015);
@@ -186,6 +195,7 @@ public class main extends javax.swing.JFrame {
         rf_014.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         rf_014.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/curso.png"))); // NOI18N
         rf_014.setText("Disciplinas");
+        rf_014.setEnabled(false);
         rf_014.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rf_014ActionPerformed(evt);
@@ -207,11 +217,13 @@ public class main extends javax.swing.JFrame {
 
         menuFinanceiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuFinanceiro.png"))); // NOI18N
         menuFinanceiro.setText("Financeiro");
+        menuFinanceiro.setEnabled(false);
         menuFinanceiro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         mainMenu.add(menuFinanceiro);
 
         menuRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuRelatorios.png"))); // NOI18N
         menuRelatorios.setText("Relatórios");
+        menuRelatorios.setEnabled(false);
         menuRelatorios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         rf_006Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -236,6 +248,11 @@ public class main extends javax.swing.JFrame {
         menuSair.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         menuSair.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         menuSair.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        menuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairActionPerformed(evt);
+            }
+        });
         mainMenu.add(menuSair);
 
         setJMenuBar(mainMenu);
@@ -309,17 +326,6 @@ public class main extends javax.swing.JFrame {
         rfAlterarTurmas.setVisible(true);
     }//GEN-LAST:event_rf_015ActionPerformed
 
-    private void rf_014ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_014ActionPerformed
-        //rf_014 rfAlterarDisciplinas = new rf_014();
-        //areaTrabalhoMain.add(rfAlterarDisciplinas);
-        //rfAlterarDisciplinas.setVisible(true);
-    }//GEN-LAST:event_rf_014ActionPerformed
-
-    private void rf_016ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_016ActionPerformed
-        rf_016 rfAlterarFuncionario = new rf_016();
-        areaTrabalhoMain.add(rfAlterarFuncionario);
-        rfAlterarFuncionario.setVisible(true);
-    }//GEN-LAST:event_rf_016ActionPerformed
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         rf_019 rfMovimentaProfessor = new rf_019();
         areaTrabalhoMain.add(rfMovimentaProfessor);
@@ -329,6 +335,26 @@ public class main extends javax.swing.JFrame {
     private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1MouseClicked
+
+    private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
+        
+    }//GEN-LAST:event_menuSairActionPerformed
+
+    private void rf_015ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rf_015ActionPerformed1
+        
+    }//GEN-LAST:event_rf_015ActionPerformed1
+
+    private void rf_016ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+         rf_016 rfAlterarFuncionario = new rf_016();
+        areaTrabalhoMain.add(rfAlterarFuncionario);
+        rfAlterarFuncionario.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void rf_014ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        //rf_014 rfAlterarDisciplinas = new rf_014();
+        //areaTrabalhoMain.add(rfAlterarDisciplinas);
+        //rfAlterarDisciplinas.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
