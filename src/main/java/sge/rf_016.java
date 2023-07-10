@@ -158,6 +158,7 @@ public class rf_016 extends javax.swing.JInternalFrame {
         cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cpfLabel.setText("CPF");
 
+        jDateChooser1.setDateFormatString("dd/MM/yyyy");
         jDateChooser1.setEnabled(false);
 
         cpfLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N

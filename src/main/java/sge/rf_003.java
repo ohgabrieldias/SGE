@@ -46,6 +46,8 @@ public class rf_003 extends javax.swing.JInternalFrame {
         senhaLabel = new javax.swing.JLabel();
         senhaCampo = new javax.swing.JTextField();
         gerarSenha = new javax.swing.JButton();
+        logoSenha = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         dnCampo = new com.toedter.calendar.JDateChooser();
         sobrenomeCampo = new javax.swing.JTextField();
 
@@ -115,6 +117,13 @@ public class rf_003 extends javax.swing.JInternalFrame {
             }
         });
 
+        logoSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/copy&paste.png"))); // NOI18N
+
+        jButton1.setBackground(new java.awt.Color(51, 204, 0));
+        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Copiar senha");
+
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
         loginPanelLayout.setHorizontalGroup(
@@ -124,7 +133,12 @@ public class rf_003 extends javax.swing.JInternalFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(senhaLabel)
                     .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(senhaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(senhaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(loginPanelLayout.createSequentialGroup()
+                                .addComponent(logoSenha)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(gerarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
                 .addGap(12, 12, 12))
@@ -135,10 +149,16 @@ public class rf_003 extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(senhaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(senhaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gerarSenha))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addComponent(senhaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(logoSenha)
+                            .addComponent(jButton1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(gerarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         dnCampo.setDateFormatString("d'/'MM'/'yyyy");
@@ -212,10 +232,10 @@ public class rf_003 extends javax.swing.JInternalFrame {
                     .addComponent(cpfCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dnCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -280,9 +300,11 @@ public class rf_003 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel cpfLabel1;
     private com.toedter.calendar.JDateChooser dnCampo;
     private javax.swing.JButton gerarSenha;
+    private javax.swing.JButton jButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel logo;
+    private javax.swing.JLabel logoSenha;
     private javax.swing.JTextField nomeCampo;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JTextField senhaCampo;

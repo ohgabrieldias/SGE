@@ -118,12 +118,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        listaTurmas.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(listaTurmas);
-        listaTurmas.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (listaTurmas.getColumnModel().getColumnCount() > 0) {
-            listaTurmas.getColumnModel().getColumn(1).setResizable(false);
-        }
 
         nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel.setText("Nome da Turma");

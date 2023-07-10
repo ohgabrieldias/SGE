@@ -34,18 +34,15 @@
                   <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="novoAlunoNome" min="-2" pref="150" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="dataNascimento" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="novoAlunoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="novoAlunoDNLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="novoAlunoNome" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="dataNascimento" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
