@@ -4,25 +4,22 @@
  */
 package sge;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
-import org.w3c.dom.events.MouseEvent;
 
 import DAO.AlunoDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import DAO.TurmaDAO;
 import baseCoding.Aluno;
 import baseCoding.Disciplina;
-import baseCoding.Pessoa;
+import baseCoding.Professor;
 import baseCoding.Turma;
-import kotlin.random.Random.Default;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import util.Formater;
 /**
  *
  * @author gabri
@@ -33,7 +30,16 @@ public class rf_015 extends javax.swing.JInternalFrame {
         initComponents();
         preencherlistaTurmas();
     }
-
+    
+    private LinkedList<Professor> professores = null; // lista dos professores dessa turma
+    private List<Disciplina> discList = null;
+    private List<Aluno> alunoList = null;
+    
+    Formater formater = new Formater();
+    TurmaDAO turmaDao = new TurmaDAO();
+    AlunoDAO alunoDao = new AlunoDAO();
+    Turma turmaTmp = null;
+    
     public void preencherlistaTurmas(){
         TurmaDAO turmaDAO = new TurmaDAO();
         List<Turma> turmas = turmaDAO.buscarTurma();
@@ -50,14 +56,21 @@ public class rf_015 extends javax.swing.JInternalFrame {
 
         listaTurmas.setModel(model);
     }
-
-    public void preencherListaDisciplinas(List<Disciplina> disciplinas){
-        for(Disciplina disciplina: disciplinas){
-            JCheckBox checkBox = new JCheckBox(disciplina.getNome());
-            alunosLista.add(checkBox);
+    
+    public void createDiscCheckboxes(List<Disciplina> discList) {
+        for (Disciplina disc : discList) {
+            JCheckBox checkBox = new JCheckBox(disc.getNome());
+            listaDiscip.add(checkBox);
         }
     }
-  
+    
+    public void createAlunosCheckboxes(List<Aluno> alunoList) {
+        for (Aluno aluno : alunoList) {
+            JCheckBox checkBox = new JCheckBox(aluno.getNome() + " CPF: " + aluno.getCpf());
+            listaAlunos.add(checkBox);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -90,7 +103,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
         titulo2 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         disciplinasLabel = new javax.swing.JLabel();
-        alunosLista = new javax.swing.JPanel();
+        listaDiscip = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
         setClosable(true);
@@ -118,11 +131,17 @@ public class rf_015 extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        listaTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaTurmasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaTurmas);
 
         nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nomeLabel.setText("Nome da Turma");
 
+        nomeCampo.setEnabled(false);
         nomeCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomeCampoActionPerformed(evt);
@@ -131,6 +150,12 @@ public class rf_015 extends javax.swing.JInternalFrame {
 
         btnEditar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarMouseClicked(evt);
+            }
+        });
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -141,6 +166,12 @@ public class rf_015 extends javax.swing.JInternalFrame {
         btnExcluir.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir turma");
+        btnExcluir.setEnabled(false);
+        btnExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExcluirMouseClicked(evt);
+            }
+        });
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
@@ -182,26 +213,36 @@ public class rf_015 extends javax.swing.JInternalFrame {
         );
 
         btnSalvar.setText("Salvar");
+        btnSalvar.setEnabled(false);
+        btnSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalvarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout dadosPainelLayout = new javax.swing.GroupLayout(dadosPainel);
         dadosPainel.setLayout(dadosPainelLayout);
         dadosPainelLayout.setHorizontalGroup(
             dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dadosPainelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dadosPainelLayout.createSequentialGroup()
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalvar))
-                    .addComponent(nomeLabel)
-                    .addComponent(pesquisaNomeLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(cabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nomeCampo))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addGroup(dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(dadosPainelLayout.createSequentialGroup()
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEditar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSalvar))
+                            .addComponent(nomeLabel)
+                            .addComponent(pesquisaNomeLabel)
+                            .addComponent(cabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nomeCampo)))
+                    .addGroup(dadosPainelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dadosPainelLayout.setVerticalGroup(
             dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +256,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
                 .addComponent(nomeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nomeCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(dadosPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,7 +282,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
                         .addComponent(logo1)
                         .addGap(42, 42, 42)
                         .addComponent(titulo1)
-                        .addGap(0, 14, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator3))
                 .addContainerGap())
         );
@@ -263,9 +304,15 @@ public class rf_015 extends javax.swing.JInternalFrame {
         pesquisaNomeLabel2.setText("Alunos da turma");
 
         listaAlunos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        listaAlunos.setEnabled(false);
         listaAlunos.setLayout(new javax.swing.BoxLayout(listaAlunos, javax.swing.BoxLayout.Y_AXIS));
 
         btnSalvarAlunos.setText("Salvar");
+        btnSalvarAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalvarAlunosMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout alunosPainelLayout = new javax.swing.GroupLayout(alunosPainel);
         alunosPainel.setLayout(alunosPainelLayout);
@@ -317,7 +364,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
                         .addComponent(logo2)
                         .addGap(42, 42, 42)
                         .addComponent(titulo2)
-                        .addGap(0, 14, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator4))
                 .addContainerGap())
         );
@@ -338,10 +385,16 @@ public class rf_015 extends javax.swing.JInternalFrame {
         disciplinasLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         disciplinasLabel.setText("Disciplinas da turma");
 
-        alunosLista.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        alunosLista.setLayout(new javax.swing.BoxLayout(alunosLista, javax.swing.BoxLayout.Y_AXIS));
+        listaDiscip.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        listaDiscip.setEnabled(false);
+        listaDiscip.setLayout(new javax.swing.BoxLayout(listaDiscip, javax.swing.BoxLayout.Y_AXIS));
 
         jButton1.setText("Salvar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout disciplinasPainelLayout = new javax.swing.GroupLayout(disciplinasPainel);
         disciplinasPainel.setLayout(disciplinasPainelLayout);
@@ -358,7 +411,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
                             .addGroup(disciplinasPainelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton1))
-                            .addComponent(alunosLista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(listaDiscip, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cabecalho2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(19, 19, 19))))
         );
@@ -369,7 +422,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(disciplinasLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(alunosLista, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addComponent(listaDiscip, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
@@ -394,29 +447,159 @@ public class rf_015 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        JOptionPane.showConfirmDialog(null, "Deseja realmente excluir a turma?", "Excluir turma", JOptionPane.YES_NO_OPTION);
-        if(JOptionPane.YES_OPTION == 0){
-            TurmaDAO turmaDAO = new TurmaDAO();
-            turmaDAO.excluirTurma(listaTurmas.getSelectedRow());
-            JOptionPane.showMessageDialog(null, "Turma excluída com sucesso!");
-        }else{
-            JOptionPane.showMessageDialog(null, "Turma não excluída!");
-        }
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        TurmaDAO turmaDAO = new TurmaDAO();
-        Turma turma = new Turma(nomeCampo.getText());
-        turmaDAO.cadastrarTurma(turma);
-        JOptionPane.showMessageDialog(null, "Turma atulizada com sucesso!");
-        preencherlistaTurmas();
+  
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void listaTurmasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaTurmasMouseClicked
+        // click na Tabela
+        int selectedRow = listaTurmas.getSelectedRow();
+        int selectedColumn = listaTurmas.getSelectedColumn();
+        int id = (Integer)listaTurmas.getValueAt(selectedRow, selectedColumn);
+        
+        listaAlunos.removeAll();
+        listaAlunos.revalidate();
+        listaAlunos.repaint();
+        
+        listaDiscip.removeAll();
+        listaDiscip.revalidate();
+        listaDiscip.repaint();
+        
+        btnEditar.setEnabled(true);
+        turmaTmp = turmaDao.buscarPorId(id);
+        btnExcluir.setEnabled(true);
+        if (turmaTmp != null) {
+            createAlunosCheckboxes(turmaTmp.getAlunos());
+            createDiscCheckboxes(turmaTmp.getDisciplinas());
+         }
+    }//GEN-LAST:event_listaTurmasMouseClicked
+
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+        listaAlunos.setEnabled(true);
+        listaDiscip.setEnabled(true);
+        btnSalvar.setEnabled(true);
+        nomeCampo.setEnabled(true);
+    }//GEN-LAST:event_btnEditarMouseClicked
+    
+    public List<Integer> getDisciplinaIds(List<Disciplina> disciplinas, List<String> nomes) {
+        List<Integer> discipTmp = new ArrayList<>();
+
+        for (String nome : nomes) {
+            for (Disciplina disciplina : disciplinas) {
+                if (disciplina.getNome().equals(nome)) {
+                    discipTmp.add(disciplina.getId());
+                    System.out.println(disciplina.getId());
+                    break;
+                }
+            }
+        }
+
+        return discipTmp;
+    }
+    
+    public List<Integer> getAlunosIds(List<Aluno> alunos, List<String> nomes) {
+        List<Integer> alunoTmp = new ArrayList<>();
+
+        for (String nome : nomes) {
+            for (Aluno aluno : alunos) {
+                String cpfPart = nome.substring(nome.indexOf("CPF: ") + 5); // Obtém a parte após "CPF: "
+    //            System.out.print(cpfPart);
+                if (aluno.getCpf().equals(cpfPart)) {
+                    alunoTmp.add(aluno.getId());
+                    System.out.println(aluno.getId());
+                    break;
+                }
+            }
+        }
+
+        return alunoTmp;
+    }
+    
+    public List<String> getSelectedCheckboxValues(JPanel panel) {
+        List<String> selectedValues = new ArrayList<>();
+
+        for (int i = 0; i < panel.getComponentCount(); i++) {
+            if (panel.getComponent(i) instanceof JCheckBox) {
+                JCheckBox checkBox = (JCheckBox) panel.getComponent(i);
+                if (checkBox.isSelected()) {
+                    selectedValues.add(checkBox.getText());
+                }
+            }
+        }
+
+        return selectedValues;
+    }
+    private void btnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcluirMouseClicked
+        if((turmaTmp.getAlunos().isEmpty() || turmaTmp.getDisciplinas().isEmpty())){
+            if(turmaDao.excluirTurma(turmaTmp.getId())) JOptionPane.showMessageDialog(this, "Turma excluida!");
+            else JOptionPane.showMessageDialog(this, "Exclusão falhou!!!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+            JOptionPane.showMessageDialog(this, "Turma não está vazia!", "Erro", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_btnExcluirMouseClicked
+
+    private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
+        String tmp = nomeCampo.getText();
+
+        if(!(tmp.isEmpty())){
+            if(turmaDao.atualizarNomeTurma(turmaTmp.getId(),tmp)) JOptionPane.showMessageDialog(this, "Turma alterada com sucesso!");
+            else JOptionPane.showMessageDialog(this, "Alteração falhou!");
+        }
+        else
+            JOptionPane.showMessageDialog(this, "Campos obrigatorios não preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                
+    }//GEN-LAST:event_btnSalvarMouseClicked
+
+    private void btnSalvarAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarAlunosMouseClicked
+        List<String> alunosSelected = getSelectedCheckboxValues(listaAlunos);
+
+        if (alunosSelected.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione pelo menos um aluno.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        List<Integer> selectedAlunos = getAlunosIds(turmaTmp.getAlunos(), alunosSelected);
+
+        boolean sucesso = false;
+        if (!selectedAlunos.isEmpty()) {
+            sucesso = turmaDao.atualizarListaAlunosTurma(turmaTmp.getId(), selectedAlunos);
+        }
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(this, "Lista de alunos atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Ocorreu um erro ao atualizar a lista de alunos.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSalvarAlunosMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        List<String> discSelected = getSelectedCheckboxValues(listaDiscip);
+
+        if (discSelected.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione pelo menos uma disciplina.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        List<Integer> selectedDiscip = getDisciplinaIds(turmaTmp.getDisciplinas(), discSelected);
+        boolean sucesso = false;
+        if (!selectedDiscip.isEmpty()) {
+            sucesso = turmaDao.atualizarListaDisciplinasTurma(turmaTmp.getId(), selectedDiscip);
+        }
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(this, "Lista de disciplinas atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Ocorreu um erro ao atualizar a lista de disciplinas.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
     private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel alunosLista;
     private javax.swing.JPanel alunosPainel;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
@@ -434,6 +617,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JPanel listaAlunos;
+    private javax.swing.JPanel listaDiscip;
     private javax.swing.JTable listaTurmas;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel logo1;

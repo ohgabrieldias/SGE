@@ -64,22 +64,22 @@ public class rf_004 extends javax.swing.JInternalFrame {
     }
     
     public List<Aluno> getAlunosIds(List<Aluno> alunos, List<String> nomes) {
-    List<Aluno> alunoTmp = new ArrayList<>();
+        List<Aluno> alunoTmp = new ArrayList<>();
 
-    for (String nome : nomes) {
-        for (Aluno aluno : alunos) {
-            String cpfPart = nome.substring(nome.indexOf("CPF: ") + 5); // Obtém a parte após "CPF: "
-//            System.out.print(cpfPart);
-            if (aluno.getCpf().equals(cpfPart)) {
-                alunoTmp.add(aluno);
-                System.out.println(aluno.getId());
-                break;
+        for (String nome : nomes) {
+            for (Aluno aluno : alunos) {
+                String cpfPart = nome.substring(nome.indexOf("CPF: ") + 5); // Obtém a parte após "CPF: "
+    //            System.out.print(cpfPart);
+                if (aluno.getCpf().equals(cpfPart)) {
+                    alunoTmp.add(aluno);
+                    System.out.println(aluno.getId());
+                    break;
+                }
             }
         }
-    }
 
-    return alunoTmp;
-}
+        return alunoTmp;
+    }
 
     public List<String> getSelectedCheckboxValues(JPanel panel) {
         List<String> selectedValues = new ArrayList<>();
@@ -251,10 +251,10 @@ public class rf_004 extends javax.swing.JInternalFrame {
                // Feche o formulário
                dispose();
                }
-               else JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!");
+               else JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         
-        else JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+        else JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeCampoActionPerformed

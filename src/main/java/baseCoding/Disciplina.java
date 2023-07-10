@@ -31,6 +31,14 @@ public class Disciplina {
         this.professor = professor;
     }
     
+    public Disciplina(int id, String nome, String dataInicio, String dataFim, String professor){
+        this.id = id;
+        this.nome = nome;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.professor = professor;
+    }
+    
     public Disciplina(int id, String nome){
         this.nome = nome;
         this.id = id;

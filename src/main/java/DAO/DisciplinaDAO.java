@@ -61,4 +61,26 @@ public class DisciplinaDAO {
         return disciplinas;
     }
     
+    public Disciplina buscarPorId(int id) {
+        String query = "SELECT * FROM disciplinas WHERE id = ?";
+
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            stmt.setInt(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String nome = rs.getString("nome");
+                    String dataInicio = rs.getString("dataInicio");
+                    String dataFim = rs.getString("dataFim");
+                    String professor = rs.getString("professor");
+
+                    return new Disciplina(id,nome, dataInicio, dataFim, professor);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
+    }
+    
 }

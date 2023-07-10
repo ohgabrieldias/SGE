@@ -330,7 +330,7 @@ public class rf_016 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Funcionario excluído com sucesso!");
             dispose();
         }
-        else JOptionPane.showMessageDialog(null, "Exclusão falhou!");
+        else JOptionPane.showMessageDialog(null, "Exclusão falhou!", "Erro", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnExcluirMouseClicked
 
     private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
@@ -347,7 +347,7 @@ public class rf_016 extends javax.swing.JInternalFrame {
             dispose();
         }
         else
-            JOptionPane.showMessageDialog(null, "Alteração falhou!!!");
+            JOptionPane.showMessageDialog(null, "Alteração falhou!!!", "Erro", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnSalvarMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

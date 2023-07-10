@@ -8,9 +8,9 @@ import java.util.List;
 import sge.MySQLConnector;
 
 public class Turma {
-    private LinkedList<Professor> professores; // lista dos professores dessa turma
-    private List<Aluno> alunos; // lista dos alunos
-    private List<Disciplina> disciplinas; // lista das disciplinas
+    private LinkedList<Professor> professores = null; // lista dos professores dessa turma
+    private List<Aluno> alunos = null; // lista dos alunos
+    private List<Disciplina> disciplinas = null; // lista das disciplinas
     private String curso;
     private int id;
     private String nome; // nome da turma ex: ec11
@@ -31,7 +31,14 @@ public class Turma {
         this.alunos = listAluno;
         this.disciplinas = listDiscip;
     }
-
+    
+    public Turma(int id, String nome, List<Aluno> listAluno, List<Disciplina> listDiscip) {
+        this.nome = nome;
+        this.professores = new LinkedList<>();
+        this.alunos = listAluno;
+        this.disciplinas = listDiscip;
+        this.id = id;
+    }
     public Turma(int id, String nome){
         this.id = id;
         this.nome = nome;
@@ -83,6 +90,10 @@ public class Turma {
         return alunos;
     }
 
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+    
     public void setAlunos(LinkedList<Aluno> alunos) {
         this.alunos = alunos;
     }
@@ -115,7 +126,7 @@ public class Turma {
         return dataFim;
     }
 
-    public Object getId() {
+    public int getId() {
         return id;
     }
 
