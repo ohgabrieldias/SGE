@@ -175,7 +175,23 @@ public class rf_login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Login inválido. Tente novamente.");
         }
     }
+    
+    public static void main(String[] args) {
+        // Set the look and feel of the Swing application
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        }
 
+        // Create and display the login form
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new rf_login().setVisible(true);
+            }
+        });
+    }
+    
     /**
      * @param args the command line arguments
      */
