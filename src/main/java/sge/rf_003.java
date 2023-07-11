@@ -281,7 +281,7 @@ public class rf_003 extends javax.swing.JInternalFrame {
 
     private void btnCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseClicked
         String nome = nomeCampo.getText();
-        String sobrenome = nomeCampo.getText();
+        String sobrenome = sobrenomeCampo.getText();
         String dataNasc = "";
         String cpf = cpfCampo.getText();
         String end = "";
