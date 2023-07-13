@@ -5,12 +5,16 @@ import javax.swing.JOptionPane;
 
 import DAO.ProfessorDAO;
 import baseCoding.Professor;
+import java.sql.Connection;
 import util.Formater;
 
 
 public class rf_002 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
-    private ProfessorDAO professorDAO = new ProfessorDAO();
+    MySQLConnector connector = new MySQLConnector();
+    Connection connection = connector.getConnection();
+    
+    private ProfessorDAO professorDAO = new ProfessorDAO(connection);
     
     public rf_002() {
         initComponents();
@@ -52,7 +56,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
         sobrenomeLabel.setForeground(new java.awt.Color(51, 51, 51));
         sobrenomeLabel.setText("Sobrenome");
 
-        sobrenomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        sobrenomeCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         sobrenomeCampo.addActionListener(evt -> sobrenomeCampoActionPerformed(evt));
 
 
@@ -64,7 +68,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
         cpfLabel.setForeground(new java.awt.Color(51, 51, 51));
         cpfLabel.setText("CPF");
 
-        cpfCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cpfCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         cpfCampo.addActionListener(evt -> cpfCampoActionPerformed(evt));
 
 

@@ -2,6 +2,7 @@ package sge;
 
 import DAO.AlunoDAO;
 import  baseCoding.Aluno;
+import java.sql.Connection;
 import util.Formater;
 import javax.swing.JOptionPane;
 import util.Validator;
@@ -12,7 +13,11 @@ import util.Validator;
  */
 public class rf_001 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
-    AlunoDAO alunoDao = new AlunoDAO();
+    
+    MySQLConnector connector = new MySQLConnector();
+    Connection connection = connector.getConnection();
+    
+    AlunoDAO alunoDao = new AlunoDAO(connection);
     
     public rf_001() {
         initComponents();

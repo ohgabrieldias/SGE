@@ -6,6 +6,7 @@ package sge;
 
 import DAO.AlunoDAO;
 import baseCoding.Aluno;
+import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
@@ -25,14 +26,16 @@ public class rf_012 extends javax.swing.JInternalFrame {
      */
     Aluno alunoTmp = null;
     Formater formater = new Formater();
+    MySQLConnector connector = new MySQLConnector();
+    Connection connection = connector.getConnection();
+        
+        AlunoDAO alunoDao = new AlunoDAO(connection);
     public rf_012() {
         initComponents();
         preencherTabelaAlunos();
     }
     
-    public void preencherTabelaAlunos() {
-        AlunoDAO alunoDao = new AlunoDAO();
-    
+    public void preencherTabelaAlunos() {  
         List<Aluno> alunos = alunoDao.buscarListaAluno();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id");
@@ -326,13 +329,12 @@ public class rf_012 extends javax.swing.JInternalFrame {
     private void tabelaAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaAlunosMouseClicked
         // TODO add your handling code here:
         btnEditar1.setEnabled(true);
-        AlunoDAO alunoDAO = new AlunoDAO();
         
         int selectedRow = tabelaAlunos.getSelectedRow();
         int selectedColumn = tabelaAlunos.getSelectedColumn();
         int id = (Integer)tabelaAlunos.getValueAt(selectedRow, selectedColumn);
         
-        alunoTmp = alunoDAO.buscarPorId(id);
+        alunoTmp = alunoDao.buscarPorId(id);
         if (alunoTmp != null) {
             nomeCampo.setText(alunoTmp.getNome());
             sobrenomeCampo.setText(alunoTmp.getSobrenome());
@@ -356,14 +358,13 @@ public class rf_012 extends javax.swing.JInternalFrame {
     }                                       
 
     private void btnSalvar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvar1MouseClicked
-        AlunoDAO alunoDAO = new AlunoDAO();
 
         alunoTmp.setNome(nomeCampo.getText());
         alunoTmp.setSobrenome(sobrenomeCampo.getText());
         alunoTmp.setCpf(cpfCampo.getText());
         alunoTmp.setEndereco(enderecoCampo.getText());
         alunoTmp.setDataNasc(formater.formatarData2(dnCampo));
-        alunoDAO.alterarAluno(alunoTmp);
+        alunoDao.alterarAluno(alunoTmp);
         JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
     }//GEN-LAST:event_btnSalvar1MouseClicked
 

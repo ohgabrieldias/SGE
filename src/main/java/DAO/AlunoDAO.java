@@ -2,31 +2,33 @@ package DAO;
 
 import baseCoding.Aluno;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-import sge.MySQLConnector;
 
-public class AlunoDAO {
-    MySQLConnector connector = new MySQLConnector();
-    Logger logger = Logger.getLogger(getClass().getName());
-    private static final String SOBRENOME = "sobrenome";  // Compliant
-    private static final String DATANASC = "datanasc";  // Compliant
-    private static final String ENDERECO = "endereco";  // Compliant
+public class AlunoDAO implements DaoInterface {
+    private Connection connection;
+    private Logger logger = Logger.getLogger(getClass().getName());
+    private static final String SOBRENOME = "sobrenome";
+    private static final String DATANASC = "datanasc";
+    private static final String ENDERECO = "endereco";
 
-
+    public AlunoDAO(Connection connection) {
+        this.connection = connection;
+    }
     public Aluno buscarAluno(long matricula) {
         Aluno tmpAluno = null;
 
         String query = "SELECT * FROM alunos WHERE matricula = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setLong(1, matricula);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -59,7 +61,7 @@ public class AlunoDAO {
         
         logger.log(Level.INFO, "Aluno com matrícula {0} excluído com sucesso.", matricula);
         String query = "DELETE FROM alunos WHERE matricula = ?";
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setLong(1, matricula);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -72,7 +74,7 @@ public class AlunoDAO {
         // Insert data into the "alunos" table
         String query = "INSERT INTO alunos (nome, sobrenome, datanasc, cpf, endereco, cpfresp, responsavel, matricula) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getSobrenome());
             stmt.setString(3, aluno.getDataNasc());
@@ -95,7 +97,7 @@ public class AlunoDAO {
 
         String query = "SELECT id,nome, cpf FROM alunos";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        try (PreparedStatement stmt = connection.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -116,7 +118,7 @@ public class AlunoDAO {
     public void alterarAluno(Aluno aluno) {
         String query = "UPDATE alunos SET nome = ?, sobrenome = ?, datanasc = ?, cpf = ?, endereco = ? WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getSobrenome());
             stmt.setString(3, aluno.getDataNasc());
@@ -136,7 +138,7 @@ public class AlunoDAO {
 
         String query = "SELECT * FROM alunos";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        try (PreparedStatement stmt = connection.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 String nome = rs.getString("nome");
@@ -161,7 +163,7 @@ public class AlunoDAO {
     public Aluno buscarPorId(int id) {
         String query = "SELECT * FROM alunos WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -187,7 +189,7 @@ public class AlunoDAO {
 
         String query = "SELECT nome, cpf FROM alunos";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet resultSet = stmt.executeQuery()) {
 
                 while (resultSet.next()) {

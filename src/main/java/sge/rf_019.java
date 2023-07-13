@@ -7,6 +7,7 @@ package sge;
 import DAO.DisciplinaDAO;
 import DAO.ProfessorDAO;
 import baseCoding.Professor;
+import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,14 +20,16 @@ import util.Formater;
  */
 public class rf_019 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
+    MySQLConnector connector = new MySQLConnector();
+    Connection connection = connector.getConnection();
 
     /**
      * Creates new form rf_010
      */
     Professor professorTmp = null;
     Formater formater = new Formater();
-    ProfessorDAO professorDao = new ProfessorDAO();
-    DisciplinaDAO discpDao = new DisciplinaDAO();
+    ProfessorDAO professorDao = new ProfessorDAO(connection);
+    DisciplinaDAO discpDao = new DisciplinaDAO(connection);
     
     public rf_019() {
         initComponents();

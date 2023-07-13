@@ -1,6 +1,8 @@
 package DAO;
 
 import baseCoding.Disciplina;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,16 +12,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import sge.MySQLConnector;
 
-public class DisciplinaDAO {
-    MySQLConnector connector = new MySQLConnector();
+public class DisciplinaDAO implements DaoInterface {
+    private Connection connection;
     Logger logger = Logger.getLogger(getClass().getName());
+
+    public DisciplinaDAO(Connection connection){
+        this.connection = connection;
+    }
 
     public List<String> buscarNomesDisciplinas() {
         List<String> nomesDisciplinas = new ArrayList<>();
 
         String query = "SELECT nome FROM disciplinas";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet resultSet = stmt.executeQuery()) {
 
                 while (resultSet.next()) {
@@ -38,7 +44,7 @@ public class DisciplinaDAO {
         // Insert data into the "alunos" table
         String query = "INSERT INTO disciplinas (nome, dataInicio, dataFim, professor) VALUES (?, ?, ?, ?)";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, disc.getNome());
             stmt.setString(2, disc.getDataInicio());
             stmt.setString(3, disc.getDataFim());
@@ -59,7 +65,7 @@ public class DisciplinaDAO {
 
         String query = "SELECT id,nome FROM disciplinas";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet resultSet = stmt.executeQuery()) {
 
                 while (resultSet.next()) {
@@ -79,7 +85,7 @@ public class DisciplinaDAO {
     public boolean checkVinculo(String professor) {
         String query = "SELECT * FROM disciplinas WHERE nome = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, professor);
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -99,7 +105,7 @@ public class DisciplinaDAO {
     public Disciplina buscarPorId(int id) {
         String query = "SELECT * FROM disciplinas WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {

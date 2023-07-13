@@ -15,6 +15,7 @@ import baseCoding.Disciplina;
 import baseCoding.Professor;
 import baseCoding.Turma;
 import java.awt.Component;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -28,16 +29,18 @@ import util.Formater;
  */
 public class rf_015 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
-
+    MySQLConnector connector = new MySQLConnector();
+    Connection connection = connector.getConnection();
+    
     public rf_015() {
         initComponents();
         preencherlistaTurmas();
     }
     
-    Formater formater = new Formater();
-    TurmaDAO turmaDao = new TurmaDAO();
-    AlunoDAO alunoDao = new AlunoDAO();
-    private DisciplinaDAO discDao = new DisciplinaDAO();
+    private Formater formater = new Formater();
+    private TurmaDAO turmaDao = new TurmaDAO(connection);
+    private AlunoDAO alunoDao = new AlunoDAO(connection);
+    private DisciplinaDAO discDao = new DisciplinaDAO(connection);
     
     private LinkedList<Professor> professores = null; // lista dos professores dessa turma
     private List<Disciplina> discList = discDao.getDisciplinas();
@@ -48,8 +51,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
     Turma turmaTmp = null;
     
     public void preencherlistaTurmas(){
-        TurmaDAO turmaDAO = new TurmaDAO();
-        List<Turma> turmas = turmaDAO.buscarTurma();
+        List<Turma> turmas = turmaDao.buscarTurma();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id");
         model.addColumn("Turma");

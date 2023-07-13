@@ -1,6 +1,7 @@
 package DAO;
 
 import baseCoding.Professor;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,16 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sge.MySQLConnector;
 
-public class ProfessorDAO {
-    MySQLConnector connector = new MySQLConnector();
+public class ProfessorDAO implements DaoInterface {
+    private Connection connection;
     Logger logger = Logger.getLogger(getClass().getName());
     
+    public ProfessorDAO(Connection connection){
+        this.connection = connection;
+    }
     
     public Boolean cadastrarProfessor(Professor professor) {
         String query = "INSERT INTO professores (nome, sobrenome, datanasc, cpf, endereco) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, professor.getNome());
             stmt.setString(2, professor.getSobrenome());
             stmt.setString(3, professor.getDataNasc());
@@ -33,7 +36,7 @@ public class ProfessorDAO {
 
     private void excliurProfessor(int codigoProfessor) {
       String query = "DELETE FROM professores WHERE codigoProfessor = ?";
-      try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+      try (PreparedStatement stmt = connection.prepareStatement(query)) {
           stmt.setInt(1, codigoProfessor);
           stmt.executeUpdate();
           logger.info("Professor excluido com sucesso!");
@@ -45,7 +48,7 @@ public class ProfessorDAO {
     private Professor buscarProfessor(Professor professor){
       Professor tmpProfessor = null;
       String query = "SELECT * FROM professores WHERE codigoProfessor = ?";
-      try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+      try (PreparedStatement stmt = connection.prepareStatement(query)) {
           stmt.setInt(1, professor.getCodigoProfessor());
           try (ResultSet rs = stmt.executeQuery()) {
               if (rs.next()) {
@@ -68,7 +71,7 @@ public class ProfessorDAO {
 
         String query = "SELECT nome FROM professores";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             try (ResultSet resultSet = stmt.executeQuery()) {
 
                 while (resultSet.next()) {
@@ -88,7 +91,7 @@ public class ProfessorDAO {
 
         String query = "SELECT nome FROM professores WHERE nome = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, nomeProfessor);
 
             try (ResultSet resultSet = stmt.executeQuery()) {
@@ -109,7 +112,7 @@ public class ProfessorDAO {
 
         String query = "SELECT id,nome, cpf FROM professores";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        try (PreparedStatement stmt = connection.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -129,7 +132,7 @@ public class ProfessorDAO {
     public Professor buscarPorId(int id) {
         String query = "SELECT * FROM professores WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -152,7 +155,7 @@ public class ProfessorDAO {
     public boolean alterarProfessor(Professor professor) {
         String query = "UPDATE professores SET nome = ?, sobrenome = ?, datanasc = ?, cpf = ?, endereco = ? WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, professor.getNome());
             stmt.setString(2, professor.getSobrenome());
             stmt.setString(3, professor.getDataNasc());
@@ -173,7 +176,7 @@ public class ProfessorDAO {
     public boolean excluirProfessor(int id) {
         String query = "DELETE FROM professores WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
 

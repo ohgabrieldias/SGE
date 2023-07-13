@@ -8,22 +8,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import sge.MySQLConnector;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TurmaDAO {
-    AlunoDAO alunoDao = new AlunoDAO();
-    DisciplinaDAO discipDao = new DisciplinaDAO();
-    MySQLConnector connector = new MySQLConnector();
+public class TurmaDAO implements DaoInterface{
+    private Connection connection;
+    
+    AlunoDAO alunoDao = new AlunoDAO(connection);
+    DisciplinaDAO discipDao = new DisciplinaDAO(connection);
     Logger logger = Logger.getLogger(getClass().getName());
+
+    public TurmaDAO(Connection connection){
+        this.connection = connection;
+    }
 
     public boolean cadastrarTurma(Turma turma) {
         String query = "INSERT INTO turmas (nome, codigo, dataInicio, dataFim, listaIdAlunos, listaIdsDisciplinas) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, turma.getNome());
             stmt.setString(2, turma.getCodigo());
             stmt.setString(3, turma.getDataInicio());
@@ -46,7 +51,7 @@ public class TurmaDAO {
         List<Turma> listaTurmas = new ArrayList<>();
         String query = "SELECT id, nome FROM turmas";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        try (PreparedStatement stmt = connection.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -64,7 +69,7 @@ public class TurmaDAO {
     public boolean alterarTurma(Turma turma) {
         String query = "UPDATE turmas SET nome = ?, codigo = ?, dataInicio = ?, dataFim = ?, listaIdAlunos = ?, listaIdsDisciplinas = ? WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, turma.getNome());
             stmt.setString(2, turma.getCodigo());
             stmt.setString(3, turma.getDataInicio());
@@ -86,7 +91,7 @@ public class TurmaDAO {
     public boolean atualizarNomeTurma(int id, String novoNome) {
         String query = "UPDATE turmas SET nome = ? WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, novoNome);
             stmt.setInt(2, id);
 
@@ -102,7 +107,7 @@ public class TurmaDAO {
 
     public Turma buscarPorId(int id) {
         String query = "SELECT * FROM turmas WHERE id = ?";
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -124,7 +129,7 @@ public class TurmaDAO {
     public boolean atualizarListaAlunosTurma(int idTurma, List<Integer> list) {
         String query = "UPDATE turmas SET listaIdAlunos = ? WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             String listaAlunosJson = toJsonString(list);
             stmt.setString(1, listaAlunosJson);
             stmt.setInt(2, idTurma);
@@ -142,7 +147,7 @@ public class TurmaDAO {
     public boolean atualizarListaDisciplinasTurma(int idTurma, List<Integer> list) {
         String query = "UPDATE turmas SET listaIdsDisciplinas = ? WHERE id = ?";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, toJsonString(list));
             stmt.setInt(2, idTurma);
 
@@ -158,7 +163,7 @@ public class TurmaDAO {
 
     public boolean excluirTurma(int id) {
         String query = "DELETE FROM turmas WHERE id = ?";
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
 

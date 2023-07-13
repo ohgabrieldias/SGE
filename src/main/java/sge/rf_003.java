@@ -10,6 +10,7 @@ import static java.awt.SystemColor.text;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 import util.*;
 /**
@@ -18,11 +19,13 @@ import util.*;
  */
 public class rf_003 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
+    MySQLConnector connector = new MySQLConnector();
+    Connection connection = connector.getConnection();
 
     /**
      * Creates new form rf_003
      */
-    FuncionarioDAO funcionarioDao = new FuncionarioDAO();
+    FuncionarioDAO funcionarioDao = new FuncionarioDAO(connection);
     
     public rf_003() {
         initComponents();

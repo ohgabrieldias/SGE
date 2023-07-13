@@ -7,6 +7,7 @@ package sge;
 import DAO.DisciplinaDAO;
 import DAO.ProfessorDAO;
 import baseCoding.Disciplina;
+import java.sql.Connection;
 import java.util.List;
 import javax.swing.JOptionPane;
 import util.Formater;
@@ -18,7 +19,10 @@ import util.Validator;
  */
 public class rf_005 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
-    DisciplinaDAO discipDao = new DisciplinaDAO();
+    MySQLConnector connector = new MySQLConnector();
+    Connection connection = connector.getConnection();
+    DisciplinaDAO discipDao = new DisciplinaDAO(connection);
+    ProfessorDAO professordao = new ProfessorDAO(connection);
 
     /**
      * Creates new form rf_005
@@ -197,7 +201,6 @@ public class rf_005 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_professorCampoActionPerformed
 
     private void professorCampoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_professorCampoAncestorAdded
-        ProfessorDAO professordao = new ProfessorDAO();
         List<String> dados = professordao.buscarNomesProfessores();
         professorCampo.addItem("-- Selecione --");
         for (String elemento : dados) {

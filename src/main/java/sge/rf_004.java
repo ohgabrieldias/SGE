@@ -10,6 +10,7 @@ import DAO.TurmaDAO;
 import baseCoding.Aluno;
 import baseCoding.Disciplina;
 import baseCoding.Turma;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JCheckBox;
@@ -22,13 +23,14 @@ import javax.swing.JPanel;
  */
 public class rf_004 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
-
+    MySQLConnector connector = new MySQLConnector();
+    Connection connection = connector.getConnection();
     /**
      * Creates new form rf_004
      */
-    private TurmaDAO turmaDao = new TurmaDAO();
-    private DisciplinaDAO discDao = new DisciplinaDAO();
-    private AlunoDAO alunoDao = new AlunoDAO();
+    private TurmaDAO turmaDao = new TurmaDAO(connection);
+    private DisciplinaDAO discDao = new DisciplinaDAO(connection);
+    private AlunoDAO alunoDao = new AlunoDAO(connection);
     private List<Disciplina> discList = discDao.getDisciplinas();
     private List<Aluno> alunoList = alunoDao.buscarListaAluno();
     

@@ -1,6 +1,8 @@
 package sge;
 
 import io.github.cdimascio.dotenv.Dotenv;
+
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,7 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MySQLConnector {
+public class MySQLConnector implements Serializable{
     private static final Logger logger = Logger.getLogger(MySQLConnector.class.getName());
     private Connection connection;
     private String dbHost;

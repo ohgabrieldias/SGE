@@ -1,6 +1,7 @@
 package DAO;
 
 import baseCoding.Funcionario;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,18 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sge.MySQLConnector;
 
-public class FuncionarioDAO {
-    MySQLConnector connector = new MySQLConnector();
+public class FuncionarioDAO implements DaoInterface{
+    private Connection connection;
     Logger logger = Logger.getLogger(getClass().getName());
+
+    public FuncionarioDAO(Connection connection) {
+        this.connection = connection;
+    }
 
     public boolean cadastrarFuncionario(Funcionario funcionario) {
         String queryFuncionarios = "INSERT INTO funcionarios (nome, sobrenome, datanasc, cpf, endereco, setor, cargo, salario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         String queryUsers = "INSERT INTO users (username, password) VALUES (?, ?)";
 
-        try (PreparedStatement stmtFuncionarios = connector.getConnection().prepareStatement(queryFuncionarios);
-                PreparedStatement stmtUsers = connector.getConnection().prepareStatement(queryUsers)) {
+        try (PreparedStatement stmtFuncionarios = connection.prepareStatement(queryFuncionarios);
+                PreparedStatement stmtUsers = connection.prepareStatement(queryUsers)) {
 
             stmtFuncionarios.setString(1, funcionario.getNome());
             stmtFuncionarios.setString(2, funcionario.getSobrenome());
@@ -52,7 +56,7 @@ public class FuncionarioDAO {
 
         String query = "SELECT id,nome, cpf FROM funcionarios";
 
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+        try (PreparedStatement stmt = connection.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -73,8 +77,8 @@ public class FuncionarioDAO {
         String queryFuncionarios = "SELECT * FROM funcionarios WHERE id = ?";
         String queryUsers = "SELECT * FROM users WHERE id = ?";
 
-        try (PreparedStatement stmtFuncionarios = connector.getConnection().prepareStatement(queryFuncionarios);
-                PreparedStatement stmtUsers = connector.getConnection().prepareStatement(queryUsers)) {
+        try (PreparedStatement stmtFuncionarios = connection.prepareStatement(queryFuncionarios);
+                PreparedStatement stmtUsers = connection.prepareStatement(queryUsers)) {
 
             stmtFuncionarios.setInt(1, id);
 
@@ -109,8 +113,8 @@ public class FuncionarioDAO {
         String queryFuncionarios = "UPDATE funcionarios SET nome = ?, sobrenome = ?, datanasc = ?, cpf = ?, endereco = ? WHERE id = ?";
         String queryUsers = "UPDATE users SET username = ?, password = ? WHERE id = ?";
 
-        try (PreparedStatement stmtFuncionarios = connector.getConnection().prepareStatement(queryFuncionarios);
-                PreparedStatement stmtUsers = connector.getConnection().prepareStatement(queryUsers)) {
+        try (PreparedStatement stmtFuncionarios = connection.prepareStatement(queryFuncionarios);
+                PreparedStatement stmtUsers = connection.prepareStatement(queryUsers)) {
 
             stmtFuncionarios.setString(1, funcionario.getNome());
             stmtFuncionarios.setString(2, funcionario.getSobrenome());
@@ -138,8 +142,8 @@ public class FuncionarioDAO {
         String queryFuncionarios = "DELETE FROM funcionarios WHERE id = ?";
         String queryUsers = "DELETE FROM users WHERE id = ?";
 
-        try (PreparedStatement stmtFuncionarios = connector.getConnection().prepareStatement(queryFuncionarios);
-                PreparedStatement stmtUsers = connector.getConnection().prepareStatement(queryUsers)) {
+        try (PreparedStatement stmtFuncionarios = connection.prepareStatement(queryFuncionarios);
+                PreparedStatement stmtUsers = connection.prepareStatement(queryUsers)) {
 
             stmtFuncionarios.setInt(1, id);
             stmtUsers.setInt(1, id);

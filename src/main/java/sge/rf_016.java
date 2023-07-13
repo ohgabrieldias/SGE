@@ -7,6 +7,7 @@ package sge;
 import DAO.FuncionarioDAO;
 import baseCoding.Funcionario;
 import baseCoding.Funcionario;
+import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,13 +20,15 @@ import util.Formater;
  */
 public class rf_016 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
+    MySQLConnector connector = new MySQLConnector();
+    Connection connection = connector.getConnection();
 
     /**
      * Creates new form rf_016
      */
     Funcionario funcionarioTmp = null;
     Formater formater = new Formater();
-    FuncionarioDAO funcionarioDao = new FuncionarioDAO();
+    FuncionarioDAO funcionarioDao = new FuncionarioDAO(connection);
     
     public rf_016() {
         initComponents();
