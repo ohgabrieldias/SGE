@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import baseCoding.Disciplina;
@@ -14,14 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import sge.MySQLConnector;
 
-/**
- *
- * @author gabriel
- */
 public class DisciplinaDAO {
     MySQLConnector connector = new MySQLConnector();
     Logger logger = Logger.getLogger(getClass().getName());
-    
+
     public List<String> buscarNomesDisciplinas() {
         List<String> nomesDisciplinas = new ArrayList<>();
 
@@ -30,10 +22,10 @@ public class DisciplinaDAO {
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             try (ResultSet resultSet = stmt.executeQuery()) {
 
-            while (resultSet.next()) {
-                String nome = resultSet.getString("nome");
-                nomesDisciplinas.add(nome);
-             }
+                while (resultSet.next()) {
+                    String nome = resultSet.getString("nome");
+                    nomesDisciplinas.add(nome);
+                }
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Erro ao buscar nomes das disciplinas: " + e.getMessage(), e);
@@ -41,7 +33,7 @@ public class DisciplinaDAO {
 
         return nomesDisciplinas;
     }
-    
+
     public List<Disciplina> getDisciplinas() {
         List<Disciplina> disciplinas = new ArrayList<>();
 
@@ -50,12 +42,12 @@ public class DisciplinaDAO {
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             try (ResultSet resultSet = stmt.executeQuery()) {
 
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String nome = resultSet.getString("nome");
-                Disciplina tmpDisciplina = new Disciplina(id, nome);
-                disciplinas.add(tmpDisciplina);
-             }
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String nome = resultSet.getString("nome");
+                    Disciplina tmpDisciplina = new Disciplina(id, nome);
+                    disciplinas.add(tmpDisciplina);
+                }
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Erro ao buscar disciplinas: " + e.getMessage(), e);
@@ -63,7 +55,7 @@ public class DisciplinaDAO {
 
         return disciplinas;
     }
-    
+
     public boolean checkVinculo(String professor) {
         String query = "SELECT * FROM disciplinas WHERE nome = ?";
 
@@ -97,7 +89,7 @@ public class DisciplinaDAO {
                     String dataFim = rs.getString("dataFim");
                     String professor = rs.getString("professor");
 
-                    return new Disciplina(id,nome, dataInicio, dataFim, professor);
+                    return new Disciplina(id, nome, dataInicio, dataFim, professor);
                 }
             }
         } catch (SQLException e) {
@@ -105,5 +97,5 @@ public class DisciplinaDAO {
         }
         return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
     }
-    
+
 }

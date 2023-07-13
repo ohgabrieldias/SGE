@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import baseCoding.Aluno;
@@ -17,51 +13,46 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import kotlin.jvm.internal.TypeReference;
 
-/**
- *
- * @author gabriel
- */
-    public class TurmaDAO {
-        AlunoDAO alunoDao = new AlunoDAO();
-        DisciplinaDAO discipDao = new DisciplinaDAO();
-        MySQLConnector connector = new MySQLConnector();
-        Logger logger = Logger.getLogger(getClass().getName());
-        
-        public boolean cadastrarTurma(Turma turma) {
-            String query = "INSERT INTO turmas (nome, codigo, dataInicio, dataFim, listaIdAlunos, listaIdsDisciplinas) VALUES (?, ?, ?, ?, ?, ?)";
+public class TurmaDAO {
+    AlunoDAO alunoDao = new AlunoDAO();
+    DisciplinaDAO discipDao = new DisciplinaDAO();
+    MySQLConnector connector = new MySQLConnector();
+    Logger logger = Logger.getLogger(getClass().getName());
 
-            try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
-                stmt.setString(1, turma.getNome());
-                stmt.setString(2, turma.getCodigo());
-                stmt.setString(3, turma.getDataInicio());
-                stmt.setString(4, turma.getDataFim());
-                stmt.setString(5, toJsonString(turma.getListaIdAlunos()));
-                stmt.setString(6, toJsonString(turma.getListaIdsDisciplinas()));
+    public boolean cadastrarTurma(Turma turma) {
+        String query = "INSERT INTO turmas (nome, codigo, dataInicio, dataFim, listaIdAlunos, listaIdsDisciplinas) VALUES (?, ?, ?, ?, ?, ?)";
 
-                int rowsAffected = stmt.executeUpdate();
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            stmt.setString(1, turma.getNome());
+            stmt.setString(2, turma.getCodigo());
+            stmt.setString(3, turma.getDataInicio());
+            stmt.setString(4, turma.getDataFim());
+            stmt.setString(5, toJsonString(turma.getListaIdAlunos()));
+            stmt.setString(6, toJsonString(turma.getListaIdsDisciplinas()));
 
-                return rowsAffected > 0;
-            } catch (SQLException e) {
-                logger.log(Level.SEVERE, "Erro ao cadastrar turma: " + e.getMessage(), e);
+            int rowsAffected = stmt.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Erro ao cadastrar turma: " + e.getMessage(), e);
         }
 
-    return false;
+        return false;
     }
 
-    //criar um metodo para buscar todas as turmas no banco de dados
+    // criar um metodo para buscar todas as turmas no banco de dados
     public List<Turma> buscarTurma() {
         List<Turma> listaTurmas = new ArrayList<>();
         String query = "SELECT id, nome FROM turmas";
 
-        try(PreparedStatement stmt = connector.getConnection().prepareStatement(query) ;
-            ResultSet rs = stmt.executeQuery()){
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+                ResultSet rs = stmt.executeQuery()) {
 
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String nome = rs.getString("nome");
-                Turma tmpTurma = new Turma(id,nome);
+                Turma tmpTurma = new Turma(id, nome);
                 listaTurmas.add(tmpTurma);
             }
         } catch (SQLException e) {
@@ -69,7 +60,7 @@ import kotlin.jvm.internal.TypeReference;
         }
         return listaTurmas;
     }
-    
+
     public boolean alterarTurma(Turma turma) {
         String query = "UPDATE turmas SET nome = ?, codigo = ?, dataInicio = ?, dataFim = ?, listaIdAlunos = ?, listaIdsDisciplinas = ? WHERE id = ?";
 
@@ -109,27 +100,27 @@ import kotlin.jvm.internal.TypeReference;
         return false;
     }
 
-    public Turma buscarPorId(int id){
+    public Turma buscarPorId(int id) {
         String query = "SELECT * FROM turmas WHERE id = ?";
-        try(PreparedStatement stmt = connector.getConnection().prepareStatement(query)){
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             stmt.setInt(1, id);
-            try(ResultSet rs = stmt.executeQuery()){
-                if(rs.next()){
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
                     String nome = rs.getString("nome");
                     String listaIdAlunosString = rs.getString("listaIdAlunos");
                     String listaIdDisciplinasString = rs.getString("listaIdsDisciplinas");
-                    
+
                     List<Disciplina> listaIdDisciplinas = convertStringToListDisc(listaIdDisciplinasString);
                     List<Aluno> listaIdAlunos = convertJsonToListAluno(listaIdAlunosString);
-                return new Turma(id, nome, listaIdAlunos, listaIdDisciplinas);
+                    return new Turma(id, nome, listaIdAlunos, listaIdDisciplinas);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.log(Level.SEVERE, "Erro ao buscar tumra por ID: " + e.getMessage(), e);
         }
         return null;
     }
-    
+
     public boolean atualizarListaAlunosTurma(int idTurma, List<Integer> list) {
         String query = "UPDATE turmas SET listaIdAlunos = ? WHERE id = ?";
 
@@ -165,14 +156,14 @@ import kotlin.jvm.internal.TypeReference;
         return false;
     }
 
-    public boolean excluirTurma(int id){
+    public boolean excluirTurma(int id) {
         String query = "DELETE FROM turmas WHERE id = ?";
-        try(PreparedStatement stmt = connector.getConnection().prepareStatement(query)){
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            
+
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.log(Level.SEVERE, "Erro ao excluir turma: " + e.getMessage(), e);
             return false;
         }
@@ -182,16 +173,17 @@ import kotlin.jvm.internal.TypeReference;
         Gson gson = new Gson();
         return gson.toJson(list);
     }
-    
+
     public List<Aluno> convertJsonToListAluno(String jsonString) {
         Gson gson = new Gson();
 
-        List<Integer> listaIds = gson.fromJson(jsonString, new TypeToken<List<Integer>>() {}.getType());
+        List<Integer> listaIds = gson.fromJson(jsonString, new TypeToken<List<Integer>>() {
+        }.getType());
 
         List<Aluno> listaAlunos = new ArrayList<>();
         for (Integer id : listaIds) {
             // Criar objeto Aluno com base no ID
-            
+
             Aluno aluno = alunoDao.buscarPorId(id);
             listaAlunos.add(aluno);
         }
@@ -199,16 +191,16 @@ import kotlin.jvm.internal.TypeReference;
         return listaAlunos;
     }
 
-    
     public List<Disciplina> convertStringToListDisc(String jsonString) {
         Gson gson = new Gson();
 
-        List<Integer> listaIds = gson.fromJson(jsonString, new TypeToken<List<Integer>>() {}.getType());
+        List<Integer> listaIds = gson.fromJson(jsonString, new TypeToken<List<Integer>>() {
+        }.getType());
 
         List<Disciplina> listaDisc = new ArrayList<>();
         for (Integer id : listaIds) {
             // Criar objeto Aluno com base no ID
-            
+
             Disciplina discip = discipDao.buscarPorId(id);
             listaDisc.add(discip);
         }
