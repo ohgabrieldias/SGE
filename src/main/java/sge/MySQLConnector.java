@@ -20,7 +20,6 @@ public class MySQLConnector {
 
     public MySQLConnector() {
         initializeConnectionParameters();
-        initializeConnection();
     }
 
     public MySQLConnector(Connection connection) {
@@ -36,27 +35,26 @@ public class MySQLConnector {
         dbPassword = dotenv.get("DB_PASSWORD");
     }
 
-    private void initializeConnection() {
+    public Connection getConnection() {
         try {
             if (connection != null && !connection.isClosed()) {
-                return;
+                return connection;
+            } else {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                String url = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
+                connection = DriverManager.getConnection(url, dbUser, dbPassword);
+                return connection;
             }
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
-            connection = DriverManager.getConnection(url, dbUser, dbPassword);
         } catch (ClassNotFoundException | SQLException e) {
             logger.log(Level.SEVERE, "Erro ao conectar ao banco de dados: " + e.getMessage(), e);
         }
+        return null;
     }
 
-    public Connection getConnection() {
-        initializeConnection();
-        return connection;
-    }
     public boolean authenticateUser(String username, String password) {
         String query = "SELECT COUNT(*) FROM users WHERE username = ? AND password = ?";
 
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, username);
             stmt.setString(2, password);
 
@@ -70,7 +68,7 @@ public class MySQLConnector {
         }
 
         return false;
-    }   
+    }
 
     public void closeConnection() {
         try {
@@ -78,7 +76,7 @@ public class MySQLConnector {
                 connection.close();
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao fechar conexão: " + e.getMessage(), e);    
+            logger.log(Level.SEVERE, "Erro ao fechar conexão: " + e.getMessage(), e);
         }
     }
 }
