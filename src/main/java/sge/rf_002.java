@@ -2,12 +2,16 @@ package sge;
 
 import util.Validator;
 import javax.swing.JOptionPane;
+
+import DAO.ProfessorDAO;
 import baseCoding.Professor;
 import util.Formater;
 
 
 public class rf_002 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
+    private ProfessorDAO professorDAO = new ProfessorDAO();
+    
     public rf_002() {
         initComponents();
     }
@@ -136,9 +140,9 @@ public class rf_002 extends javax.swing.JInternalFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeCampoActionPerformed
+    private void nomeCampoActionPerformed(java.awt.event.ActionEvent evt) {                                          
         if(nomeCampo.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Campo nome vazio!");
         }else{
@@ -147,7 +151,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
         }
     }
 
-    private void sobrenomeCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobrenomeCampoActionPerformed
+    private void sobrenomeCampoActionPerformed(java.awt.event.ActionEvent evt) {                                               
         if(sobrenomeCampo.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Campo sobrenome vazio!");
         }else{
@@ -157,7 +161,7 @@ public class rf_002 extends javax.swing.JInternalFrame {
         }
     }
 
-    private void cpfCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfCampoActionPerformed
+    private void cpfCampoActionPerformed(java.awt.event.ActionEvent evt) {                                         
         if(cpfCampo.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Campo CPF vazio!");
         }else{
@@ -174,14 +178,16 @@ public class rf_002 extends javax.swing.JInternalFrame {
             String sobrenome = sobrenomeCampo.getText();
             String cpf = cpfCampo.getText();
             String dataNasc = Formater.formatarData2(dataNascimento);
+            
         if(Validator.validarNome(nome) && Validator.validarNome(sobrenome) && Validator.validarCPF(cpf) && Validator.validarData(dataNasc)){
             Professor professor = new Professor(nome, sobrenome, dataNasc, cpf, "Rua 01");  
-        if(professor.cadastrarProfessor(professor)){
-            JOptionPane.showMessageDialog(null, "Professor cadastrado com sucesso!");
-            this.dispose();
-        }else{  
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar professor!");
-        }
+            
+            if(professorDAO.cadastrarProfessor(professor)){
+                JOptionPane.showMessageDialog(null, "Professor cadastrado com sucesso!", "Cadastro de Professor", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }else{  
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar professor!", "Cadastro de Professor", JOptionPane.ERROR_MESSAGE);
+            }
       }
     }
     }//GEN-LAST:event_btnCadastrarActionPerformed

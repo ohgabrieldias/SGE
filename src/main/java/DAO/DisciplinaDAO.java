@@ -33,7 +33,27 @@ public class DisciplinaDAO {
 
         return nomesDisciplinas;
     }
+    
+    public boolean cadastrarDisciplinas(Disciplina disc) {
+        // Insert data into the "alunos" table
+        String query = "INSERT INTO disciplinas (nome, dataInicio, dataFim, professor) VALUES (?, ?, ?, ?)";
 
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            stmt.setString(1, disc.getNome());
+            stmt.setString(2, disc.getDataInicio());
+            stmt.setString(3, disc.getDataFim());
+            stmt.setString(4, disc.getNomeProfessor());
+
+            stmt.executeUpdate();
+            logger.info("Student data inserted successfully into the 'disciplinas' table.");
+
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Erro ao cadastrar disciplina: " + e.getMessage(), e);
+        }
+
+        return true;
+    }
+    
     public List<Disciplina> getDisciplinas() {
         List<Disciplina> disciplinas = new ArrayList<>();
 

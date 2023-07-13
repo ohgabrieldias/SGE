@@ -1,24 +1,11 @@
 package baseCoding;
 
-import java.io.IOException;
-import sge.MySQLConnector;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.FileHandler;
-import java.util.logging.SimpleFormatter;
-
 public class Aluno extends Pessoa {
     private int id;
     private long matricula;
     private String responsavel;
     private String cpfresp;
     private static final String SOBRENOME = "sobrenome";  // Compliant
-
-    Logger logger = Logger.getLogger(getClass().getName());
-    MySQLConnector connector = new MySQLConnector();
 
     public Aluno(String nome, String sobrenome, String dataNasc, String cpf, String end, String resp, String cpfresp, long matricula) {
         super(nome, sobrenome, dataNasc, cpf, end);
@@ -57,73 +44,5 @@ public class Aluno extends Pessoa {
     public String getCpfResp() {
         return cpfresp;
     }
-    
-    public Aluno buscarAluno(long matricula) {
-        Aluno tmpAluno = null;
-    
-        String query = "SELECT * FROM alunos WHERE matricula = ?";
-    
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
-            stmt.setLong(1, matricula);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    String nome = rs.getString("nome");
-                    String sobrenome = rs.getString(SOBRENOME);
-                    String dataNasc = rs.getString("datanasc");
-                    String cpf = rs.getString("cpf");
-                    String endereco = rs.getString("endereco");
-                    String tmpCpfResp = rs.getString("cpfresp");
-                    String tmpResp = rs.getString("resp");
-                    tmpAluno = new Aluno(nome, sobrenome, dataNasc, cpf, endereco, tmpResp, tmpCpfResp, matricula);
-                }
-            }
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar aluno: " + e.getMessage(), e);
-        }
-    
-        return tmpAluno;
-    }        
-    
-    public void excluirAluno(long matricula) {
-        try {
-            FileHandler fileHandler = new FileHandler("excliur.log");
-            fileHandler.setLevel(Level.ALL); // Define o nível de log desejado
-            fileHandler.setFormatter(new SimpleFormatter());
-            
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "Erro ao criar arquivo de log: " + e.getMessage(), e);
-        }
         
-        logger.log(Level.INFO, "Aluno com matrícula {0} excluído com sucesso.", matricula);
-        String query = "DELETE FROM alunos WHERE matricula = ?";
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
-            stmt.setLong(1, matricula);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao excluir aluno: " + e.getMessage(), e);
-        }
-    }
-
-    
-    public boolean cadastrarAluno(Aluno aluno) {
-        // Insert data into the "alunos" table
-        String query = "INSERT INTO alunos (nome, sobrenome, datanasc, cpf, endereco, cpfresp, responsavel, matricula) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
-            stmt.setString(1, aluno.getNome());
-            stmt.setString(2, aluno.getSobrenome());
-            stmt.setString(3, aluno.getDataNasc());
-            stmt.setString(4, aluno.getCpf());
-            stmt.setString(5, aluno.getEnd());
-            stmt.setString(6, aluno.getCpfResp());
-            stmt.setString(7, aluno.getResponsavel());
-            stmt.setLong(8, aluno.getMatricula());
-            stmt.executeUpdate();
-            logger.info("Student data inserted successfully into the 'alunos' table.");
-
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error inserting student data into the 'alunos' table: " + e.getMessage(), e);
-        }
-        return true;
-    }    
 }

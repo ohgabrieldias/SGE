@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package unitTests;
+import DAO.AlunoDAO;
 import baseCoding.Aluno;
 import java.security.SecureRandom;
 import util.Formater;
@@ -16,6 +17,7 @@ import java.text.ParseException;
 
 public class TesteInserirAlunos {
     public static void main(String[] args) {
+        AlunoDAO alunoDao = new AlunoDAO();
         // Array com os dados dos alunos
         String[][] dadosAlunos = {
             {"João", "Silva", "01/01/2000", "12345678901", "Endereço 1", "Responsável 1", "98765432101"},
@@ -48,7 +50,7 @@ public class TesteInserirAlunos {
                 long matricula = 1_000_000_000L + random.nextInt(9_000_000);                
                 // Inserir aluno no banco de dados usando a data formatada corretamente
                 Aluno aluno = new Aluno(nome, sobrenome, dataFormatada, cpf, endereco, responsavel, cpfResponsavel, matricula);
-                aluno.cadastrarAluno(aluno);
+                alunoDao.cadastrarAluno(aluno);
                 
                 System.out.println("Aluno cadastrado com sucesso: " + nome + " " + sobrenome);
             } catch (ParseException e) {

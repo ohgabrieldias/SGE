@@ -4,6 +4,7 @@
  */
 package sge;
 
+import DAO.DisciplinaDAO;
 import DAO.ProfessorDAO;
 import baseCoding.Disciplina;
 import java.util.List;
@@ -17,6 +18,7 @@ import util.Validator;
  */
 public class rf_005 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
+    DisciplinaDAO discipDao = new DisciplinaDAO();
 
     /**
      * Creates new form rf_005
@@ -180,15 +182,13 @@ public class rf_005 extends javax.swing.JInternalFrame {
         if (Validator.validarNome(nome) && Validator.validarData(dataInicio) && Validator.validarData(dataFim) ) {
             
             Disciplina disc = new Disciplina(nome, dataInicio, dataFim,(String)professorCampo.getSelectedItem());
-            if(disc.cadastrarDisciplinas(disc)){
+            if(discipDao.cadastrarDisciplinas(disc)){
             
-                JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
+                JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 // Feche o formulário
                 dispose();
             }
-            else JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!");
-
-            
+            else JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

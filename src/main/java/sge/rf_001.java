@@ -1,5 +1,6 @@
 package sge;
 
+import DAO.AlunoDAO;
 import  baseCoding.Aluno;
 import util.Formater;
 import javax.swing.JOptionPane;
@@ -11,7 +12,8 @@ import util.Validator;
  */
 public class rf_001 extends javax.swing.JInternalFrame {
     private static final String AWT_FONTE = "Arial";  // Compliant
-
+    AlunoDAO alunoDao = new AlunoDAO();
+    
     public rf_001() {
         initComponents();
     }
@@ -222,16 +224,15 @@ public class rf_001 extends javax.swing.JInternalFrame {
         String end = "";
         dataNasc = Formater.formatarData2(dataNascimento);
       
-        System.out.print("data = " + dataNasc);
         if (Validator.validarNome(nome) && Validator.validarSobrenome(sobrenome) && Validator.validarCPF(cpf)) {
 
         Aluno aluno = new Aluno(nome, sobrenome, dataNasc, cpf, "Av n sei onde", resp,cpfResp, 2110102629);
-        aluno.cadastrarAluno(aluno);
-
-        JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!");
-
-        // Feche o formulário
-        dispose();
+        
+        if(alunoDao.cadastrarAluno(aluno)){
+            JOptionPane.showMessageDialog(this, "Cadastro bem sucedido!", "Cadastro bem sucessdido", JOptionPane.INFORMATION_MESSAGE);  
+            dispose();
+        }
+            else JOptionPane.showMessageDialog(this, "Cadastro mal sucedido!", "Cadastro mal sucessdido", JOptionPane.ERROR_MESSAGE);
         }
         
         

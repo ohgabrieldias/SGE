@@ -30,7 +30,11 @@ public class MySQLConnector {
             logger.log(Level.SEVERE, "Erro ao conectar ao banco de dados: " + e.getMessage(), e);
         }
     }
-
+    
+    public MySQLConnector(Connection connection) {
+        this.connection = connection;
+    }
+    
     public Connection getConnection() {
         return connection;
     }

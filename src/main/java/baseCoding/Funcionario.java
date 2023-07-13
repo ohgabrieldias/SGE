@@ -1,7 +1,6 @@
 package baseCoding;
 
 import java.util.Date;
-import DAO.FuncionarioDAO;
 
 public class Funcionario extends Pessoa {
     private Date data;
@@ -11,7 +10,6 @@ public class Funcionario extends Pessoa {
     private int id;
     private String username;
     private String password;
-    FuncionarioDAO funcionarioDao = new FuncionarioDAO();
 
     public Funcionario(String nome, String sobrenome, String dataNasc, String cpf, String endereco, String username,
             String password) {
