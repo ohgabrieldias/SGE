@@ -5,10 +5,8 @@
 package util;
 
 
+import static com.mysql.cj.conf.PropertyKey.logger;
 import com.toedter.calendar.JDateChooser;
-
-import unitTests.ExcluirAlunoTest;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,9 +18,8 @@ import java.util.logging.Logger;
  * @author gabriel
  */
 public class Formater {
-
-     private static final String DATE_FORMAT = "yyyy-MM-dd";
-     private static final Logger logger = Logger.getLogger(ExcluirAlunoTest.class.getName());
+    Logger logger = Logger.getLogger(getClass().getName());
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
     
     public static String formatarData(String dataString) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -49,7 +46,7 @@ public class Formater {
         try {
             return dateFormat.parse(dateString);
         } catch (ParseException e) {
-            logger.log(Level.SEVERE, "Erro ao converter o formato de data" );
+            Logger.getLogger(Formater.class.getName()).log(Level.SEVERE, "Erro ao converter o formato de data" );
             return null;
         }
     }
