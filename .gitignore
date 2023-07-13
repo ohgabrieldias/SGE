@@ -39,3 +39,10 @@ replay_pid*
 **.*.lst
 /target/maven-status/maven-compiler-plugin/compile/default-compile/*.lst
 /target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/*.lst
+
+# Arquivos e diretórios do Jacoco e testes
+/target/**/*.exec
+/target/**/*.xml
+/target/**/*.csv
+/target/**/*.txt
+/target/**/*.*
