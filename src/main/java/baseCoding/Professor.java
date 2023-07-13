@@ -5,7 +5,6 @@ import sge.MySQLConnector;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
@@ -19,7 +18,6 @@ public class Professor extends Pessoa {
     
     public Professor(String nome, String sobrenome, String dataNasc, String cpf, String endereco){
         super(nome, sobrenome, dataNasc, cpf, endereco);
-        this.codigoProfessor = codigoProfessor;
     }
     
     public Professor(int id, String nome, String sobrenome, String dataNasc, String cpf, String end){
