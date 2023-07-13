@@ -15,6 +15,8 @@ import java.util.List;
 import sge.MySQLConnector;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kotlin.jvm.internal.TypeReference;
 
 /**
@@ -25,7 +27,8 @@ import kotlin.jvm.internal.TypeReference;
         AlunoDAO alunoDao = new AlunoDAO();
         DisciplinaDAO discipDao = new DisciplinaDAO();
         MySQLConnector connector = new MySQLConnector();
-
+        Logger logger = Logger.getLogger(getClass().getName());
+        
         public boolean cadastrarTurma(Turma turma) {
             String query = "INSERT INTO turmas (nome, codigo, dataInicio, dataFim, listaIdAlunos, listaIdsDisciplinas) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -41,7 +44,7 @@ import kotlin.jvm.internal.TypeReference;
 
                 return rowsAffected > 0;
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.log(Level.SEVERE, "Erro ao cadastrar turma: " + e.getMessage(), e);
         }
 
     return false;
@@ -62,7 +65,7 @@ import kotlin.jvm.internal.TypeReference;
                 listaTurmas.add(tmpTurma);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar turma: " + e.getMessage(), e);
         }
         return listaTurmas;
     }
@@ -83,7 +86,7 @@ import kotlin.jvm.internal.TypeReference;
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao alterar turma: " + e.getMessage(), e);
         }
 
         return false;
@@ -100,7 +103,7 @@ import kotlin.jvm.internal.TypeReference;
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao atualizar nome da turma: " + e.getMessage(), e);
         }
 
         return false;
@@ -118,12 +121,11 @@ import kotlin.jvm.internal.TypeReference;
                     
                     List<Disciplina> listaIdDisciplinas = convertStringToListDisc(listaIdDisciplinasString);
                     List<Aluno> listaIdAlunos = convertJsonToListAluno(listaIdAlunosString);
-//                    System.out.println(id);
                 return new Turma(id, nome, listaIdAlunos, listaIdDisciplinas);
                 }
             }
         }catch (Exception e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar tumra por ID: " + e.getMessage(), e);
         }
         return null;
     }
@@ -140,7 +142,7 @@ import kotlin.jvm.internal.TypeReference;
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao atualizar lista de alunos da turma: " + e.getMessage(), e);
         }
 
         return false;
@@ -157,7 +159,7 @@ import kotlin.jvm.internal.TypeReference;
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao lista de disciplinas: " + e.getMessage(), e);
         }
 
         return false;
@@ -171,7 +173,7 @@ import kotlin.jvm.internal.TypeReference;
             
             return true;
         }catch (Exception e){
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao excluir turma: " + e.getMessage(), e);
             return false;
         }
     }

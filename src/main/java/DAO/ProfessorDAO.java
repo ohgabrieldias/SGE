@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sge.MySQLConnector;
 
 /**
@@ -18,6 +20,7 @@ import sge.MySQLConnector;
  */
 public class ProfessorDAO {
     MySQLConnector connector = new MySQLConnector();
+    Logger logger = Logger.getLogger(getClass().getName());
     
     public List<String> buscarNomesProfessores() {
         List<String> nomesProfessores = new ArrayList<>();
@@ -33,7 +36,7 @@ public class ProfessorDAO {
              }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar nomes dos professores: " + e.getMessage(), e);
         }
 
         return nomesProfessores;
@@ -54,7 +57,7 @@ public class ProfessorDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar professor por nome: " + e.getMessage(), e);
         }
 
         return professor;
@@ -76,7 +79,7 @@ public class ProfessorDAO {
                 listaProfessores.add(tmpAluno);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar lista professores: " + e.getMessage(), e);
     }
 
     return listaProfessores;
@@ -99,7 +102,7 @@ public class ProfessorDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar professores por ID " + e.getMessage(), e);
         }
 
         return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
@@ -121,7 +124,7 @@ public class ProfessorDAO {
             
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao alterar professore: " + e.getMessage(), e);
             return false;
         }   
     }
@@ -135,7 +138,7 @@ public class ProfessorDAO {
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao excluir professore: " + e.getMessage(), e);
             return false;
         }   
     }

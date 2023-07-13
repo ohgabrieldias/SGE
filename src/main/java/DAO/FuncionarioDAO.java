@@ -5,7 +5,6 @@
 package DAO;
 
 import baseCoding.Funcionario;
-import static com.mysql.cj.conf.PropertyKey.logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
