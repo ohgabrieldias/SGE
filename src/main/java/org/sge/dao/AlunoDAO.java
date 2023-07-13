@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AlunoDAO implements DaoInterface {
     private Connection connection;
-    private Logger logger = Logger.getLogger(getClass().getName());
+    private Logger logger = LoggerFactory.getLogger(AlunoDAO.class);
     private static final String SOBRENOME = "sobrenome";
     private static final String DATANASC = "datanasc";
     private static final String ENDERECO = "endereco";
@@ -43,7 +44,7 @@ public class AlunoDAO implements DaoInterface {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar aluno: " + e.getMessage(), e);
+            logger.error("Erro ao buscar aluno: {}" + e.getMessage(), e);
         }
 
         return tmpAluno;
@@ -56,16 +57,16 @@ public class AlunoDAO implements DaoInterface {
             fileHandler.setFormatter(new SimpleFormatter());
             
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Erro ao criar arquivo de log: " + e.getMessage(), e);
+            logger.error("Erro ao criar arquivo de log: {}" + e.getMessage(), e);
         }
         
-        logger.log(Level.INFO, "Aluno com matrícula {0} excluído com sucesso.", matricula);
+        logger.info( "Aluno com matrícula {0} excluído com sucesso.", matricula);
         String query = "DELETE FROM alunos WHERE matricula = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setLong(1, matricula);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao excluir aluno: " + e.getMessage(), e);
+            logger.error("Erro ao excluir aluno: {}" + e.getMessage(), e);
         }
     }
 
@@ -87,7 +88,7 @@ public class AlunoDAO implements DaoInterface {
             logger.info("Student data inserted successfully into the 'alunos' table.");
 
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error inserting student data into the 'alunos' table: " + e.getMessage(), e);
+            logger.error("Error inserting student data into the 'alunos' table: {}" + e.getMessage(), e);
         }
         return true;
     }
@@ -108,7 +109,7 @@ public class AlunoDAO implements DaoInterface {
                 listaAlunos.add(tmpAluno);
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar lista de alunos: " + e.getMessage(), e);
+            logger.error("Erro ao buscar lista de alunos: {}" + e.getMessage(), e);
         }
 
         return listaAlunos;
@@ -129,7 +130,7 @@ public class AlunoDAO implements DaoInterface {
             stmt.setLong(6, aluno.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar aluno: " + e.getMessage(), e);
+            logger.error("Erro ao buscar aluno: {}" + e.getMessage(), e);
         }
     }
 
@@ -154,7 +155,7 @@ public class AlunoDAO implements DaoInterface {
                 listaAlunos.add(tmpAluno);
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao atualizar banco de dados: " + e.getMessage(), e);
+            logger.error("Erro ao atualizar banco de dados: {}" + e.getMessage(), e);
         }
 
         return listaAlunos;
@@ -177,7 +178,7 @@ public class AlunoDAO implements DaoInterface {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar aluno por ID: " + e.getMessage(), e);
+            logger.error("Erro ao buscar aluno por ID: {}" + e.getMessage(), e);
 
         }
 
@@ -195,12 +196,12 @@ public class AlunoDAO implements DaoInterface {
                 while (resultSet.next()) {
                     String nome = resultSet.getString("nome");
                     String cpf = resultSet.getString("cpf");
-                    String nomeCpf = nome + " - CPF: " + cpf;
+                    String nomeCpf = nome + " - CPF: {}" + cpf;
                     nomesAlunos.add(nomeCpf);
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar nomes dos alunos: " + e.getMessage(), e);
+            logger.error("Erro ao buscar nomes dos alunos: {}" + e.getMessage(), e);
         }
 
         return nomesAlunos;
