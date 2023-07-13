@@ -55,23 +55,23 @@ public class MySQLConnector {
     }
 
     public ResultSet executeQuery(String query) {
-        try {
-            PreparedStatement stmt = connection.prepareStatement(query);
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             return stmt.executeQuery();
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao executar query: " + e.getMessage(), e);    
+            logger.log(Level.SEVERE, "Erro ao executar query: " + e.getMessage(), e);
         }
         return null;
     }
+    
 
     public void executeUpdate(String query) {
-        try {
-            PreparedStatement stmt = connection.prepareStatement(query);
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.executeUpdate();
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao executar update: " + e.getMessage(), e);    
+            logger.log(Level.SEVERE, "Erro ao executar update: " + e.getMessage(), e);
         }
     }
+    
 
     public void closeConnection() {
         try {
@@ -79,7 +79,7 @@ public class MySQLConnector {
                 connection.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao fechar conexão: " + e.getMessage(), e);    
         }
     }
 
