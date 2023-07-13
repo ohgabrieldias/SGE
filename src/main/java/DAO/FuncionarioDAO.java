@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import sge.MySQLConnector;
 
@@ -20,7 +21,7 @@ import sge.MySQLConnector;
  */
 public class FuncionarioDAO {
     MySQLConnector connector = new MySQLConnector();
-    private static final Logger logger = Logger.getLogger(FuncionarioDAO.class.getName());
+    Logger logger = Logger.getLogger(getClass().getName());   
     
     public boolean cadastrarFuncionario(Funcionario funcionario) {
     String queryFuncionarios = "INSERT INTO funcionarios (nome, sobrenome, datanasc, cpf, endereco, setor, cargo, salario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -47,7 +48,7 @@ public class FuncionarioDAO {
         
         // logger.info("Dados do funcionario inseridos com sucesso nas tabelas 'funcionarios' e 'users'.");
     } catch (SQLException e) {
-        e.printStackTrace();
+        logger.log(Level.SEVERE, "Erro ao cadastrar funcionario: " + e.getMessage(), e);
         return false;
     }
 
@@ -70,7 +71,7 @@ public class FuncionarioDAO {
                 listaFuncionarioes.add(tmpAluno);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar lista de funcionários: " + e.getMessage(), e);
     }
 
     return listaFuncionarioes;
@@ -106,7 +107,7 @@ public class FuncionarioDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar por ID: " + e.getMessage(), e);
         }
 
         return null; // Retorna null se nenhum funcionário for encontrado com o ID especificado
@@ -137,7 +138,7 @@ public class FuncionarioDAO {
 
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao alterar funcionário: " + e.getMessage(), e);
             return false;
         }   
     }
@@ -158,7 +159,7 @@ public class FuncionarioDAO {
 
             return (rowsAffectedFuncionarios > 0) && (rowsAffectedUsers > 0);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao excluir funcionário: " + e.getMessage(), e);
             return false;
         }   
     }

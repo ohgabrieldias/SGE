@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sge.MySQLConnector;
 
 /**
@@ -18,6 +20,7 @@ import sge.MySQLConnector;
  */
 public class DisciplinaDAO {
     MySQLConnector connector = new MySQLConnector();
+    Logger logger = Logger.getLogger(getClass().getName());
     
     public List<String> buscarNomesDisciplinas() {
         List<String> nomesDisciplinas = new ArrayList<>();
@@ -33,7 +36,7 @@ public class DisciplinaDAO {
              }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar nomes das disciplinas: " + e.getMessage(), e);
         }
 
         return nomesDisciplinas;
@@ -55,7 +58,7 @@ public class DisciplinaDAO {
              }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar disciplinas: " + e.getMessage(), e);
         }
 
         return disciplinas;
@@ -75,7 +78,7 @@ public class DisciplinaDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao checar vinculo com disciplinas: " + e.getMessage(), e);
         }
 
         return false;
@@ -98,7 +101,7 @@ public class DisciplinaDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar por ID: " + e.getMessage(), e);
         }
         return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
     }

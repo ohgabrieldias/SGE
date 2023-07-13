@@ -64,7 +64,7 @@ public class AlunoDAO {
             listaAlunos.add(tmpAluno);
         }
     } catch (SQLException e) {
-        e.printStackTrace();
+        logger.log(Level.SEVERE, "Erro ao buscar lista de alunos: " + e.getMessage(), e);
     }
 
     return listaAlunos;
@@ -85,7 +85,7 @@ public class AlunoDAO {
             stmt.setLong(6, aluno.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar aluno: " + e.getMessage(), e);
         }   
     }
 
@@ -110,7 +110,7 @@ public class AlunoDAO {
                 listaAlunos.add(tmpAluno);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao atualizar banco de dados: " + e.getMessage(), e);
         }
 
         return listaAlunos;
@@ -133,7 +133,8 @@ public class AlunoDAO {
             }
         }
     } catch (SQLException e) {
-        e.printStackTrace();
+        logger.log(Level.SEVERE, "Erro ao buscar aluno por ID: " + e.getMessage(), e);
+
     }
 
     return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
@@ -155,7 +156,7 @@ public class AlunoDAO {
              }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar nomes dos alunos: " + e.getMessage(), e);
         }
 
         return nomesAlunos;
