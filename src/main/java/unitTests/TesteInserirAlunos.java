@@ -4,11 +4,9 @@
  */
 package unitTests;
 import baseCoding.Aluno;
+import java.security.SecureRandom;
 import util.Formater;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
 
 /**
  *
@@ -46,7 +44,7 @@ public class TesteInserirAlunos {
                 String dataFormatada = Formater.formatarData("kjkk");
                 
                 // Generate a random 10-digit student ID
-                Random random = new Random();
+                SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
                 long matricula = 1_000_000_000L + random.nextInt(9_000_000);                
                 // Inserir aluno no banco de dados usando a data formatada corretamente
                 Aluno aluno = new Aluno(nome, sobrenome, dataFormatada, cpf, endereco, responsavel, cpfResponsavel, matricula);
