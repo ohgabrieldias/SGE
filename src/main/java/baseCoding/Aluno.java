@@ -15,11 +15,9 @@ public class Aluno extends Pessoa {
     private long matricula;
     private String responsavel;
     private String cpfresp;
+    
     Logger logger = Logger.getLogger(getClass().getName());
-
-
     MySQLConnector connector = new MySQLConnector();
-    Logger logger = Logger.getLogger(getClass().getName());
 
     public Aluno(String nome, String sobrenome, String dataNasc, String cpf, String end, String resp, String cpfresp, long matricula) {
         super(nome, sobrenome, dataNasc, cpf, end);
@@ -80,6 +78,7 @@ public class Aluno extends Pessoa {
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Erro ao buscar aluno: " + e.getMessage(), e);
+        }
     
         return tmpAluno;
     }        
