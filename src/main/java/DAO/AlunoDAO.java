@@ -5,6 +5,8 @@
 package DAO;
 
 import baseCoding.Aluno;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +20,7 @@ import sge.MySQLConnector;
  */
 public class AlunoDAO {
     MySQLConnector connector = new MySQLConnector();
+    Logger logger = Logger.getLogger(getClass().getName());
     
     public Aluno buscarAluno(long matricula) {
         Aluno tmpAluno = null;
@@ -39,7 +42,7 @@ public class AlunoDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao buscar aluno: " + e.getMessage(), e);
         }
     
         return tmpAluno;
