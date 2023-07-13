@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package baseCoding;
 
 import java.util.Date;
 import DAO.FuncionarioDAO;
 
-/**
- *
- * @author Gabriel
- */
 public class Funcionario extends Pessoa {
     private Date data;
     private String setor;
@@ -20,24 +12,26 @@ public class Funcionario extends Pessoa {
     private String username;
     private String password;
     FuncionarioDAO funcionarioDao = new FuncionarioDAO();
-    
-    public Funcionario(String nome, String sobrenome, String dataNasc, String cpf, String endereco, String username, String password){
+
+    public Funcionario(String nome, String sobrenome, String dataNasc, String cpf, String endereco, String username,
+            String password) {
         super(nome, sobrenome, dataNasc, cpf, endereco);
         this.username = username;
         this.password = password;
     }
-    
-    public Funcionario(int id, String nome, String sobrenome, String dataNasc, String cpf, String end, String username, String password){
+
+    public Funcionario(int id, String nome, String sobrenome, String dataNasc, String cpf, String end, String username,
+            String password) {
         super(nome, sobrenome, dataNasc, cpf, end);
         this.id = id;
         this.username = username;
         this.password = password;
     }
-    
-    public Funcionario(int id, String nome, String cpf){
-        super(nome,  cpf);
+
+    public Funcionario(int id, String nome, String cpf) {
+        super(nome, cpf);
         this.id = id;
-    } 
+    }
 
     public String getSetor() {
         return setor;
@@ -51,9 +45,10 @@ public class Funcionario extends Pessoa {
         return cargo;
     }
 
-    public Date getDate(){
+    public Date getDate() {
         return this.data;
     }
+
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }

@@ -1,20 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package integrationTests;
 
 import baseCoding.Aluno;
-/**
- *
- * @author gabriel
- */
+
 public class AlunoIntegrationTest {
     public static void main(String[] args) {
         // Create a test student
-        Aluno aluno = new Aluno("Maria", "Silva", "2023-12-15", "98765432109", "Av n sei onde", "paps", "12345678910", 2021002);
+        Aluno aluno = new Aluno("Maria", "Silva", "2023-12-15", "98765432109", "Av n sei onde", "paps", "12345678910",
+                2021002);
         // Insert the student into the database for testing
-        
 
         // Test the registration and search functionality
         testCadastrarAluno(aluno);

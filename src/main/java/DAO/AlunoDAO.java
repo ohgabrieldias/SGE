@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import baseCoding.Aluno;
@@ -14,19 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 import sge.MySQLConnector;
 
-/**
- *
- * @author gabriel
- */
 public class AlunoDAO {
     MySQLConnector connector = new MySQLConnector();
     Logger logger = Logger.getLogger(getClass().getName());
-    
+
     public Aluno buscarAluno(long matricula) {
         Aluno tmpAluno = null;
-    
+
         String query = "SELECT * FROM alunos WHERE matricula = ?";
-    
+
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             stmt.setLong(1, matricula);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -44,33 +36,33 @@ public class AlunoDAO {
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Erro ao buscar aluno: " + e.getMessage(), e);
         }
-    
+
         return tmpAluno;
     }
-    
+
     public List<Aluno> buscarListaAluno() {
-    List<Aluno> listaAlunos = new ArrayList<>();
+        List<Aluno> listaAlunos = new ArrayList<>();
 
-    String query = "SELECT id,nome, cpf FROM alunos";
+        String query = "SELECT id,nome, cpf FROM alunos";
 
-    try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-         ResultSet rs = stmt.executeQuery()) {
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            String nome = rs.getString("nome");
-            String cpf = rs.getString("cpf");
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
 
-            Aluno tmpAluno = new Aluno(id,nome,cpf);
-            listaAlunos.add(tmpAluno);
+                Aluno tmpAluno = new Aluno(id, nome, cpf);
+                listaAlunos.add(tmpAluno);
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Erro ao buscar lista de alunos: " + e.getMessage(), e);
         }
-    } catch (SQLException e) {
-        logger.log(Level.SEVERE, "Erro ao buscar lista de alunos: " + e.getMessage(), e);
+
+        return listaAlunos;
     }
 
-    return listaAlunos;
-    }
-
-    //Criar um metodo pra conseguir modificar dados do aluno 
+    // Criar um metodo pra conseguir modificar dados do aluno
     public void alterarAluno(Aluno aluno) {
         String query = "UPDATE alunos SET nome = ?, sobrenome = ?, datanasc = ?, cpf = ?, endereco = ? WHERE id = ?";
 
@@ -80,13 +72,13 @@ public class AlunoDAO {
             stmt.setString(3, aluno.getDataNasc());
             stmt.setString(4, aluno.getCpf());
             stmt.setString(5, aluno.getEndereco());
-//            stmt.setString(6, aluno.getCpfResp());
-//            stmt.setString(7, aluno.getResponsavel());
+            // stmt.setString(6, aluno.getCpfResp());
+            // stmt.setString(7, aluno.getResponsavel());
             stmt.setLong(6, aluno.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Erro ao buscar aluno: " + e.getMessage(), e);
-        }   
+        }
     }
 
     public List<Aluno> atualizarBD() {
@@ -95,7 +87,7 @@ public class AlunoDAO {
         String query = "SELECT * FROM alunos";
 
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+                ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 String nome = rs.getString("nome");
                 String sobrenome = rs.getString("sobrenome");
@@ -117,29 +109,29 @@ public class AlunoDAO {
     }
 
     public Aluno buscarPorId(int id) {
-    String query = "SELECT * FROM alunos WHERE id = ?";
+        String query = "SELECT * FROM alunos WHERE id = ?";
 
-    try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
-        stmt.setInt(1, id);
+        try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
+            stmt.setInt(1, id);
 
-        try (ResultSet rs = stmt.executeQuery()) {
-            if (rs.next()) {
-                String nome = rs.getString("nome");
-                String sobrenome = rs.getString("sobrenome");
-                String dataNasc = rs.getString("datanasc");
-                String cpf = rs.getString("cpf");
-                String endereco = rs.getString("endereco");
-                return new Aluno(id,nome, sobrenome, dataNasc, cpf, endereco);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String nome = rs.getString("nome");
+                    String sobrenome = rs.getString("sobrenome");
+                    String dataNasc = rs.getString("datanasc");
+                    String cpf = rs.getString("cpf");
+                    String endereco = rs.getString("endereco");
+                    return new Aluno(id, nome, sobrenome, dataNasc, cpf, endereco);
+                }
             }
-        }
-    } catch (SQLException e) {
-        logger.log(Level.SEVERE, "Erro ao buscar aluno por ID: " + e.getMessage(), e);
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Erro ao buscar aluno por ID: " + e.getMessage(), e);
 
+        }
+
+        return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
     }
 
-    return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
-}
-    
     public List<String> buscarNomesAlunos() {
         List<String> nomesAlunos = new ArrayList<>();
 
@@ -148,12 +140,12 @@ public class AlunoDAO {
         try (PreparedStatement stmt = connector.getConnection().prepareStatement(query)) {
             try (ResultSet resultSet = stmt.executeQuery()) {
 
-            while (resultSet.next()) {
-                String nome = resultSet.getString("nome");
-                String cpf = resultSet.getString("cpf");
-                String nomeCpf = nome + " - CPF: " + cpf;
-                nomesAlunos.add(nomeCpf);
-             }
+                while (resultSet.next()) {
+                    String nome = resultSet.getString("nome");
+                    String cpf = resultSet.getString("cpf");
+                    String nomeCpf = nome + " - CPF: " + cpf;
+                    nomesAlunos.add(nomeCpf);
+                }
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Erro ao buscar nomes dos alunos: " + e.getMessage(), e);
@@ -161,5 +153,5 @@ public class AlunoDAO {
 
         return nomesAlunos;
     }
-    
+
 }
