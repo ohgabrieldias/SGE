@@ -185,8 +185,7 @@ public class rf_login extends javax.swing.JFrame {
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            ex.printStackTrace();
-        }
+        Logger.getLogger(rf_login.class.getName()).log(Level.SEVERE, "Erro ao definir o look and feel da aplicação", ex);        }
 
         // Create and display the login form
         java.awt.EventQueue.invokeLater(new Runnable() {
