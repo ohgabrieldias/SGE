@@ -90,7 +90,6 @@ public class Aluno extends Pessoa {
             fileHandler.setLevel(Level.ALL); // Define o nível de log desejado
             fileHandler.setFormatter(new SimpleFormatter());
             
-            logger.addHandler(fileHandler);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,25 +124,6 @@ public class Aluno extends Pessoa {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
         return true;
-    }
-    
-    
-    
-    public static void main(String[] args) {
-        try {
-            FileHandler fileHandler = new FileHandler("application.log");
-            fileHandler.setLevel(Level.ALL); // Define o nível de log desejado
-            fileHandler.setFormatter(new SimpleFormatter());
-            
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Aluno aluno = new Aluno("Maria", "Silva", "2023-12-15", "98765432109", "Av n sei onde", "paps", "12345678910", 2021002);
-        aluno.cadastrarAluno(aluno);
-        aluno.excluirAluno(2021002);
-    }
-    
+    }    
 }

@@ -15,8 +15,6 @@ public class ExcluirAlunoTest {
             FileHandler fileHandler = new FileHandler("application.log");
             fileHandler.setLevel(Level.ALL); // Define o nível de log desejado
             fileHandler.setFormatter(new SimpleFormatter());
-            
-            logger.addHandler(fileHandler);
         } catch (IOException e) {
             e.printStackTrace();
         }
