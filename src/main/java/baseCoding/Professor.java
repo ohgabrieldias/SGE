@@ -1,6 +1,7 @@
 package baseCoding;
 
 public class Professor extends Pessoa {
+    private int codigoProfessor;
     private int id;
     
     public Professor(String nome, String sobrenome, String dataNasc, String cpf, String endereco){
@@ -15,6 +16,10 @@ public class Professor extends Pessoa {
     public Professor(int id, String nome, String cpf){
         super(nome,  cpf);
         this.id = id;
+    }
+
+    public int getCodigoProfessor(){
+    return this.codigoProfessor;  
     }
 
     public int getId(){
