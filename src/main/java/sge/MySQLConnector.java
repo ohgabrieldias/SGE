@@ -10,8 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MySQLConnector {
-    private Connection connection;
     Logger logger = Logger.getLogger(getClass().getName());
+    private Connection connection;
 
     public MySQLConnector() {
         Dotenv dotenv = Dotenv.configure().load();
@@ -59,7 +59,7 @@ public class MySQLConnector {
             PreparedStatement stmt = connection.prepareStatement(query);
             return stmt.executeQuery();
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao executar query: " + e.getMessage(), e);
+            logger.log(Level.SEVERE, "Erro ao executar query: " + e.getMessage(), e);    
         }
         return null;
     }
@@ -69,7 +69,7 @@ public class MySQLConnector {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao executar update: " + e.getMessage(), e);
+            logger.log(Level.SEVERE, "Erro ao executar update: " + e.getMessage(), e);    
         }
     }
 
@@ -79,7 +79,7 @@ public class MySQLConnector {
                 connection.close();
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao fechar conexão: " + e.getMessage(), e);
+            e.printStackTrace();
         }
     }
 

@@ -10,6 +10,7 @@ import util.Validator;
  * @author gabri
  */
 public class rf_001 extends javax.swing.JInternalFrame {
+    private static final String AWT_FONTE = "Arial";  // Compliant
 
     public rf_001() {
         initComponents();
@@ -41,47 +42,47 @@ public class rf_001 extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Cadastro de Alun@");
 
-        novoAlunoInternalLogo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        novoAlunoInternalLogo.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         novoAlunoInternalLogo.setForeground(new java.awt.Color(51, 51, 51));
         novoAlunoInternalLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/novoAlunoInternal.png"))); // NOI18N
 
-        cadastroAluno.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cadastroAluno.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         cadastroAluno.setForeground(new java.awt.Color(51, 51, 51));
         cadastroAluno.setText("Cadastro de Alun@");
 
-        novoAlunoSobrenomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        novoAlunoSobrenomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         novoAlunoSobrenomeLabel.setForeground(new java.awt.Color(51, 51, 51));
         novoAlunoSobrenomeLabel.setText("Sobrenome");
 
-        novoAlunoNome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        novoAlunoNome.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         novoAlunoNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novoAlunoNomeActionPerformed(evt);
             }
         });
 
-        novoAlunoLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        novoAlunoLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         novoAlunoLabel.setForeground(new java.awt.Color(51, 51, 51));
         novoAlunoLabel.setText("Nome");
 
-        novoAlunoSobrenome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        novoAlunoSobrenome.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         novoAlunoSobrenome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novoAlunoSobrenomeActionPerformed(evt);
             }
         });
 
-        novoAlunoCPF.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        novoAlunoCPF.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
 
-        novoAlunoDNLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        novoAlunoDNLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         novoAlunoDNLabel.setForeground(new java.awt.Color(51, 51, 51));
         novoAlunoDNLabel.setText("Data de Nascimento");
 
-        novoAlunoCPFLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        novoAlunoCPFLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         novoAlunoCPFLabel.setForeground(new java.awt.Color(51, 51, 51));
         novoAlunoCPFLabel.setText("CPF");
 
-        btnCadastrar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnCadastrar.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,24 +90,24 @@ public class rf_001 extends javax.swing.JInternalFrame {
             }
         });
 
-        novoAlunoResp.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        novoAlunoResp.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         novoAlunoResp.setForeground(new java.awt.Color(51, 51, 51));
         novoAlunoResp.setText("Responsável");
 
-        novoAlunoRespField.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        novoAlunoRespField.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         novoAlunoRespField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novoAlunoRespFieldActionPerformed(evt);
             }
         });
 
-        novoAlunoCPFRespLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        novoAlunoCPFRespLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         novoAlunoCPFRespLabel.setForeground(new java.awt.Color(51, 51, 51));
         novoAlunoCPFRespLabel.setText("CPF Responsável");
 
-        novoAlunoCPFResp.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        novoAlunoCPFResp.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
 
-        respAviso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        respAviso.setFont(new java.awt.Font(AWT_FONTE, 1, 12)); // NOI18N
         respAviso.setForeground(new java.awt.Color(51, 51, 51));
         respAviso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         respAviso.setText("Somente se necessário um responsável");

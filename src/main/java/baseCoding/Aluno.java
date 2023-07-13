@@ -15,7 +15,8 @@ public class Aluno extends Pessoa {
     private long matricula;
     private String responsavel;
     private String cpfresp;
-    
+    private static final String SOBRENOME = "sobrenome";  // Compliant
+
     Logger logger = Logger.getLogger(getClass().getName());
     MySQLConnector connector = new MySQLConnector();
 
@@ -67,7 +68,7 @@ public class Aluno extends Pessoa {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     String nome = rs.getString("nome");
-                    String sobrenome = rs.getString("sobrenome");
+                    String sobrenome = rs.getString(SOBRENOME);
                     String dataNasc = rs.getString("datanasc");
                     String cpf = rs.getString("cpf");
                     String endereco = rs.getString("endereco");

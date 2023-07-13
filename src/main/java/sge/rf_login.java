@@ -13,6 +13,7 @@ import unitTests.ExcluirAlunoTest;
  * @author gabriel dias
  */
 public class rf_login extends javax.swing.JFrame {
+    private static final String AWT_FONTE = "Arial";  // Compliant
     Logger logger = Logger.getLogger(getClass().getName());
 
     private MySQLConnector connector;
@@ -48,7 +49,7 @@ public class rf_login extends javax.swing.JFrame {
         setMinimumSize(null);
         setResizable(false);
 
-        loginPanel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        loginPanel.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         loginPanel.setMinimumSize(null);
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
@@ -57,7 +58,7 @@ public class rf_login extends javax.swing.JFrame {
         loginIsidePanel.setName(""); // NOI18N
         loginIsidePanel.setPreferredSize(new java.awt.Dimension(250, 250));
 
-        loginButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        loginButton.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         loginButton.setText("Acessar");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,15 +66,15 @@ public class rf_login extends javax.swing.JFrame {
             }
         });
 
-        loginUserLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        loginUserLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         loginUserLabel.setText("Usuário");
 
-        loginUserPass.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        loginUserPass.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         loginUserPass.setText("Senha");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField1.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
 
-        jPasswordField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPasswordField1.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
 
         javax.swing.GroupLayout loginIsidePanelLayout = new javax.swing.GroupLayout(loginIsidePanel);
         loginIsidePanel.setLayout(loginIsidePanelLayout);

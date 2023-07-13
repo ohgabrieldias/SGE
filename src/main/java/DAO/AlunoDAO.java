@@ -13,6 +13,10 @@ import sge.MySQLConnector;
 public class AlunoDAO {
     MySQLConnector connector = new MySQLConnector();
     Logger logger = Logger.getLogger(getClass().getName());
+    private static final String SOBRENOME = "sobrenome";  // Compliant
+    private static final String DATANASC = "datanasc";  // Compliant
+    private static final String ENDERECO = "endereco";  // Compliant
+
 
     public Aluno buscarAluno(long matricula) {
         Aluno tmpAluno = null;
@@ -24,10 +28,10 @@ public class AlunoDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     String nome = rs.getString("nome");
-                    String sobrenome = rs.getString("sobrenome");
-                    String dataNasc = rs.getString("datanasc");
+                    String sobrenome = rs.getString(SOBRENOME);
+                    String dataNasc = rs.getString(DATANASC);
                     String cpf = rs.getString("cpf");
-                    String endereco = rs.getString("endereco");
+                    String endereco = rs.getString(ENDERECO);
                     String tmpCpfResp = rs.getString("cpfresp");
                     String tmpResp = rs.getString("responsavel");
                     tmpAluno = new Aluno(nome, sobrenome, dataNasc, cpf, endereco, tmpResp, tmpCpfResp, matricula);
@@ -90,10 +94,10 @@ public class AlunoDAO {
                 ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 String nome = rs.getString("nome");
-                String sobrenome = rs.getString("sobrenome");
-                String dataNasc = rs.getString("datanasc");
+                String sobrenome = rs.getString(SOBRENOME);
+                String dataNasc = rs.getString(DATANASC);
                 String cpf = rs.getString("cpf");
-                String endereco = rs.getString("endereco");
+                String endereco = rs.getString(ENDERECO);
                 String tmpCpfResp = rs.getString("cpfresp");
                 String tmpResp = rs.getString("responsavel");
                 long matricula = rs.getLong("matricula");
@@ -117,10 +121,10 @@ public class AlunoDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     String nome = rs.getString("nome");
-                    String sobrenome = rs.getString("sobrenome");
-                    String dataNasc = rs.getString("datanasc");
+                    String sobrenome = rs.getString(SOBRENOME);
+                    String dataNasc = rs.getString(DATANASC);
                     String cpf = rs.getString("cpf");
-                    String endereco = rs.getString("endereco");
+                    String endereco = rs.getString(ENDERECO);
                     return new Aluno(id, nome, sobrenome, dataNasc, cpf, endereco);
                 }
             }
