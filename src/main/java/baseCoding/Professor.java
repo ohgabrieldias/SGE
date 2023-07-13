@@ -83,23 +83,5 @@ public class Professor extends Pessoa {
         e.printStackTrace();
     }
     return tmpProfessor;
-    // return null;
   }
-
-
-
-  public static void main(String args[]){
-    try {
-        FileHandler fh = new FileHandler("logProfessor.log");
-        logger.addHandler(fh);
-        SimpleFormatter formatter = new SimpleFormatter();
-        fh.setFormatter(formatter);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    Professor professor = new Professor("Joao", "Silva", "1990-01-01", "12345678901", "Rua 1");
-    professor.cadastrarProfessor(professor);
-
-  }
-
 }
