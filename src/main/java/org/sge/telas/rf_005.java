@@ -59,35 +59,35 @@ public class rf_005 extends javax.swing.JInternalFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cursoLogo.png"))); // NOI18N
 
-        cadastroAluno.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cadastroAluno.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         cadastroAluno.setForeground(new java.awt.Color(51, 51, 51));
         cadastroAluno.setText("Cadastro de Disciplina");
 
-        nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel.setForeground(new java.awt.Color(51, 51, 51));
         nomeLabel.setText("Nome da Disciplina");
 
-        dataInicioLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        dataInicioLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         dataInicioLabel.setForeground(new java.awt.Color(51, 51, 51));
         dataInicioLabel.setText("Início do Curso");
 
         dataInicioCampo.setDateFormatString("dd/MM/yyyy");
-        dataInicioCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        dataInicioCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
 
-        dataFimLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        dataFimLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         dataFimLabel.setForeground(new java.awt.Color(51, 51, 51));
         dataFimLabel.setText("Fim do Curso");
 
         dataFimCampo.setDateFormatString("dd/MM/yyyy");
-        dataFimCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        dataFimCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
 
-        professorLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        professorLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         professorLabel.setForeground(new java.awt.Color(51, 51, 51));
         professorLabel.setText("Professor responsável");
 
-        professorCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        professorCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         jButton1.setText("Cadastrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

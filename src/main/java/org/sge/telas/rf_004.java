@@ -134,13 +134,13 @@ public class rf_004 extends javax.swing.JInternalFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turmaLogo.png"))); // NOI18N
 
-        titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         titulo.setText("Cadastro de Turma");
 
-        nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel.setText("Nome da turma");
 
-        nomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        nomeCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         nomeCampo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         nomeCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,10 +155,10 @@ public class rf_004 extends javax.swing.JInternalFrame {
         listaDisciplinas.setLayout(new javax.swing.BoxLayout(listaDisciplinas, javax.swing.BoxLayout.Y_AXIS));
         scrollDisciplinas.setViewportView(listaDisciplinas);
 
-        disciplinasLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        disciplinasLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         disciplinasLabel.setText("Selecione as Disciplinas desta turma");
 
-        disciplinasLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        disciplinasLabel1.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         disciplinasLabel1.setText("Selecione os Alunos desta turma");
 
         scrollAlunos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

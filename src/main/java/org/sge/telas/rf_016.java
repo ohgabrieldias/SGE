@@ -111,10 +111,10 @@ public class rf_016 extends javax.swing.JInternalFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentacoes.png"))); // NOI18N
 
-        titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         titulo.setText("Movimentação de Funcionários");
 
-        selecioneLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        selecioneLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         selecioneLabel.setText("Selecione um funcionário");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -145,31 +145,31 @@ public class rf_016 extends javax.swing.JInternalFrame {
 
         painelInformacoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel.setText("Nome");
 
-        nomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        nomeCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         nomeCampo.setEnabled(false);
 
-        sobrenomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        sobrenomeCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         sobrenomeCampo.setEnabled(false);
 
-        sobrenomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        sobrenomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         sobrenomeLabel.setText("Sobrenome");
 
-        cpfCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cpfCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         cpfCampo.setEnabled(false);
 
-        cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cpfLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         cpfLabel.setText("CPF");
 
         jDateChooser1.setDateFormatString("dd/MM/yyyy");
         jDateChooser1.setEnabled(false);
 
-        cpfLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cpfLabel1.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         cpfLabel1.setText("Data de nascimento");
 
-        infoSenha.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        infoSenha.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         infoSenha.setForeground(new java.awt.Color(204, 0, 0));
         infoSenha.setText("Somente insira uma senha nova se for necessário trocar");
 
@@ -236,7 +236,7 @@ public class rf_016 extends javax.swing.JInternalFrame {
         );
 
         btnExcluir.setBackground(new java.awt.Color(255, 51, 51));
-        btnExcluir.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnExcluir.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir funcionário");
         btnExcluir.setEnabled(false);

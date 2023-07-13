@@ -67,33 +67,33 @@ public class rf_003 extends javax.swing.JInternalFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionarioLogo.png"))); // NOI18N
 
-        titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         titulo.setText("Cadastro de Funcionário(a)");
 
-        nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel.setText("Nome");
 
-        nomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        nomeCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         nomeCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomeCampoActionPerformed(evt);
             }
         });
 
-        sobrenomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        sobrenomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         sobrenomeLabel.setText("Sobrenome");
 
-        cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cpfLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         cpfLabel.setText("CPF");
 
-        cpfCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cpfCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         cpfCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cpfCampoActionPerformed(evt);
             }
         });
 
-        cpfLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cpfLabel1.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         cpfLabel1.setText("Data de nascimento");
 
         btnCadastrar.setText("Cadastrar");
@@ -105,10 +105,10 @@ public class rf_003 extends javax.swing.JInternalFrame {
 
         loginPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
 
-        senhaLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        senhaLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         senhaLabel.setText("Senha");
 
-        senhaCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        senhaCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         senhaCampo.setEnabled(false);
         senhaCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,7 +131,7 @@ public class rf_003 extends javax.swing.JInternalFrame {
         logoSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/copy&paste.png"))); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(51, 204, 0));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Copiar senha");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -180,7 +180,7 @@ public class rf_003 extends javax.swing.JInternalFrame {
         dnCampo.setDateFormatString("d'/'MM'/'yyyy");
         dnCampo.setMaxSelectableDate(new java.util.Date(253370779289000L));
 
-        sobrenomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        sobrenomeCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         sobrenomeCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sobrenomeCampoActionPerformed(evt);

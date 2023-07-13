@@ -91,15 +91,15 @@ public class rf_012 extends javax.swing.JInternalFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentacoes.png"))); // NOI18N
 
-        pesquisaNomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        pesquisaNomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         pesquisaNomeLabel.setText("Pesquisa por nome");
 
-        titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         titulo.setText("Movimentação de Alun@s");
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel.setText("Nome");
 
         nomeCampo.setEnabled(false);
@@ -109,7 +109,7 @@ public class rf_012 extends javax.swing.JInternalFrame {
             }
         });
 
-        nomeLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel1.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel1.setText("Sobrenome");
 
         sobrenomeCampo.setEnabled(false);
@@ -119,18 +119,18 @@ public class rf_012 extends javax.swing.JInternalFrame {
             }
         });
 
-        cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cpfLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         cpfLabel.setText("CPF");
 
         cpfCampo.setEnabled(false);
 
-        dnLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        dnLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         dnLabel.setText("Data de Nascimento");
 
         dnCampo.setDateFormatString("dd/MM/yyyy");
         dnCampo.setEnabled(false);
 
-        nomeLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel2.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel2.setText("Endereço");
 
         enderecoCampo.setEnabled(false);

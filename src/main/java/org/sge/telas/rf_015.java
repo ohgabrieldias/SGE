@@ -119,7 +119,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Movimentação de turma");
 
-        pesquisaNomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        pesquisaNomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         pesquisaNomeLabel.setText("Pesquisa por nome");
 
         listaTurmas.setModel(new javax.swing.table.DefaultTableModel(
@@ -148,7 +148,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(listaTurmas);
 
-        nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel.setText("Nome da Turma");
 
         nomeCampo.setEnabled(false);
@@ -158,7 +158,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEditar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnEditar.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.setEnabled(false);
         btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -173,7 +173,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
         });
 
         btnExcluir.setBackground(new java.awt.Color(255, 102, 102));
-        btnExcluir.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnExcluir.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir turma");
         btnExcluir.setEnabled(false);
@@ -190,7 +190,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentacoes.png"))); // NOI18N
 
-        titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         titulo.setText("Movimentação de Turmas");
 
         javax.swing.GroupLayout cabecalhoLayout = new javax.swing.GroupLayout(cabecalho);
@@ -278,7 +278,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
 
         logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentacoes.png"))); // NOI18N
 
-        titulo1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo1.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         titulo1.setText("Movimentação de Turmas");
 
         javax.swing.GroupLayout cabecalho1Layout = new javax.swing.GroupLayout(cabecalho1);
@@ -310,7 +310,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pesquisaNomeLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        pesquisaNomeLabel2.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         pesquisaNomeLabel2.setText("Alunos da turma");
 
         listaAlunos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -361,7 +361,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
 
         logo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentacoes.png"))); // NOI18N
 
-        titulo2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo2.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         titulo2.setText("Movimentação de Turmas");
 
         javax.swing.GroupLayout cabecalho2Layout = new javax.swing.GroupLayout(cabecalho2);
@@ -393,7 +393,7 @@ public class rf_015 extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        disciplinasLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        disciplinasLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         disciplinasLabel.setText("Disciplinas da turma");
 
         listaDiscip.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

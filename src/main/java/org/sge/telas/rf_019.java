@@ -91,10 +91,10 @@ public class rf_019 extends javax.swing.JInternalFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentacoes.png"))); // NOI18N
 
-        titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         titulo.setText("Movimentação de Professores(as)");
 
-        pesquisaNomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        pesquisaNomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         pesquisaNomeLabel.setText("Selecione um professor(a)");
 
         tabelaProfessores.setModel(new javax.swing.table.DefaultTableModel(
@@ -127,33 +127,33 @@ public class rf_019 extends javax.swing.JInternalFrame {
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel.setText("Nome");
 
         nomeCampo.setEnabled(false);
 
-        nomeLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel1.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel1.setText("Sobrenome");
 
         sobrenomeCampo.setEnabled(false);
 
-        cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cpfLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         cpfLabel.setText("CPF");
 
         cpfCampo.setEnabled(false);
 
-        dnLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        dnLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         dnLabel.setText("Data de Nascimento");
 
         dnCampo.setDateFormatString("dd/MM/yyyy");
         dnCampo.setEnabled(false);
 
-        nomeLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel2.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel2.setText("Endereço");
 
         enderecoCampo.setEnabled(false);
 
-        btnEditar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnEditar1.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         btnEditar1.setText("Editar");
         btnEditar1.setEnabled(false);
         btnEditar1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,7 +163,7 @@ public class rf_019 extends javax.swing.JInternalFrame {
         });
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Excluir cadastro");
         jButton1.setEnabled(false);
@@ -173,7 +173,7 @@ public class rf_019 extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSalvar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnSalvar.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
         btnSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
