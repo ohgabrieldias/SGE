@@ -16,7 +16,7 @@ public class ExcluirAlunoTest {
             fileHandler.setLevel(Level.ALL); // Define o nível de log desejado
             fileHandler.setFormatter(new SimpleFormatter());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao criar arquivo de log.");
         }
         Aluno aluno = new Aluno("Maria", "Silva", "2023-12-15", "98765432109", "Av n sei onde", "paps", "12345678910", 2021002);
         // Insert the student into the database for testing

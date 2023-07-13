@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.SimpleFormatter;
 
 public class Professor extends Pessoa {
@@ -60,7 +61,7 @@ public class Professor extends Pessoa {
         stmt.executeUpdate();
         logger.info("Professor excluido com sucesso!");
     } catch(SQLException e){
-        e.printStackTrace();
+        logger.log(Level.SEVERE, "Erro ao excluir professor: " + e.getMessage(), e);
     }
   }
 
@@ -80,7 +81,7 @@ public class Professor extends Pessoa {
             }
         }
     } catch(SQLException e){
-        e.printStackTrace();
+        logger.log(Level.SEVERE, "Erro ao buscar professor: " + e.getMessage(), e);
     }
     return tmpProfessor;
   }
