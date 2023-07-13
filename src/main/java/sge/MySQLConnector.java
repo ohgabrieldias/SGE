@@ -56,25 +56,6 @@ public class MySQLConnector {
         return false;
     }
 
-    public ResultSet executeQuery(String query) {
-        try {
-            PreparedStatement stmt = connection.prepareStatement(query);
-            return stmt.executeQuery();
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao executar query: " + e.getMessage(), e);
-        }
-        return null;
-    }
-
-    public void executeUpdate(String query) {
-        try {
-            PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao executar update: " + e.getMessage(), e);
-        }
-    }
-
     public void closeConnection() {
         try {
             if (connection != null && !connection.isClosed()) {

@@ -5,7 +5,8 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 public class main extends javax.swing.JFrame {
-
+    private static final String AWT_FONTE = "Arial";  // Compliant
+    
     public main() {
         initComponents();
 
@@ -48,7 +49,7 @@ public class main extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(900, 700));
         setPreferredSize(new java.awt.Dimension(900, 700));
 
-        areaTrabalhoMain.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        areaTrabalhoMain.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
 
         logoMain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logoMain.png"))); // NOI18N
 
@@ -71,15 +72,15 @@ public class main extends javax.swing.JFrame {
                                         .addComponent(logoMain)
                                         .addContainerGap()));
 
-        mainMenu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        mainMenu.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         mainMenu.setMargin(new java.awt.Insets(4, 4, 4, 4));
 
         menuCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuCadastrar.png"))); // NOI18N
         menuCadastros.setText("Cadastrar");
         menuCadastros.setActionCommand("Cadastros");
-        menuCadastros.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        menuCadastros.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
 
-        rf_001Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_001Menu.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_001Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluno.png"))); // NOI18N
         rf_001Menu.setText("Aluno");
         rf_001Menu.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +90,7 @@ public class main extends javax.swing.JFrame {
         });
         menuCadastros.add(rf_001Menu);
 
-        rf_002Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_002Menu.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_002Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
         rf_002Menu.setText("Professor");
         rf_002Menu.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +100,7 @@ public class main extends javax.swing.JFrame {
         });
         menuCadastros.add(rf_002Menu);
 
-        rf_003Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_003Menu.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_003Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turma.png"))); // NOI18N
         rf_003Menu.setText("Turma");
         rf_003Menu.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +110,7 @@ public class main extends javax.swing.JFrame {
         });
         menuCadastros.add(rf_003Menu);
 
-        rf_004Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_004Menu.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_004Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/curso.png"))); // NOI18N
         rf_004Menu.setText("Disciplina");
         rf_004Menu.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +120,7 @@ public class main extends javax.swing.JFrame {
         });
         menuCadastros.add(rf_004Menu);
 
-        rf_005Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_005Menu.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_005Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         rf_005Menu.setText("Funcionário");
         rf_005Menu.addActionListener(new java.awt.event.ActionListener() {
@@ -133,9 +134,9 @@ public class main extends javax.swing.JFrame {
 
         menuMovimentar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/movimentar.png"))); // NOI18N
         menuMovimentar.setText("Alterar");
-        menuMovimentar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        menuMovimentar.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
 
-        rf_009.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_009.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_009.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aluno.png"))); // NOI18N
         rf_009.setText("Alunos");
         rf_009.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +146,7 @@ public class main extends javax.swing.JFrame {
         });
         menuMovimentar.add(rf_009);
 
-        rf_019.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_019.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_019.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professor.png"))); // NOI18N
         rf_019.setText("Professores");
         rf_019.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +156,7 @@ public class main extends javax.swing.JFrame {
         });
         menuMovimentar.add(rf_019);
 
-        rf_015.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_015.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_015.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/turma.png"))); // NOI18N
         rf_015.setText("Turmas");
         rf_015.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +166,7 @@ public class main extends javax.swing.JFrame {
         });
         menuMovimentar.add(rf_015);
 
-        rf_014.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_014.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_014.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/curso.png"))); // NOI18N
         rf_014.setText("Disciplinas");
         rf_014.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +176,7 @@ public class main extends javax.swing.JFrame {
         });
         menuMovimentar.add(rf_014);
 
-        rf_016.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_016.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_016.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/funcionario.png"))); // NOI18N
         rf_016.setText("Funcionários");
         rf_016.addActionListener(new java.awt.event.ActionListener() {
@@ -189,24 +190,24 @@ public class main extends javax.swing.JFrame {
 
         menuFinanceiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuFinanceiro.png"))); // NOI18N
         menuFinanceiro.setText("Financeiro");
-        menuFinanceiro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        menuFinanceiro.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         mainMenu.add(menuFinanceiro);
 
         menuRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuRelatorios.png"))); // NOI18N
         menuRelatorios.setText("Relatórios");
-        menuRelatorios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        menuRelatorios.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
 
-        rf_006Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_006Menu.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_006Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
         rf_006Menu.setText("Financeiro");
         menuRelatorios.add(rf_006Menu);
 
-        rf_007Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_007Menu.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_007Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/notas.png"))); // NOI18N
         rf_007Menu.setText("Notas");
         menuRelatorios.add(rf_007Menu);
 
-        rf_008Menu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        rf_008Menu.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         rf_008Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/frequencias.png"))); // NOI18N
         rf_008Menu.setText("Frequências");
         menuRelatorios.add(rf_008Menu);
@@ -215,7 +216,7 @@ public class main extends javax.swing.JFrame {
 
         menuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/menuSair.png"))); // NOI18N
         menuSair.setText("Sair");
-        menuSair.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        menuSair.setFont(new java.awt.Font(AWT_FONTE, 0, 14)); // NOI18N
         menuSair.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         menuSair.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         mainMenu.add(menuSair);
@@ -235,7 +236,7 @@ public class main extends javax.swing.JFrame {
 
         setSize(new java.awt.Dimension(622, 379));
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     private void rf_003MenuActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_rf_003MenuActionPerformed
         rf_004 rfNovaTurma = new rf_004();

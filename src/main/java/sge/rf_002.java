@@ -26,7 +26,7 @@ import util.Formater;
  * @author gabri
  */
 public class rf_002 extends javax.swing.JInternalFrame {
-
+    private static final String AWT_FONTE = "Arial";  // Compliant
     /**
      * Creates new form rf_002
      */
@@ -60,48 +60,48 @@ public class rf_002 extends javax.swing.JInternalFrame {
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/professorLogo.png"))); // NOI18N
 
-        titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         titulo.setForeground(new java.awt.Color(51, 51, 51));
         titulo.setText("Cadastro de Professor(a)");
 
-        nomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         nomeLabel.setForeground(new java.awt.Color(51, 51, 51));
         nomeLabel.setText("Nome");
 
-        nomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        nomeCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         nomeCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomeCampoActionPerformed(evt);
             }
         });
 
-        sobrenomeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        sobrenomeLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         sobrenomeLabel.setForeground(new java.awt.Color(51, 51, 51));
         sobrenomeLabel.setText("Sobrenome");
 
-        sobrenomeCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        sobrenomeCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         sobrenomeCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sobrenomeCampoActionPerformed(evt);
             }
         });
 
-        dnLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        dnLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         dnLabel.setForeground(new java.awt.Color(51, 51, 51));
         dnLabel.setText("Data de Nascimento");
 
-        cpfLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cpfLabel.setFont(new java.awt.Font(AWT_FONTE, 1, 14)); // NOI18N
         cpfLabel.setForeground(new java.awt.Color(51, 51, 51));
         cpfLabel.setText("CPF");
 
-        cpfCampo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cpfCampo.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         cpfCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cpfCampoActionPerformed(evt);
             }
         });
 
-        btnCadastrar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnCadastrar.setFont(new java.awt.Font(AWT_FONTE, 0, 12)); // NOI18N
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
