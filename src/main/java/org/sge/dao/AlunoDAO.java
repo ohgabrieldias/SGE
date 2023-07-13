@@ -60,7 +60,7 @@ public class AlunoDAO implements DaoInterface {
             logger.error("Erro ao criar arquivo de log: {}" + e.getMessage(), e);
         }
         
-        logger.info( "Aluno com matrícula {0} excluído com sucesso.", matricula);
+        logger.info("Aluno com matrícula {} excluído com sucesso.", matricula);
         String query = "DELETE FROM alunos WHERE matricula = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setLong(1, matricula);
@@ -125,8 +125,6 @@ public class AlunoDAO implements DaoInterface {
             stmt.setString(3, aluno.getDataNasc());
             stmt.setString(4, aluno.getCpf());
             stmt.setString(5, aluno.getEndereco());
-            // stmt.setString(6, aluno.getCpfResp());
-            // stmt.setString(7, aluno.getResponsavel());
             stmt.setLong(6, aluno.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {

@@ -2,17 +2,16 @@ package org.sge.dao;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class MySQLConnector implements Serializable{
-    private static final Logger logger = Logger.getLogger(MySQLConnector.class.getName());
+public class MySQLConnector{
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
     private Connection connection;
     private String dbHost;
     private String dbPort;
@@ -48,7 +47,7 @@ public class MySQLConnector implements Serializable{
                 return connection;
             }
         } catch (ClassNotFoundException | SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao conectar ao banco de dados: " + e.getMessage(), e);
+            logger.error("Erro ao conectar ao banco de dados: {}" + e.getMessage(), e);
         }
         return null;
     }
@@ -66,7 +65,7 @@ public class MySQLConnector implements Serializable{
                 return count > 0;
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao autenticar usuário: " + e.getMessage(), e);
+            logger.error("Erro ao autenticar usuário: {}" + e.getMessage(), e);
         }
 
         return false;
@@ -78,7 +77,7 @@ public class MySQLConnector implements Serializable{
                 connection.close();
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao fechar conexão: " + e.getMessage(), e);
+            logger.error("Erro ao fechar conexão: {}" + e.getMessage(), e);
         }
     }
 }

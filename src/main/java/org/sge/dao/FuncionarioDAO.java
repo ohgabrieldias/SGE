@@ -7,12 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FuncionarioDAO implements DaoInterface{
     private Connection connection;
-    Logger logger = Logger.getLogger(getClass().getName());
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     public FuncionarioDAO(Connection connection) {
         this.connection = connection;
@@ -44,7 +44,7 @@ public class FuncionarioDAO implements DaoInterface{
             // logger.info("Dados do funcionario inseridos com sucesso nas tabelas
             // 'funcionarios' e 'users'.");
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao cadastrar funcionario: " + e.getMessage(), e);
+            logger.error("Erro ao cadastrar funcionario: {}" + e.getMessage(), e);
             return false;
         }
 
@@ -67,7 +67,7 @@ public class FuncionarioDAO implements DaoInterface{
                 listaFuncionarioes.add(tmpAluno);
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar lista de funcionários: " + e.getMessage(), e);
+            logger.error("Erro ao buscar lista de funcionários: {}" + e.getMessage(), e);
         }
 
         return listaFuncionarioes;
@@ -103,7 +103,7 @@ public class FuncionarioDAO implements DaoInterface{
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar por ID: " + e.getMessage(), e);
+            logger.error("Erro ao buscar por ID: {}" + e.getMessage(), e);
         }
 
         return null; // Retorna null se nenhum funcionário for encontrado com o ID especificado
@@ -133,7 +133,7 @@ public class FuncionarioDAO implements DaoInterface{
 
             return true;
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao alterar funcionário: " + e.getMessage(), e);
+            logger.error("Erro ao alterar funcionário: {}" + e.getMessage(), e);
             return false;
         }
     }
@@ -153,7 +153,7 @@ public class FuncionarioDAO implements DaoInterface{
 
             return (rowsAffectedFuncionarios > 0) && (rowsAffectedUsers > 0);
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao excluir funcionário: " + e.getMessage(), e);
+            logger.error("Erro ao excluir funcionário: {}" + e.getMessage(), e);
             return false;
         }
     }

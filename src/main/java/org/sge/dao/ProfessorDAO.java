@@ -8,11 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProfessorDAO implements DaoInterface {
     private Connection connection;
-    Logger logger = Logger.getLogger(getClass().getName());
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
     
     public ProfessorDAO(Connection connection){
         this.connection = connection;
@@ -29,7 +30,7 @@ public class ProfessorDAO implements DaoInterface {
             stmt.executeUpdate();
             logger.info("Professor cadastrado com sucesso!");
         } catch(SQLException e){
-            logger.log(Level.SEVERE, "Erro ao cadastrar professor: " + e.getMessage(), e);
+            logger.error("Erro ao cadastrar professor: {}" + e.getMessage(), e);
         }
         return true;
       }
@@ -41,7 +42,7 @@ public class ProfessorDAO implements DaoInterface {
           stmt.executeUpdate();
           logger.info("Professor excluido com sucesso!");
       } catch(SQLException e){
-          logger.log(Level.SEVERE, "Erro ao excluir professor: " + e.getMessage(), e);
+          logger.error("Erro ao excluir professor: {}" + e.getMessage(), e);
       }
     }
 
@@ -61,7 +62,7 @@ public class ProfessorDAO implements DaoInterface {
               }
           }
       } catch(SQLException e){
-          logger.log(Level.SEVERE, "Erro ao buscar professor: " + e.getMessage(), e);
+          logger.error("Erro ao buscar professor: {}" + e.getMessage(), e);
       }
       return tmpProfessor;
     }
@@ -80,7 +81,7 @@ public class ProfessorDAO implements DaoInterface {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar nomes dos professores: " + e.getMessage(), e);
+            logger.error("Erro ao buscar nomes dos professores: {}" + e.getMessage(), e);
         }
 
         return nomesProfessores;
@@ -101,7 +102,7 @@ public class ProfessorDAO implements DaoInterface {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar professor por nome: " + e.getMessage(), e);
+            logger.error("Erro ao buscar professor por nome: {}" + e.getMessage(), e);
         }
 
         return professor;
@@ -123,7 +124,7 @@ public class ProfessorDAO implements DaoInterface {
                 listaProfessores.add(tmpAluno);
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar lista professores: " + e.getMessage(), e);
+            logger.error("Erro ao buscar lista professores: {}" + e.getMessage(), e);
         }
 
         return listaProfessores;
@@ -146,7 +147,7 @@ public class ProfessorDAO implements DaoInterface {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar professores por ID " + e.getMessage(), e);
+            logger.error("Erro ao buscar professores por ID {}" + e.getMessage(), e);
         }
 
         return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
@@ -168,7 +169,7 @@ public class ProfessorDAO implements DaoInterface {
 
             return true;
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao alterar professore: " + e.getMessage(), e);
+            logger.error("Erro ao alterar professore: {}" + e.getMessage(), e);
             return false;
         }
     }
@@ -182,7 +183,7 @@ public class ProfessorDAO implements DaoInterface {
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao excluir professore: " + e.getMessage(), e);
+            logger.error("Erro ao excluir professore: {}" + e.getMessage(), e);
             return false;
         }
     }

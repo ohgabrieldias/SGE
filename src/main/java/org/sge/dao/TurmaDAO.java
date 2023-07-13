@@ -12,14 +12,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.sql.Connection;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TurmaDAO implements DaoInterface{
     private Connection connection;
     
     AlunoDAO alunoDao = new AlunoDAO(connection);
     DisciplinaDAO discipDao = new DisciplinaDAO(connection);
-    Logger logger = Logger.getLogger(getClass().getName());
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     public TurmaDAO(Connection connection){
         this.connection = connection;
@@ -40,7 +41,7 @@ public class TurmaDAO implements DaoInterface{
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao cadastrar turma: " + e.getMessage(), e);
+            logger.error("Erro ao cadastrar turma: {}" + e.getMessage(), e);
         }
 
         return false;
@@ -61,7 +62,7 @@ public class TurmaDAO implements DaoInterface{
                 listaTurmas.add(tmpTurma);
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar turma: " + e.getMessage(), e);
+            logger.error("Erro ao buscar turma: {}" + e.getMessage(), e);
         }
         return listaTurmas;
     }
@@ -82,7 +83,7 @@ public class TurmaDAO implements DaoInterface{
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao alterar turma: " + e.getMessage(), e);
+            logger.error("Erro ao alterar turma: {}" + e.getMessage(), e);
         }
 
         return false;
@@ -99,7 +100,7 @@ public class TurmaDAO implements DaoInterface{
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao atualizar nome da turma: " + e.getMessage(), e);
+            logger.error("Erro ao atualizar nome da turma: {}" + e.getMessage(), e);
         }
 
         return false;
@@ -121,7 +122,7 @@ public class TurmaDAO implements DaoInterface{
                 }
             }
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro ao buscar tumra por ID: " + e.getMessage(), e);
+            logger.error("Erro ao buscar tumra por ID: {}" + e.getMessage(), e);
         }
         return null;
     }
@@ -138,7 +139,7 @@ public class TurmaDAO implements DaoInterface{
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao atualizar lista de alunos da turma: " + e.getMessage(), e);
+            logger.error("Erro ao atualizar lista de alunos da turma: {}" + e.getMessage(), e);
         }
 
         return false;
@@ -155,7 +156,7 @@ public class TurmaDAO implements DaoInterface{
 
             return rowsAffected > 0;
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao lista de disciplinas: " + e.getMessage(), e);
+            logger.error("Erro ao lista de disciplinas: {}" + e.getMessage(), e);
         }
 
         return false;
@@ -169,7 +170,7 @@ public class TurmaDAO implements DaoInterface{
 
             return true;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro ao excluir turma: " + e.getMessage(), e);
+            logger.error("Erro ao excluir turma: {}" + e.getMessage(), e);
             return false;
         }
     }

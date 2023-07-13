@@ -8,12 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 public class DisciplinaDAO implements DaoInterface {
     private Connection connection;
-    Logger logger = Logger.getLogger(getClass().getName());
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     public DisciplinaDAO(Connection connection){
         this.connection = connection;
@@ -33,7 +32,7 @@ public class DisciplinaDAO implements DaoInterface {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar nomes das disciplinas: " + e.getMessage(), e);
+            logger.error("Erro ao buscar nomes das disciplinas: {}" + e.getMessage(), e);
         }
 
         return nomesDisciplinas;
@@ -53,7 +52,7 @@ public class DisciplinaDAO implements DaoInterface {
             logger.info("Student data inserted successfully into the 'disciplinas' table.");
 
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao cadastrar disciplina: " + e.getMessage(), e);
+            logger.error("Erro ao cadastrar disciplina: {}" + e.getMessage(), e);
         }
 
         return true;
@@ -75,7 +74,7 @@ public class DisciplinaDAO implements DaoInterface {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar disciplinas: " + e.getMessage(), e);
+            logger.error("Erro ao buscar disciplinas: {}" + e.getMessage(), e);
         }
 
         return disciplinas;
@@ -95,7 +94,7 @@ public class DisciplinaDAO implements DaoInterface {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao checar vinculo com disciplinas: " + e.getMessage(), e);
+            logger.error("Erro ao checar vinculo com disciplinas: {}" + e.getMessage(), e);
         }
 
         return false;
@@ -118,7 +117,7 @@ public class DisciplinaDAO implements DaoInterface {
                 }
             }
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao buscar por ID: " + e.getMessage(), e);
+            logger.error("Erro ao buscar por ID: {}" + e.getMessage(), e);
         }
         return null; // Retorna null se nenhum aluno for encontrado com o ID especificado
     }
