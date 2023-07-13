@@ -6,6 +6,7 @@ package baseCoding;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import sge.MySQLConnector;
 
@@ -22,7 +23,7 @@ public class Disciplina {
     private String professor;
     
     MySQLConnector connector = new MySQLConnector();
-    private static final Logger logger = Logger.getLogger(Disciplina.class.getName());
+    Logger logger = Logger.getLogger(getClass().getName());
     
     public Disciplina(String nome, String dataInicio, String dataFim, String professor){
         this.nome = nome;
@@ -58,7 +59,7 @@ public class Disciplina {
             logger.info("Student data inserted successfully into the 'disciplinas' table.");
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao cadastrar disciplina: " + e.getMessage(), e);
         }
         
         return true;

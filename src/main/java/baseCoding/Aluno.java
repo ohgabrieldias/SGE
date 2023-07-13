@@ -15,10 +15,11 @@ public class Aluno extends Pessoa {
     private long matricula;
     private String responsavel;
     private String cpfresp;
-    private static final Logger logger = Logger.getLogger(Aluno.class.getName());
+    Logger logger = Logger.getLogger(getClass().getName());
 
 
     MySQLConnector connector = new MySQLConnector();
+    Logger logger = Logger.getLogger(getClass().getName());
 
     public Aluno(String nome, String sobrenome, String dataNasc, String cpf, String end, String resp, String cpfresp, long matricula) {
         super(nome, sobrenome, dataNasc, cpf, end);
@@ -78,8 +79,7 @@ public class Aluno extends Pessoa {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            logger.log(Level.SEVERE, "Erro ao buscar aluno: " + e.getMessage(), e);
     
         return tmpAluno;
     }        
@@ -91,7 +91,7 @@ public class Aluno extends Pessoa {
             fileHandler.setFormatter(new SimpleFormatter());
             
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao criar arquivo de log: " + e.getMessage(), e);
         }
         
         logger.log(Level.INFO, "Aluno com matrícula {0} excluído com sucesso.", matricula);
@@ -100,7 +100,7 @@ public class Aluno extends Pessoa {
             stmt.setLong(1, matricula);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao excluir aluno: " + e.getMessage(), e);
         }
     }
 
@@ -122,7 +122,7 @@ public class Aluno extends Pessoa {
             logger.info("Student data inserted successfully into the 'alunos' table.");
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error inserting student data into the 'alunos' table: " + e.getMessage(), e);
         }
         return true;
     }    

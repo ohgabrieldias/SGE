@@ -13,8 +13,8 @@ import java.util.logging.SimpleFormatter;
 public class Professor extends Pessoa {
     private int codigoProfessor;
     private int id;
-    private static final Logger logger = Logger.getLogger(Professor.class.getName());
 
+    Logger logger = Logger.getLogger(getClass().getName());
     MySQLConnector connector = new MySQLConnector();
     
     public Professor(String nome, String sobrenome, String dataNasc, String cpf, String endereco){
@@ -49,7 +49,7 @@ public class Professor extends Pessoa {
         stmt.executeUpdate();
         logger.info("Professor cadastrado com sucesso!");
     } catch(SQLException e){
-        e.printStackTrace();
+        logger.log(Level.SEVERE, "Erro ao cadastrar professor: " + e.getMessage(), e);
     }
     return true;
   }
