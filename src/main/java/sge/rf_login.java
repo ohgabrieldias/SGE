@@ -4,12 +4,17 @@
  */
 package sge;
 
+import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
+
+import unitTests.ExcluirAlunoTest;
 /**
  *
  * @author gabriel dias
  */
 public class rf_login extends javax.swing.JFrame {
+    private static final Logger logger = Logger.getLogger(ExcluirAlunoTest.class.getName());
 
     private MySQLConnector connector;
     /**

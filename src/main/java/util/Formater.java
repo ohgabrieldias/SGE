@@ -4,16 +4,24 @@
  */
 package util;
 
+
 import com.toedter.calendar.JDateChooser;
+
+import unitTests.ExcluirAlunoTest;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author gabriel
  */
 public class Formater {
+
+     private static final Logger logger = Logger.getLogger(ExcluirAlunoTest.class.getName());
     
     public static String formatarData(String dataString) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -40,7 +48,7 @@ public class Formater {
         try {
             return dateFormat.parse(dateString);
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao converter o formato de data" );
             return null;
         }
     }
