@@ -10,19 +10,37 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MySQLConnector {
-    Logger logger = Logger.getLogger(getClass().getName());
+    private static final Logger logger = Logger.getLogger(MySQLConnector.class.getName());
     private Connection connection;
+    private String dbHost;
+    private String dbPort;
+    private String dbName;
+    private String dbUser;
+    private String dbPassword;
 
     public MySQLConnector() {
+        initializeConnectionParameters();
+        initializeConnection();
+    }
+
+    public MySQLConnector(Connection connection) {
+        this.connection = connection;
+    }
+
+    private void initializeConnectionParameters() {
         Dotenv dotenv = Dotenv.configure().load();
+        dbHost = dotenv.get("DB_HOST");
+        dbPort = dotenv.get("DB_PORT");
+        dbName = dotenv.get("DB_NAME");
+        dbUser = dotenv.get("DB_USER");
+        dbPassword = dotenv.get("DB_PASSWORD");
+    }
 
-        String dbHost = dotenv.get("DB_HOST");
-        String dbPort = dotenv.get("DB_PORT");
-        String dbName = dotenv.get("DB_NAME");
-        String dbUser = dotenv.get("DB_USER");
-        String dbPassword = dotenv.get("DB_PASSWORD");
-
+    private void initializeConnection() {
         try {
+            if (connection != null && !connection.isClosed()) {
+                return;
+            }
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
             connection = DriverManager.getConnection(url, dbUser, dbPassword);
@@ -30,15 +48,11 @@ public class MySQLConnector {
             logger.log(Level.SEVERE, "Erro ao conectar ao banco de dados: " + e.getMessage(), e);
         }
     }
-    
-    public MySQLConnector(Connection connection) {
-        this.connection = connection;
-    }
-    
+
     public Connection getConnection() {
+        initializeConnection();
         return connection;
     }
-
     public boolean authenticateUser(String username, String password) {
         String query = "SELECT COUNT(*) FROM users WHERE username = ? AND password = ?";
 
@@ -56,26 +70,7 @@ public class MySQLConnector {
         }
 
         return false;
-    }
-
-    public ResultSet executeQuery(String query) {
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            return stmt.executeQuery();
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao executar query: " + e.getMessage(), e);
-        }
-        return null;
-    }
-    
-
-    public void executeUpdate(String query) {
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao executar update: " + e.getMessage(), e);
-        }
-    }
-    
+    }   
 
     public void closeConnection() {
         try {
@@ -86,5 +81,4 @@ public class MySQLConnector {
             logger.log(Level.SEVERE, "Erro ao fechar conexão: " + e.getMessage(), e);    
         }
     }
-
 }

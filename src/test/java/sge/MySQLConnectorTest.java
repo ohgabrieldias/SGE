@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 public class MySQLConnectorTest {
 
@@ -28,21 +27,6 @@ public class MySQLConnectorTest {
 
         Assertions.assertTrue(authenticated, "User authentication should be successful");
     }
-
-    @Test
-    public void testExecuteQuery() throws SQLException {
-        MySQLConnector connector = new MySQLConnector();
-        ResultSet resultSet = connector.executeQuery("SELECT * FROM users");
-
-        Assertions.assertNotNull(resultSet, "ResultSet should not be null");
-
-        // Perform assertions on the ResultSet if needed
-        // For example:
-        // resultSet.next();
-        // int id = resultSet.getInt("id");
-        // Assertions.assertEquals(1, id, "ID should be 1");
-    }
-
     // Add more test methods as needed to cover other functionality of the MySQLConnector class
 
 }
