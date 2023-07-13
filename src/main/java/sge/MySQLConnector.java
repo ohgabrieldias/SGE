@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 public class MySQLConnector {
     private Connection connection;
+    Logger logger = Logger.getLogger(getClass().getName());
     MySQLConnector connector = new MySQLConnector();
 
     public MySQLConnector() {
