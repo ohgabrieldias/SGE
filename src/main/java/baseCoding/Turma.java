@@ -83,8 +83,8 @@ public class Turma {
         return professores;
     }
 
-    public void setProfessores(LinkedList<Professor> professores) {
-        this.professores = professores;
+    public void setProfessores(List<Professor> professores) {
+        this.professores = new LinkedList<>(professores);
     }
 
     public List<Aluno> getAlunos() {
@@ -95,7 +95,7 @@ public class Turma {
         return disciplinas;
     }
 
-    public void setAlunos(LinkedList<Aluno> alunos) {
+    public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
     }
 
