@@ -21,12 +21,13 @@ import java.util.logging.Logger;
  */
 public class Formater {
 
+     private static final String DATE_FORMAT = "yyyy-MM-dd";
      private static final Logger logger = Logger.getLogger(ExcluirAlunoTest.class.getName());
     
     public static String formatarData(String dataString) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date data = sdf.parse(dataString);
-        return new SimpleDateFormat("yyyy-MM-dd").format(data);
+        return new SimpleDateFormat(DATE_FORMAT).format(data);
     }
     
 
@@ -36,7 +37,7 @@ public class Formater {
         Date dataSelecionada = dateChooser.getDate();
 
         if (dataSelecionada != null) {
-            SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatador = new SimpleDateFormat(DATE_FORMAT);
             return formatador.format(dataSelecionada);
         } else {
             return null;
@@ -44,7 +45,7 @@ public class Formater {
     }
     
     public static Date converteStringToDate(String dateString) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         try {
             return dateFormat.parse(dateString);
         } catch (ParseException e) {

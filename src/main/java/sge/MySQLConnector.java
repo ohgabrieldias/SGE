@@ -1,7 +1,6 @@
 package sge;
 
 import io.github.cdimascio.dotenv.Dotenv;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,7 +12,6 @@ import java.util.logging.Logger;
 public class MySQLConnector {
     private Connection connection;
     Logger logger = Logger.getLogger(getClass().getName());
-    MySQLConnector connector = new MySQLConnector();
 
     public MySQLConnector() {
         Dotenv dotenv = Dotenv.configure().load();
@@ -36,7 +34,7 @@ public class MySQLConnector {
     public Connection getConnection() {
         return connection;
     }
-    
+
     public boolean authenticateUser(String username, String password) {
         String query = "SELECT COUNT(*) FROM users WHERE username = ? AND password = ?";
 
@@ -85,5 +83,4 @@ public class MySQLConnector {
         }
     }
 
-   
 }
