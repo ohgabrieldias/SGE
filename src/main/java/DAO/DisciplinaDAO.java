@@ -101,10 +101,17 @@ public class DisciplinaDAO implements DaoInterface {
 
         return false;
     }
-
-    public Disciplina buscarPorId(int id) {
+    
+    public void recreateConnection() {
+        MySQLConnector connector = new MySQLConnector();
+        connection = connector.getConnection();
+    }
+    
+    public Disciplina buscarDiscpPorId(int id) {
         String query = "SELECT * FROM disciplinas WHERE id = ?";
+        if (connection == null) recreateConnection();
 
+        System.out.println("Conexão buscarDiscpPorId: " + connection);
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
 

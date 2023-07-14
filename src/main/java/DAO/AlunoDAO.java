@@ -12,6 +12,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import sge.MySQLConnector;
 
 public class AlunoDAO implements DaoInterface {
     private Connection connection;
@@ -23,6 +24,12 @@ public class AlunoDAO implements DaoInterface {
     public AlunoDAO(Connection connection) {
         this.connection = connection;
     }
+
+    public void recreateConnection() {
+        MySQLConnector connector = new MySQLConnector();
+        connection = connector.getConnection();
+    }
+
     public Aluno buscarAluno(long matricula) {
         Aluno tmpAluno = null;
 
@@ -48,6 +55,7 @@ public class AlunoDAO implements DaoInterface {
 
         return tmpAluno;
     }       
+    
     
     public void excluirAluno(long matricula) {
         try {
@@ -133,36 +141,9 @@ public class AlunoDAO implements DaoInterface {
         }
     }
 
-    public List<Aluno> atualizarBD() {
-        List<Aluno> listaAlunos = new ArrayList<>();
-
-        String query = "SELECT * FROM alunos";
-
-        try (PreparedStatement stmt = connection.prepareStatement(query);
-                ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                String nome = rs.getString("nome");
-                String sobrenome = rs.getString(SOBRENOME);
-                String dataNasc = rs.getString(DATANASC);
-                String cpf = rs.getString("cpf");
-                String endereco = rs.getString(ENDERECO);
-                String tmpCpfResp = rs.getString("cpfresp");
-                String tmpResp = rs.getString("responsavel");
-                long matricula = rs.getLong("matricula");
-
-                Aluno tmpAluno = new Aluno(nome, sobrenome, dataNasc, cpf, endereco, tmpResp, tmpCpfResp, matricula);
-                listaAlunos.add(tmpAluno);
-            }
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Erro ao atualizar banco de dados: " + e.getMessage(), e);
-        }
-
-        return listaAlunos;
-    }
-
     public Aluno buscarPorId(int id) {
         String query = "SELECT * FROM alunos WHERE id = ?";
-
+        if (connection == null) recreateConnection();
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
 
