@@ -30,8 +30,16 @@ public class rf_005 extends javax.swing.JInternalFrame {
      */
     public rf_005() {
         initComponents();
+        preencherComboProfessor();
     }
 
+    private void preencherComboProfessor() {
+        List<String> dados = professordao.buscarNomesProfessores();
+        professorCampo.addItem("-- Selecione --");
+        for (String elemento : dados) {
+            professorCampo.addItem(elemento);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -183,12 +191,7 @@ public class rf_005 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_professorCampoActionPerformed
 
     private void professorCampoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_professorCampoAncestorAdded
-        List<String> dados = professordao.buscarNomesProfessores();
-        professorCampo.addItem("-- Selecione --");
-        for (String elemento : dados) {
-            professorCampo.addItem(elemento);
-        }
-        
+        // TODO add your handling code here:
     }//GEN-LAST:event_professorCampoAncestorAdded
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
